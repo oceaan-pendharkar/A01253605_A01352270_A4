@@ -18,6 +18,13 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
     return roll
 
 
+def check_first(character, enemy):
+    if character['speed'] + luck_roll(character['luck'], 1, 3, 0.3) >= enemy['speed'] + luck_roll(0, 1, 3):
+        return [character, enemy]
+    if character['speed'] + luck_roll(character['luck'], 1, 3, 0.3) < enemy['speed'] + luck_roll(0, 1, 3):
+        return [enemy, character]
+
+
 def battle(character):
     enemy = determine_enemy()
     # first_to_strike = check_first(character, enemy)
