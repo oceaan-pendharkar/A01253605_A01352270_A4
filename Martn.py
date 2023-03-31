@@ -3,19 +3,32 @@ import random
 
 def determine_enemy():
     enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
-                   'HP': 10, 'Damage': 7, 'Speed': 2}, 2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's",
-                                                           'HP': 5, 'Damage': 8, 'Speed': 5}}
+                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2},
+               2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
+                   'Speed': 5}}
 
     selector = random.randint(1, len(enemies))
+    enemy = enemies[selector]
     print(enemies[selector]['Description'])
+    return enemy
+
+
+def battle(character):
+    enemy = determine_enemy()
+    # first_to_strike = check_first(character, enemy)
+    # while character['Frustration'] is not 0 or enemy['Frustration'] is not 0:
+        # deal_damage(first_to_strike)
+        # is_alive()
+        # deal_damage(slower, faster)
+        # is_alive()
 
 
 def main():
     """
     Drive the program.
     """
-    determine_enemy()
-    # battle()
+    character = {'Motivation': 100, 'Frustration': 75, 'Intelligence': 10, 'Speed': 8, 'luck': 5}
+    battle(character)
 
 
 if __name__ == '__main__':
