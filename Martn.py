@@ -32,6 +32,13 @@ def deal_damage(character_is_faster, character, enemy):
         character['Frustration'] -= enemy['Intelligence']
 
 
+def check_result(character):
+    if character['Frustration'] <= 0:
+        print("Sorry you lost the battle!")
+    else:
+        print("You won the battle!")
+
+
 def battle(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
@@ -39,7 +46,7 @@ def battle(character):
         deal_damage(character_is_faster, character, enemy)
         while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
             deal_damage(not character_is_faster, character, enemy)
-    # check_result()
+    check_result(character)
 
 
 def main():
