@@ -13,23 +13,23 @@ def determine_enemy():
     return enemy
 
 
-def luck_roll(luck, lower, upper, luck_multiplier=0):
+def luck_roll(luck, lower, upper, luck_multiplier = 0):
     roll = random.randint(lower, upper) + luck * luck_multiplier
     return roll
 
 
 def check_first(character, enemy):
-    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) >= enemy['Speed'] + luck_roll(0, 1, 3):
+    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) >= enemy['Speed'] + luck_roll(0, -2, 2):
         return True
-    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) < enemy['Speed'] + luck_roll(0, 1, 3):
+    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) < enemy['Speed'] + luck_roll(0, -2, 2):
         return False
 
 
 def deal_damage(character_is_faster, character, enemy):
     if character_is_faster:
-        enemy['Frustration'] -= character['Intelligence']
+        enemy['Frustration'] -= character['Intelligence'] + luck_roll(0, -2, 2)
     if not character_is_faster:
-        character['Frustration'] -= enemy['Intelligence']
+        character['Frustration'] -= enemy['Intelligence'] + luck_roll(0, -2, 2)
 
 
 def check_result(character):
