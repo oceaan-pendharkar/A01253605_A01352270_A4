@@ -35,13 +35,11 @@ def deal_damage(character_is_faster, character, enemy):
 def battle(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
-    # while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
-    deal_damage(character_is_faster, character, enemy)
-    print(character)
-    print(enemy)
-        # is_alive()
-        # deal_damage(first_to_strike.reverse())
-        # is_alive()
+    while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
+        deal_damage(character_is_faster, character, enemy)
+        while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
+            deal_damage(not character_is_faster, character, enemy)
+    # check_result()
 
 
 def main():
