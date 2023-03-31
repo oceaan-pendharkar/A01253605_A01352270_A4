@@ -20,26 +20,25 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
 
 def check_first(character, enemy):
     if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) >= enemy['Speed'] + luck_roll(0, 1, 3):
-        return [character, enemy]
+        return True
     if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) < enemy['Speed'] + luck_roll(0, 1, 3):
-        return [enemy, character]
+        return False
 
 
-def deal_damage(speed_list):
-    faster = speed_list[0]
-    slower = speed_list[1]
-    slower['Frustration'] -= faster['Intelligence']
+def deal_damage(character_is_faster, character, enemy):
+    if character_is_faster:
+        enemy['Frustration'] -= character['Intelligence']
+    if not character_is_faster:
+        character['Frustration'] -= enemy['Intelligence']
 
 
 def battle(character):
     enemy = determine_enemy()
-    first_to_strike = check_first(character, enemy)
-    print(first_to_strike)
+    character_is_faster = check_first(character, enemy)
     # while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
-    deal_damage(first_to_strike)
+    deal_damage(character_is_faster, character, enemy)
     print(character)
     print(enemy)
-    print(first_to_strike.reverse())
         # is_alive()
         # deal_damage(first_to_strike.reverse())
         # is_alive()
