@@ -13,7 +13,7 @@ def determine_enemy():
     return enemy
 
 
-def luck_roll(luck, lower, upper, luck_multiplier = 0):
+def luck_roll(luck, lower, upper, luck_multiplier=0):
     roll = random.randint(lower, upper) + luck * luck_multiplier
     return roll
 

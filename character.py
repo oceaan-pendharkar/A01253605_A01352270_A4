@@ -36,11 +36,11 @@ def populate_points(character: dict, selection: str) -> dict:
     for key in character.keys():
         character[key] = 15
     if selection == 'n':
-        character['intelligence'] += 25
+        character['Intelligence'] += 25
     elif selection == 'l':
-        character['luck'] += 25
+        character['Luck'] += 25
     elif selection == 'g':
-        character['self-control'] += 25
+        character['Self-control'] += 25
     elif selection == 'r':
         for key in character.keys():
             character[key] += 5
@@ -53,8 +53,8 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    character = {"motivation": 0, "frustration": 0, "self-control": 0, "intelligence": 0, "luck": 0,
-                 'name': input("What's your character's name?")}
+    character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0,
+                 'Name': input("What's your character's name?")}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
@@ -72,7 +72,7 @@ def create_character() -> dict:
                                "\nregular person: has an even distribution of points(r)")
         populate_points(character, character_type)
 
-    character['fitness'] = 0
+    character['Fitness'] = 0
     return character
 
 
