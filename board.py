@@ -8,12 +8,12 @@ LOCATIONS = ['Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi']
 
 
-def generate_room(description: str, percent: int, event: str) -> bool:
+def generate_room(description: str, chance: int, event: str) -> bool:
     """
     Generate a room for a player to interact with in a game.
 
     :param description: the description of the room, as a string
-    :param percent: the percent chance an event will happen in the room, as an integer
+    :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
     :param event: the event that might happen in that room
     :precondition: description must be one of the strings in LOCATIONS
     :precondition: percent must be an integer
@@ -23,9 +23,9 @@ def generate_room(description: str, percent: int, event: str) -> bool:
     :postcondition: the player interacts with the room
     :return: True if the event happens, else False
     """
-    print(f"You're in {description}. There is a {percent}% chance you will {event}.")
-    number = random.randint(1, percent)
-    guess = input(f"Type an integer [1, {percent}]: ")
+    print(f"You're in {description}. There is a 1/{chance} chance you will {event}.")
+    number = random.randint(1, chance)
+    guess = input(f"Type an integer [1, {chance}]: ")
     if number == guess:
         print(f"You KNEW this would happen! You {event}")
         return True
@@ -49,7 +49,7 @@ def enter_room(character: dict, description: str) -> None:
         if event_happens:
             character['Frustration'] += 5
     elif description == LOCATIONS[1] or description == LOCATIONS[2] or description == LOCATIONS[8]:
-        event_happens = generate_room(description, 20, 'have to fight')
+        event_happens = generate_room(description, 4, 'have to fight')
         if event_happens:
             battle(character)
     elif description == LOCATIONS[6] or description == LOCATIONS[7] or description == LOCATIONS[9]:
