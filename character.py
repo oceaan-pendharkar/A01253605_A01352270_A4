@@ -53,8 +53,8 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    print("Welcome to WILL THEY OR WON'T THEY, operation COMPLETE ASSIGNMENT 4!!")
-    character = {"motivation": 0, "frustration": 0, "self-control": 0, "intelligence": 0, "luck": 0}
+    character = {"motivation": 0, "frustration": 0, "self-control": 0, "intelligence": 0, "luck": 0,
+                 'name': input("What's your character's name?")}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
