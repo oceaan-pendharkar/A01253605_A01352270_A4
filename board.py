@@ -59,10 +59,11 @@ def enter_room(character: dict, description: str) -> None:
         print("Nothing happens in this room. Such is life...")
 
 
-def move_character(character: dict, direction: str) -> None:
+def move_character(board: tuple, character: dict, direction: str) -> None:
     """
     Move a character up, down, left, or right within a game board.
 
+    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
     :param direction: either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: character must be a dictionary that contains keys "row" and "column"
@@ -70,14 +71,15 @@ def move_character(character: dict, direction: str) -> None:
     :precondition: the move must have been validated to make sure it is possible on the board
     :postcondition: updates the character's row and column
     """
-    if direction == "n":
-        character["row"] -= 1
-    elif direction == "s":
-        character["row"] += 1
-    elif direction == "e":
-        character["column"] += 1
-    elif direction == "w":
-        character["column"] -= 1
+    if validate_move(board, character, direction):
+        if direction == "n":
+            character["row"] -= 1
+        elif direction == "s":
+            character["row"] += 1
+        elif direction == "e":
+            character["column"] += 1
+        elif direction == "w":
+            character["column"] -= 1
 
 
 def validate_move(board: tuple, character: dict, direction: str) -> bool:
