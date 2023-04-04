@@ -7,7 +7,7 @@ LOCATIONS = ['Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi']
 
 
-def generate_room(description: str, chance: int, event: str) -> bool:
+def event_happens(description: str, chance: int, event: str) -> bool:
     """
     Generate a room for a player to interact with in a game.
 
@@ -71,6 +71,7 @@ def move_character(board: tuple, character: dict, direction: str) -> None:
     :precondition: the move must have been validated to make sure it is possible on the board
     :postcondition: updates the character's row and column
     """
+
     def get_user_choice() -> str:
         """
         Print a numbered list of directions and ask the user to enter the direction they wish to travel.
@@ -159,7 +160,10 @@ def main():
     """
     Drive the program.
     """
-    make_board(10, 10)
+    board = make_board(10, 10)
+    enter_room({"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
+                'Name': "Oceaan"}, generate_room())
+    move_character(board, character, 'n')
 
 
 if __name__ == "__main__":
