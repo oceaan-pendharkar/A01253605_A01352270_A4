@@ -81,24 +81,23 @@ def move_character(character: dict, direction: str) -> None:
         character["column"] -= 1
 
 
-def make_board(rows, columns):
+def make_board(rows: int, columns: int) -> tuple:
     """
-    Create a 100 X 100 board for a game.
+    Create a board for a game.
 
     :param rows: an integer 2 or greater
     :param columns: an integer 2 or greater
     :precondition: rows must be an integer 2 or greater
     :precondition: columns must be an integer 2 or greater
     :postcondition: creates a board for a game
+    :return: the boundaries of the board, as a tuple with 2 sub-tuples that give the row and column bounds respectively
     :raises ValueError: if rows < 2
     :raises ValueError: if columns < 2
     """
     if rows < 2 or columns < 2:
         raise ValueError("Dimensions must be 2 or greater")
-    room_generator = itertools.cycle(LOCATIONS)
-    board = tuple([[next(room_generator) for _ in range(columns)] for _ in range(rows)])
-    pprint.pprint(board, width=180)
-    return board
+    boundaries = ((0, rows), (0, columns))
+    return boundaries
 
 
 def main():
