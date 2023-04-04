@@ -46,9 +46,14 @@ def enter_room(character: dict) -> None:
         """
         Randomly select a room for a player to enter, in a game.
 
+        :postcondition: the room is selected for the player
         :return: the name of the room, as a string
         """
-        selection = random.randint(0, 9)
+        if character["Luck"] > 75:
+            good_room_indices = [6, 7, 9, 4, 5]
+            selection = good_room_indices[random.randint(0, 4)]
+        else:
+            selection = random.randint(0, 9)
         return LOCATIONS[selection]
 
     room = generate_room()
