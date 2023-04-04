@@ -71,6 +71,19 @@ def move_character(board: tuple, character: dict, direction: str) -> None:
     :precondition: the move must have been validated to make sure it is possible on the board
     :postcondition: updates the character's row and column
     """
+    def get_user_choice() -> str:
+        """
+        Print a numbered list of directions and ask the user to enter the direction they wish to travel.
+
+        :postcondition: the string prompt for user input is printed
+        :postcondition: the user decides and types which direction to go next
+        :return: the direction the user wishes to travel, as a string ("Up", "Down", "Left", or "Right)
+        :raises ValueError: if direction is anything other than the string "Up", "Down", "Left", or "Right"
+        """
+        user_choice = input("Enter the direction you wish to go (Up, Down, Left, or Right): ")
+        return user_choice
+
+    get_user_choice()
     if validate_move(board, character, direction):
         if direction == "n":
             character["row"] -= 1
@@ -103,6 +116,7 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
         raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
     if direction != 'n' and direction != 's' and direction != 'w' and direction != 'e':
         raise TypeError("Direction must be 'n', 's', 'e', or 'w'!")
+
     bounds = board
 
     row = character["row"]
