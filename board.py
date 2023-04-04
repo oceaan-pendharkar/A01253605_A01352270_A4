@@ -105,8 +105,8 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
         raise TypeError("Direction must be 'n', 's', 'e', or 'w'!")
     bounds = board
 
-    x_coordinate = character["row"]
-    y_coordinate = character["column"]
+    row = character["row"]
+    column = character["column"]
 
     if direction == "n":
         x_coordinate = character["row"] - 1
@@ -117,7 +117,7 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     elif direction == "w":
         y_coordinate = character["column"] - 1
 
-    if bounds[0][0] <= x_coordinate <= bounds[0][1] and bounds[1][0] <= y_coordinate <= bounds[1][1]:
+    if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
         return True
     else:
         return False
