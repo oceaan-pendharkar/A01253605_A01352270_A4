@@ -97,7 +97,10 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     :raises TypeError: if direction is not a string
     :raises ValueError: if direction is not 'n', 's', 'e', or 'w'
     """
-
+    if type(board) != tuple or type(character) != dict or type(direction) != str:
+        raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
+    if direction != 'n' and direction != 's' and direction != 'w' and direction != 'e':
+        raise TypeError("Direction must be 'n', 's', 'e', or 'w'!")
     bounds = board
 
     x_coordinate = character["row"]
