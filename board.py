@@ -109,13 +109,13 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     column = character["column"]
 
     if direction == "n":
-        x_coordinate = character["row"] - 1
+        row = character["row"] - 1
     elif direction == "s":
-        x_coordinate = character["row"] + 1
+        row = character["row"] + 1
     elif direction == "e":
-        y_coordinate = character["column"] + 1
+        column = character["column"] + 1
     elif direction == "w":
-        y_coordinate = character["column"] - 1
+        column = character["column"] - 1
 
     if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
         return True
