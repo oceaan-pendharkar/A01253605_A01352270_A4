@@ -84,7 +84,7 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     """
     Check that a character's move in a particular direction lands on the board of a game being played.
 
-    :param board: the game board, as a tuple containing row and column boundaries as sub-tubles of size 2
+    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: the character's row position, column position, and current stats, as a dictionary
     :param direction: either 'n', 's', 'e', or 'w' as a string
     :precondition: board must be a tuple
@@ -92,7 +92,12 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
     :postcondition: determines whether a character's move in a particular direction lands on the playing board
     :return: True if the move falls within the board, else False
+    :raises TypeError: if board is not a tuple
+    :raises TypeError: if character is not a dict
+    :raises TypeError: if direction is not a string
+    :raises ValueError: if direction is not 'n', 's', 'e', or 'w'
     """
+
     bounds = board
 
     x_coordinate = character["row"]
@@ -111,6 +116,7 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
         return True
     else:
         return False
+
 
 def make_board(rows: int, columns: int) -> tuple:
     """
