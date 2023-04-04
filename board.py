@@ -33,16 +33,6 @@ def event_happens(description: str, chance: int, event: str) -> bool:
         return False
 
 
-def generate_room() -> str:
-    """
-    Randomly select a room for a player to enter, in a game.
-
-    :return: the name of the room, as a string
-    """
-    selection = random.randint(0, 9)
-    return LOCATIONS[selection]
-
-
 def enter_room(character: dict) -> None:
     """
     Decide which event happens to a character based on the room they've entered in a game.
@@ -52,6 +42,15 @@ def enter_room(character: dict) -> None:
     :precondition: character must be a dictionary
     :postcondition: selects a particular room for a player to interact with in a game
     """
+    def generate_room() -> str:
+        """
+        Randomly select a room for a player to enter, in a game.
+
+        :return: the name of the room, as a string
+        """
+        selection = random.randint(0, 9)
+        return LOCATIONS[selection]
+
     room = generate_room()
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event = event_happens(room, 10, 'get assigned ANOTHER assignment')
