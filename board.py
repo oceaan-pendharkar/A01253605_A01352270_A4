@@ -33,26 +33,36 @@ def event_happens(description: str, chance: int, event: str) -> bool:
         return False
 
 
-def enter_room(character: dict, description: str) -> None:
+def generate_room() -> str:
+    """
+    Randomly select a room for a player to enter, in a game.
+
+    :return: the name of the room, as a string
+    """
+    selection = random.randint(0, 9)
+    return LOCATIONS[selection]
+
+
+def enter_room(character: dict) -> None:
     """
     Decide which event happens to a character based on the room they've entered in a game.
 
     :param character: the character, as a dictionary
-    :param description: a string, the description of the room
     :precondition: description must be a string
     :precondition: character must be a dictionary
     :postcondition: selects a particular room for a player to interact with in a game
     """
-    if description == LOCATIONS[0] or description == LOCATIONS[3]:
-        event = event_happens(description, 10, 'get assigned ANOTHER assignment')
+    room = generate_room()
+    if room == LOCATIONS[0] or room == LOCATIONS[3]:
+        event = event_happens(room, 10, 'get assigned ANOTHER assignment')
         if event:
             character['Frustration'] += 5
-    elif description == LOCATIONS[1] or description == LOCATIONS[2] or description == LOCATIONS[8]:
-        event = event_happens(description, 4, 'have to fight')
+    elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
+        event = event_happens(room, 4, 'have to fight')
         if event:
             battle(character)
-    elif description == LOCATIONS[6] or description == LOCATIONS[7] or description == LOCATIONS[9]:
-        event = event_happens(description, 10, 'gain motivation')
+    elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
+        event = event_happens(room, 10, 'gain motivation')
         if event:
             character["Motivation"] += 10
     else:
@@ -158,16 +168,6 @@ def make_board(rows: int, columns: int) -> tuple:
     return boundaries
 
 
-def generate_room() -> str:
-    """
-    Randomly select a room for a player to enter, in a game.
-
-    :return: the name of the room, as a string
-    """
-    selection = random.randint(0, 9)
-    return LOCATIONS[selection]
-
-
 def main():
     """
     Drive the program.
@@ -175,7 +175,7 @@ def main():
     board = make_board(10, 10)
     character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
                 'Name': "Oceaan"}
-    enter_room(character, generate_room())
+    enter_room(character)
     move_character(board, character, 'n')
 
 
