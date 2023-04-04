@@ -44,16 +44,16 @@ def enter_room(character: dict, description: str) -> None:
     :postcondition: selects a particular room for a player to interact with in a game
     """
     if description == LOCATIONS[0] or description == LOCATIONS[3]:
-        event_happens = generate_room(description, 10, 'get assigned ANOTHER assignment')
-        if event_happens:
+        event = event_happens(description, 10, 'get assigned ANOTHER assignment')
+        if event:
             character['Frustration'] += 5
     elif description == LOCATIONS[1] or description == LOCATIONS[2] or description == LOCATIONS[8]:
-        event_happens = generate_room(description, 4, 'have to fight')
-        if event_happens:
+        event = event_happens(description, 4, 'have to fight')
+        if event:
             battle(character)
     elif description == LOCATIONS[6] or description == LOCATIONS[7] or description == LOCATIONS[9]:
-        event_happens = generate_room(description, 10, 'gain motivation')
-        if event_happens:
+        event = event_happens(description, 10, 'gain motivation')
+        if event:
             character["Motivation"] += 10
     else:
         print("Nothing happens in this room. Such is life...")
