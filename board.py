@@ -42,6 +42,7 @@ def enter_room(character: dict) -> None:
     :precondition: character must be a dictionary
     :postcondition: selects a particular room for a player to interact with in a game
     """
+
     def generate_room() -> str:
         """
         Randomly select a room for a player to enter, in a game.
@@ -182,9 +183,9 @@ def main():
     """
     board = make_board(10, 10)
     character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                'Name': "Oceaan"}
+                 'Name': "Oceaan"}
     enter_room(character)
-    move_character(board, character, 'n')
+    move_character(board, character)
 
 
 if __name__ == "__main__":
