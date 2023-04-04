@@ -7,7 +7,7 @@ def make_custom_character(character: dict) -> None:
     :precondition: character's attributes must have values of zero to start
     :postcondition: adds 100 points total to the character's attributes
     """
-    points = 100
+    points = 120
     new_character = character
     for key in new_character.keys():
         character[key] = int(input(f"How many points do you want to add to your {key}?"))
@@ -41,6 +41,8 @@ def populate_points(character: dict, selection: str) -> dict:
         character['Luck'] += 25
     elif selection == 'g':
         character['Self-control'] += 25
+    elif selection == 'j':
+        character['Speed'] += 25
     elif selection == 'r':
         for key in character.keys():
             character[key] += 5
@@ -53,12 +55,12 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0,
+    character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
                  'Name': input("What's your character's name?")}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
-        print("Alright! You have ***100 points*** to distribute between Motivation, Frustration, Self-Control, "
+        print(f"Alright! You have ***100 points*** to distribute between Motivation, Frustration, Self-Control, "
               "Intelligence, and Luck.\nMotivation: helps you stay alive\nFrustration: you want to keep this low during"
               "battle!\nSelf-Control: like defense\nIntelligence: helps you damage your enemies\nLuck: determines how "
               "likely you are to meet difficult opponents\nYou also have Fitness, which keeps track of your "
@@ -66,7 +68,7 @@ def create_character() -> dict:
         make_custom_character(character)
 
     else:
-        character_type = input("That's cool, we have a few preset categories. Type the first letter of the character "
+        character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the character "
                                "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
                                "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
                                "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
