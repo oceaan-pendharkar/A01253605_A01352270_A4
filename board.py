@@ -101,13 +101,12 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
         return False
 
 
-def move_character(board: tuple, character: dict, direction: str) -> None:
+def move_character(board: tuple, character: dict) -> None:
     """
     Move a character up, down, left, or right within a game board.
 
     :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
-    :param direction: either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: character must be a dictionary that contains keys "row" and "column"
     :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: the move must have been validated to make sure it is possible on the board
@@ -125,8 +124,11 @@ def move_character(board: tuple, character: dict, direction: str) -> None:
         user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
         return user_choice
 
-    get_user_choice()
-    if validate_move(board, character, direction):
+    choice_is_valid = False
+    while not choice_is_valid:
+        direction = get_user_choice()
+        choice_is_valid = validate_move(board, character, direction)
+
         if direction == "n":
             character["row"] -= 1
         elif direction == "s":
