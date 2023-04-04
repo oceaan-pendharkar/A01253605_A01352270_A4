@@ -69,7 +69,7 @@ def create_character() -> dict:
         character_type = input("That's cool, we have a few preset categories. Type the first letter of the character "
                                "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
                                "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
-                               "\nregular person: has an even distribution of points(r)")
+                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
         populate_points(character, character_type)
 
     character['Fitness'] = 0
