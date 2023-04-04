@@ -178,6 +178,18 @@ def make_board(rows: int, columns: int) -> tuple:
     return boundaries
 
 
+def initialize_game(game_board: tuple, player: dict) -> tuple:
+    """
+    Create a board a character to engage in a game scenario.
+
+    :param game_board: the board, as a tuple of row and column boundaries
+    :param player: the character, as a dictionary
+    :postcondition: creates a board and character to play a game
+    :return: the board and player as two elements within a tuple
+    """
+    return game_board, player
+
+
 def main():
     """
     Drive the program.
