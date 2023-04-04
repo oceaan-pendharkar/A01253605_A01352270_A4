@@ -54,17 +54,17 @@ def enter_room(character: dict) -> None:
     room = generate_room()
 
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
-        event = event_happens(room, 10, 'get assigned ANOTHER assignment')
+        event = event_happens(room, 3, 'get assigned ANOTHER assignment')
         if event:
             character['Frustration'] += 5
 
     elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
-        event = event_happens(room, 4, 'have to fight')
+        event = event_happens(room, 2, 'have to fight')
         if event:
             battle(character)
 
     elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
-        event = event_happens(room, 10, 'gain motivation')
+        event = event_happens(room, 3, 'gain motivation')
         if event:
             character["Motivation"] += 10
 
