@@ -59,42 +59,6 @@ def enter_room(character: dict, description: str) -> None:
         print("Nothing happens in this room. Such is life...")
 
 
-def move_character(board: tuple, character: dict, direction: str) -> None:
-    """
-    Move a character up, down, left, or right within a game board.
-
-    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
-    :param character: a dictionary
-    :param direction: either 'n', 's', 'e', or 'w', as a string of length 1
-    :precondition: character must be a dictionary that contains keys "row" and "column"
-    :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
-    :precondition: the move must have been validated to make sure it is possible on the board
-    :postcondition: updates the character's row and column
-    """
-
-    def get_user_choice() -> str:
-        """
-        Print a numbered list of directions and ask the user to enter the direction they wish to travel.
-
-        :postcondition: the string prompt for user input is printed
-        :postcondition: the user decides and types which direction to go next
-        :return: the direction the user wishes to travel, as a string ('n', 's', 'e', or 'w')
-        """
-        user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
-        return user_choice
-
-    get_user_choice()
-    if validate_move(board, character, direction):
-        if direction == "n":
-            character["row"] -= 1
-        elif direction == "s":
-            character["row"] += 1
-        elif direction == "e":
-            character["column"] += 1
-        elif direction == "w":
-            character["column"] -= 1
-
-
 def validate_move(board: tuple, character: dict, direction: str) -> bool:
     """
     Check that a character's move in a particular direction lands on the board of a game being played.
@@ -137,6 +101,42 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
         return False
 
 
+def move_character(board: tuple, character: dict, direction: str) -> None:
+    """
+    Move a character up, down, left, or right within a game board.
+
+    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
+    :param character: a dictionary
+    :param direction: either 'n', 's', 'e', or 'w', as a string of length 1
+    :precondition: character must be a dictionary that contains keys "row" and "column"
+    :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
+    :precondition: the move must have been validated to make sure it is possible on the board
+    :postcondition: updates the character's row and column
+    """
+
+    def get_user_choice() -> str:
+        """
+        Print a numbered list of directions and ask the user to enter the direction they wish to travel.
+
+        :postcondition: the string prompt for user input is printed
+        :postcondition: the user decides and types which direction to go next
+        :return: the direction the user wishes to travel, as a string ('n', 's', 'e', or 'w')
+        """
+        user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
+        return user_choice
+
+    get_user_choice()
+    if validate_move(board, character, direction):
+        if direction == "n":
+            character["row"] -= 1
+        elif direction == "s":
+            character["row"] += 1
+        elif direction == "e":
+            character["column"] += 1
+        elif direction == "w":
+            character["column"] -= 1
+
+
 def make_board(rows: int, columns: int) -> tuple:
     """
     Create a board for a game.
@@ -161,8 +161,9 @@ def main():
     Drive the program.
     """
     board = make_board(10, 10)
-    enter_room({"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                'Name': "Oceaan"}, generate_room())
+    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
+                'Name': "Oceaan"}
+    enter_room(character, generate_room())
     move_character(board, character, 'n')
 
 
