@@ -59,6 +59,8 @@ def enter_room(character: dict) -> None:
 
     room = generate_room()
 
+    print("You're in ", room)
+
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event = event_happens(room, 3, 'get assigned ANOTHER assignment')
         if event:
