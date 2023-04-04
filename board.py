@@ -2,9 +2,9 @@ import itertools
 import random
 from Martn import battle
 
-LOCATIONS = ['Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
+LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Granville Station', 'Waterfront Station', 'Pacific Centre',
-             'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi']
+             'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
 
 
 def event_happens(description: str, chance: int, event: str) -> bool:
@@ -154,6 +154,16 @@ def make_board(rows: int, columns: int) -> tuple:
         raise ValueError("Dimensions must be 2 or greater")
     boundaries = ((0, rows), (0, columns))
     return boundaries
+
+
+def generate_room() -> str:
+    """
+    Randomly select a room for a player to enter, in a game.
+
+    :return: the name of the room, as a string
+    """
+    selection = random.randint(0, 9)
+    return LOCATIONS[selection]
 
 
 def main():
