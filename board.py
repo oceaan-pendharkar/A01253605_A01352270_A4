@@ -1,5 +1,4 @@
 import itertools
-import pprint
 import random
 from Martn import battle
 
@@ -80,6 +79,38 @@ def move_character(character: dict, direction: str) -> None:
     elif direction == "w":
         character["column"] -= 1
 
+
+def validate_move(board: tuple, character: dict, direction: str) -> bool:
+    """
+    Check that a character's move in a particular direction lands on the board of a game being played.
+
+    :param board: the game board, as a tuple containing row and column boundaries as sub-tubles of size 2
+    :param character: the character's row position, column position, and current stats, as a dictionary
+    :param direction: either 'n', 's', 'e', or 'w' as a string
+    :precondition: board must be a tuple
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
+    :postcondition: determines whether a character's move in a particular direction lands on the playing board
+    :return: True if the move falls within the board, else False
+    """
+    bounds = board
+
+    x_coordinate = character["row"]
+    y_coordinate = character["column"]
+
+    if direction == "n":
+        x_coordinate = character["row"] - 1
+    elif direction == "s":
+        x_coordinate = character["row"] + 1
+    elif direction == "e":
+        y_coordinate = character["column"] + 1
+    elif direction == "w":
+        y_coordinate = character["column"] - 1
+
+    if bounds[0][0] <= x_coordinate <= bounds[0][1] and bounds[1][0] <= y_coordinate <= bounds[1][1]:
+        return True
+    else:
+        return False
 
 def make_board(rows: int, columns: int) -> tuple:
     """
