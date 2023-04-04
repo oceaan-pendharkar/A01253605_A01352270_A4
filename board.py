@@ -77,10 +77,9 @@ def move_character(board: tuple, character: dict, direction: str) -> None:
 
         :postcondition: the string prompt for user input is printed
         :postcondition: the user decides and types which direction to go next
-        :return: the direction the user wishes to travel, as a string ("Up", "Down", "Left", or "Right)
-        :raises ValueError: if direction is anything other than the string "Up", "Down", "Left", or "Right"
+        :return: the direction the user wishes to travel, as a string ('n', 's', 'e', or 'w')
         """
-        user_choice = input("Enter the direction you wish to go (Up, Down, Left, or Right): ")
+        user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
         return user_choice
 
     get_user_choice()
