@@ -21,7 +21,8 @@ def event_happens(description: str, chance: int, event: str) -> bool:
     :postcondition: the player interacts with the room
     :return: True if the event happens, else False
     """
-    print(f"You're in {description}. There is a 1/{chance} chance you will {event}.")
+    print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
+          f"numbers.")
     number = random.randint(1, chance)
     guess = input(f"Type an integer [1, {chance}]: ")
     if number == guess:
@@ -41,7 +42,6 @@ def enter_room(character: dict) -> None:
     :precondition: character must be a dictionary
     :postcondition: selects a particular room for a player to interact with in a game
     """
-
     def generate_room() -> str:
         """
         Randomly select a room for a player to enter, in a game.
@@ -94,12 +94,9 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     :raises TypeError: if board is not a tuple
     :raises TypeError: if character is not a dict
     :raises TypeError: if direction is not a string
-    :raises ValueError: if direction is not 'n', 's', 'e', or 'w'
     """
     if type(board) != tuple or type(character) != dict or type(direction) != str:
         raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
-    if direction != 'n' and direction != 's' and direction != 'w' and direction != 'e':
-        raise TypeError("Direction must be 'n', 's', 'e', or 'w'!")
 
     bounds = board
 
@@ -118,6 +115,7 @@ def validate_move(board: tuple, character: dict, direction: str) -> bool:
     if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
         return True
     else:
+        print("Your move must stay within the bounds of the board!")
         return False
 
 
@@ -140,14 +138,23 @@ def move_character(board: tuple, character: dict) -> None:
         :postcondition: the string prompt for user input is printed
         :postcondition: the user decides and types which direction to go next
         :return: the direction the user wishes to travel, as a string ('n', 's', 'e', or 'w')
+        :raises ValueError: if direction is not 'n', 's', 'e', or 'w'
         """
         user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
+        if user_choice != 'n' and user_choice != 's' and user_choice != 'w' and user_choice != 'e':
+            raise ValueError
         return user_choice
 
     choice_is_valid = False
     while not choice_is_valid:
-        direction = get_user_choice()
-        choice_is_valid = validate_move(board, character, direction)
+        try:
+            direction = get_user_choice()
+        except ValueError:
+            print("Direction must be 'n', 's', 'e', or 'w'!")
+        else:
+            choice_is_valid = validate_move(board, character, direction)
+        finally:
+            continue
 
         if direction == "n":
             character["row"] -= 1
@@ -198,11 +205,16 @@ def main():
     """
     Drive the program.
     """
-    board = make_board(10, 10)
-    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                 'Name': "Oceaan"}
-    enter_room(character)
-    move_character(board, character)
+    bottom_row = False
+    while not bottom_row:
+        board = make_board(10, 10)
+        character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
+                     'Name': "Oceaan", 'row': 0, 'column': 0}
+        enter_room(character)
+        move_character(board, character)
+        if character['row'] == 10:
+            bottom_row = True
+    print("You reached the bottom row!")
 
 
 if __name__ == "__main__":

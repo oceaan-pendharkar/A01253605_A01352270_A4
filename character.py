@@ -63,7 +63,7 @@ def create_character() -> dict:
     :return: the character, as a dictionary
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 'Name': input("What's your character's name? ")}
+                 'Name': input("What's your character's name? "), "row": 0, "column": 0}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
