@@ -26,17 +26,17 @@ def event_happens(description: str, chance: int, event: str) -> bool:
     number = random.randint(1, chance)
     guess = int(input(f"Type an integer [1, {chance}]: "))
     if number == guess:
-        print(f"You KNEW this would happen! You {event}")
+        print(f"You KNEW this would happen! You {event}.")
         return True
     else:
-        print(f"the number was {number}")
+        print(f"The number was {number}")
         print(f"You did not {event}. As you were...")
         return False
 
 
 def enter_room(character: dict) -> None:
     """
-    Decide which event happens to a character based on the room they've entered in a game.
+    Decide which event happens to a character based on the room they've entered, in a game.
 
     :param character: the character, as a dictionary
     :precondition: description must be a string
