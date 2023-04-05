@@ -4,13 +4,12 @@ import character
 
 def game():
     welcome_message()
-    game = initialize_game(board.make_board(10, 10), character.create_character())
-    character = create_character()
-    game_board = board.generate_board()
-    enter_room(character)
+    game_properties = board.initialize_game(board.make_board(10, 10), character.create_character())
+    board.enter_room(game_properties[1])
     alive = True
-    while alive and not goal:
-        board.move_character(game[0], game[1])
+    goal_achieved = False
+    while alive and not goal_achieved:
+        board.move_character(game_properties[0], game_properties[1])
             if challenge:
                 battle()
                 check_level()
@@ -25,7 +24,6 @@ def main():
     """
     Drive the program.
     """
-    make_board(10, 10)
 
 
 if __name__ == "__main__":
