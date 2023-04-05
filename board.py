@@ -24,11 +24,12 @@ def event_happens(description: str, chance: int, event: str) -> bool:
     print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
           f"numbers.")
     number = random.randint(1, chance)
-    guess = input(f"Type an integer [1, {chance}]: ")
+    guess = int(input(f"Type an integer [1, {chance}]: "))
     if number == guess:
         print(f"You KNEW this would happen! You {event}")
         return True
     else:
+        print(f"the number was {number}")
         print(f"You did not {event}. As you were...")
         return False
 
