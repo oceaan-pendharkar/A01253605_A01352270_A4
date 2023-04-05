@@ -154,17 +154,15 @@ def move_character(board: tuple, character: dict) -> None:
             print("Direction must be 'n', 's', 'e', or 'w'!")
         else:
             choice_is_valid = validate_move(board, character, direction)
-        finally:
-            continue
 
-        if direction == "n":
-            character["row"] -= 1
-        elif direction == "s":
-            character["row"] += 1
-        elif direction == "e":
-            character["column"] += 1
-        elif direction == "w":
-            character["column"] -= 1
+    if direction == "n":
+        character["row"] -= 1
+    elif direction == "s":
+        character["row"] += 1
+    elif direction == "e":
+        character["column"] += 1
+    elif direction == "w":
+        character["column"] -= 1
 
 
 def make_board(rows: int, columns: int) -> tuple:
@@ -207,14 +205,15 @@ def main():
     Drive the program.
     """
     bottom_row = False
+    board = make_board(10, 10)
+    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
+                 'Name': "Oceaan", 'row': 0, 'column': 0}
     while not bottom_row:
-        board = make_board(10, 10)
-        character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                     'Name': "Oceaan", 'row': 0, 'column': 0}
         enter_room(character)
         move_character(board, character)
-        if character['row'] == 10:
+        if character['row'] == 9:
             bottom_row = True
+        print(character)
     print("You reached the bottom row!")
 
 
