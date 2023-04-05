@@ -186,7 +186,11 @@ def initialize_game(game_board: tuple, player: dict) -> tuple:
     :param player: the character, as a dictionary
     :postcondition: creates a board and character to play a game
     :return: the board and player as two elements within a tuple
+    :raises TypeError: if game_board is not a tuple
+    :raises TypeError: if player is not a dict
     """
+    if type(game_board) != tuple or type(player) != dict:
+        raise TypeError("Your board must be a tuple and your player must be a dictionary!")
     return game_board, player
 
 
