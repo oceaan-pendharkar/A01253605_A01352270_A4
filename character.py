@@ -11,8 +11,8 @@ def make_custom_character(character: dict) -> None:
     :postcondition: adds 120 points total to the character's attributes
     """
     points = 120
-    key_generator = itertools.cycle(list(["Motivation", "Frustration", "Self-control", "Intelligence", "Luck",
-                                          "Speed"]))
+    key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
+                                                                                    "Fitness"]])
     while points > 0:
         key = next(key_generator)
         character[key] = int(input(f"How many points do you want to add to your {key}?"))
@@ -22,8 +22,8 @@ def make_custom_character(character: dict) -> None:
             break
         elif points < 0:
             print("Woah there, that was more than 120 points!! \nSince you cheated, that's all the points you get for "
-                  "now. \nAnd you can forget about the extra ones you tried to give yourself. \nThat's not how "
-                  "operation COMPLETE ASSIGNMENT 4 works...")
+                  "now. \nAnd you can forget about getting points for the category you just over-filled. \nThat's not "
+                  "how operation COMPLETE ASSIGNMENT 4 works...")
             character[key] = 0
             break
         print(f"You have {points} points left to distribute between your attributes.")
