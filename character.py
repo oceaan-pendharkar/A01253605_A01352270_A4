@@ -63,7 +63,7 @@ def create_character() -> dict:
     :return: the character, as a dictionary
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 'Name': input("What's your character's name? "), "row": 0, "column": 0}
+                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
@@ -81,7 +81,6 @@ def create_character() -> dict:
                                "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
         populate_points(character, character_type)
 
-    character['Fitness'] = 0
     return character
 
 
