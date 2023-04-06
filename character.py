@@ -11,13 +11,12 @@ def make_custom_character(character: dict) -> None:
     :postcondition: adds 120 points total to the character's attributes
     """
     points = 120
-    new_character = character
     key_generator = itertools.cycle(list(["Motivation", "Frustration", "Self-control", "Intelligence", "Luck",
                                           "Speed"]))
     while points > 0:
         key = next(key_generator)
         character[key] = int(input(f"How many points do you want to add to your {key}?"))
-        points -= new_character[key]
+        points -= character[key]
         if points == 0:
             print("You've used all your points!")
             break
@@ -25,7 +24,7 @@ def make_custom_character(character: dict) -> None:
             print("Woah there, that was more than 120 points!! \nSince you cheated, that's all the points you get for "
                   "now. \nAnd you can forget about the extra ones you tried to give yourself. \nThat's not how "
                   "operation COMPLETE ASSIGNMENT 4 works...")
-            new_character[key] = 0
+            character[key] = 0
             break
         print(f"You have {points} points left to distribute between your attributes.")
 
@@ -63,7 +62,7 @@ def create_character() -> dict:
     :return: the character, as a dictionary
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 'Name': input("What's your character's name? "), "row": 0, "column": 0}
+                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0}
     choice = input("Would you like to choose how many points to put in each category? y/n")
 
     if choice == 'y':
@@ -81,7 +80,6 @@ def create_character() -> dict:
                                "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
         populate_points(character, character_type)
 
-    character['Fitness'] = 0
     return character
 
 

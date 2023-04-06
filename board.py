@@ -147,6 +147,7 @@ def move_character(board: tuple, character: dict) -> None:
         return user_choice
 
     choice_is_valid = False
+    direction = None
     while not choice_is_valid:
         try:
             direction = get_user_choice()
