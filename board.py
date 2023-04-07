@@ -52,7 +52,19 @@ def enter_room(character: dict) -> None:
 
     print("You're in ", room)
 
-    def event_happens(description: str, chance: int, event: str) -> bool:
+    def complete_assignment() -> None:
+        """
+        Adjust a character's intelligence and frustration points to complete an assignment in a game.
+
+        :precondition: the character must be a dictionary
+        :precondition: the character must contain "Intelligence" and "Frustration" as keys, as strings
+        :precondition: the values of "Intelligence" and "Frustration" in character must be integers
+        """
+        character["Intelligence"] += 10
+        character["Frustration"] += 10
+        character["Luck"] -= 5
+
+    def event_happens(description: str, chance: int, event: str) -> None:
         """
         Generate a room for a player to interact with in a game.
 
@@ -65,7 +77,6 @@ def enter_room(character: dict) -> None:
         :precondition: attribute must be a string that exists in the character's dictionary keys
         :precondition: character must be a dictionary
         :postcondition: the player interacts with the room
-        :return: True if the event happens, else False
         """
         print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
               f"numbers.")
@@ -73,26 +84,27 @@ def enter_room(character: dict) -> None:
         guess = int(input(f"Type an integer [1, {chance}]: "))
         if number == guess:
             print(f"You KNEW this would happen! You {event}.")
-            return True
+            if event == 'get assigned ANOTHER assignment':
+                complete_assignment()
+            elif event == 'have to fight':
+                battle(character)
+            elif event == 'gain motivation':
+                character["Motivation"] += 10
+
         else:
             print(f"The number was {number}")
             print(f"You did not {event}. As you were...")
             return False
 
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
-        event_occurrence = event_happens(room, 3, 'get assigned ANOTHER assignment')
-        if event_occurrence:
-            character['Frustration'] += 5
+        event_happens(room, 3, 'get assigned ANOTHER assignment')
 
     elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
-        event_occurrence = event_happens(room, 2, 'have to fight')
-        if event_occurrence:
-            battle(character)
+        event_happens(room, 2, 'have to fight')
 
     elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
-        event_occurrence = event_happens(room, 3, 'gain motivation')
-        if event_occurrence:
-            character["Motivation"] += 10
+        event_happens(room, 3, 'gain motivation')
+
 
     else:
         print("Nothing happens in this room. Such is life...")
