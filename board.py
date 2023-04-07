@@ -110,8 +110,6 @@ def move_character(board: tuple, character: dict) -> None:
         """
         Check that a character's move in a particular direction lands on the board of a game being played.
 
-        :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
-        :param direction: either 'n', 's', 'e', or 'w' as a string
         :precondition: board must be a tuple
         :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
         :postcondition: determines whether a character's move in a particular direction lands on the playing board
