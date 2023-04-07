@@ -24,34 +24,6 @@ def welcome_message(character: dict) -> None:
           f"defeat the final boss, and make it to the last square of the board for the final battle...")
 
 
-def event_happens(description: str, chance: int, event: str) -> bool:
-    """
-    Generate a room for a player to interact with in a game.
-
-    :param description: the description of the room, as a string
-    :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
-    :param event: the event that might happen in that room
-    :precondition: description must be one of the strings in LOCATIONS
-    :precondition: percent must be an integer
-    :precondition: event must be a string
-    :precondition: attribute must be a string that exists in the character's dictionary keys
-    :precondition: character must be a dictionary
-    :postcondition: the player interacts with the room
-    :return: True if the event happens, else False
-    """
-    print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
-          f"numbers.")
-    number = random.randint(1, chance)
-    guess = int(input(f"Type an integer [1, {chance}]: "))
-    if number == guess:
-        print(f"You KNEW this would happen! You {event}.")
-        return True
-    else:
-        print(f"The number was {number}")
-        print(f"You did not {event}. As you were...")
-        return False
-
-
 def enter_room(character: dict) -> None:
     """
     Creates a scenario for a player to engage with when they've entered a room in a game.
@@ -80,19 +52,46 @@ def enter_room(character: dict) -> None:
 
     print("You're in ", room)
 
+    def event_happens(description: str, chance: int, event: str) -> bool:
+        """
+        Generate a room for a player to interact with in a game.
+
+        :param description: the description of the room, as a string
+        :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
+        :param event: the event that might happen in that room
+        :precondition: description must be one of the strings in LOCATIONS
+        :precondition: percent must be an integer
+        :precondition: event must be a string
+        :precondition: attribute must be a string that exists in the character's dictionary keys
+        :precondition: character must be a dictionary
+        :postcondition: the player interacts with the room
+        :return: True if the event happens, else False
+        """
+        print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
+              f"numbers.")
+        number = random.randint(1, chance)
+        guess = int(input(f"Type an integer [1, {chance}]: "))
+        if number == guess:
+            print(f"You KNEW this would happen! You {event}.")
+            return True
+        else:
+            print(f"The number was {number}")
+            print(f"You did not {event}. As you were...")
+            return False
+
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
-        event = event_happens(room, 3, 'get assigned ANOTHER assignment')
-        if event:
+        event_occurrence = event_happens(room, 3, 'get assigned ANOTHER assignment')
+        if event_occurrence:
             character['Frustration'] += 5
 
     elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
-        event = event_happens(room, 2, 'have to fight')
-        if event:
+        event_occurrence = event_happens(room, 2, 'have to fight')
+        if event_occurrence:
             battle(character)
 
     elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
-        event = event_happens(room, 3, 'gain motivation')
-        if event:
+        event_occurrence = event_happens(room, 3, 'gain motivation')
+        if event_occurrence:
             character["Motivation"] += 10
 
     else:
