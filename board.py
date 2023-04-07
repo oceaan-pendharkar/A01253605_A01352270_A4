@@ -123,7 +123,7 @@ def move_character(board: tuple, character: dict) -> None:
         if move == 'n':
             return character["row"] - 1
         elif direction == 's':
-            return character["row"] - 1
+            return character["row"] + 1
 
     def get_column_coordinate(move: str) -> int:
         """
