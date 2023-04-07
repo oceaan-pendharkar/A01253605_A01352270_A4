@@ -32,6 +32,8 @@ def enter_room(character: dict) -> None:
     :precondition: description must be a string
     :precondition: character must be a dictionary
     :postcondition: the player interacts with the room in a game
+    :postcondition: the player's stats and points are displayed
+    :postcondition: a message saying the player is leaving the room is displayed
     """
 
     def generate_room() -> str:
@@ -105,6 +107,8 @@ def enter_room(character: dict) -> None:
 
     else:
         print("Nothing happens in this room. Such is life...")
+
+    print(f"You are now leaving {room}.\n\nHere's what your points and stats look like:\n{character}")
 
 
 def move_character(board: tuple, character: dict) -> None:
