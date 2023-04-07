@@ -54,7 +54,7 @@ def enter_room(character: dict) -> None:
 
     def complete_assignment() -> None:
         """
-        Adjust a character's intelligence and frustration points to complete an assignment in a game.
+        Adjust a character's intelligence, frustration, and luck points to complete an assignment in a game.
 
         :precondition: the character must be a dictionary
         :precondition: the character must contain "Intelligence" and "Frustration" as keys, as strings
