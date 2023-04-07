@@ -3,8 +3,8 @@ import character
 
 
 def game():
-    welcome_message()
     game_properties = board.initialize_game(board.make_board(10, 10), character.create_character())
+    board.welcome_message()
     board.enter_room(game_properties[1])
     vitals = {"alive": True, "goal achieved": False}
     while vitals["alive"] and not vitals["goal achieved"]:

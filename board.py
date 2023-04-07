@@ -6,6 +6,24 @@ LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
 
 
+def welcome_message(character: dict) -> None:
+    """
+    Welcome a player to a game.
+
+    :param character: the character, as a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: Welcomes a player to a game
+    :raises TypeError: if character is not a dictionary
+    """
+    if type(character) != dict:
+        raise TypeError("I cannot welcome a character that is not a dictionary to this game!")
+
+    print(f"Welcome to the game, {character['Name']}! You are on MISSION: COMPLETE ASSIGNMENT 4.\nYou're at the end "
+          f"of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do "
+          f"it!\nYour mission is to stay Motivated enough to stay alive, achieve a high enough fitness level to "
+          f"defeat the final boss, and make it to the last square of the board...")
+
+
 def event_happens(description: str, chance: int, event: str) -> bool:
     """
     Generate a room for a player to interact with in a game.
@@ -43,6 +61,7 @@ def enter_room(character: dict) -> None:
     :precondition: character must be a dictionary
     :postcondition: the player interacts with the room in a game
     """
+
     def generate_room() -> str:
         """
         Randomly select a room for a player to enter, in a game.
