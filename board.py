@@ -255,14 +255,13 @@ def main():
     """
     bottom_row = False
     board = make_board(10, 10)
-    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                 'Name': "Oceaan", 'row': 0, 'column': 0}
+    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20,
+                 "Speed": 20, "Fitness": 0, 'Name': "Oceaan", 'row': 0, 'column': 0}
     while not bottom_row:
         enter_room(character)
         move_character(board, character)
         if character['row'] == 9:
             bottom_row = True
-        print(character)
     print("You reached the bottom row!")
 
 
