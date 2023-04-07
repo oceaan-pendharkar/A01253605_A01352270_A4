@@ -43,8 +43,8 @@ def enter_room(character: dict) -> None:
         :postcondition: the room is selected for the player
         :return: the name of the room, as a string
         """
-        if character["Luck"] > 75:
-            room_indices = [6, 0, 7, 9, 4, 5, 8]  # more lucky rooms than not
+        if character["Luck"] > 35:
+            room_indices = [7, 9, 4, 5]  # more lucky rooms than not
             selection = room_indices[random.randint(0, 6)]
         else:
             selection = random.randint(0, 9)
