@@ -110,7 +110,7 @@ def create_character() -> dict:
     return character
 
 
-def check_alive(character: dict) -> None:
+def check_alive(character: dict) -> bool:
     """
     Check to see if a character's motivation has dropped to or below zero in a game.
 
@@ -128,13 +128,38 @@ def check_alive(character: dict) -> None:
         return False
 
 
-def check_goal(character: dict) -> None:
+def check_goal(character: dict) -> bool:
     """
-    Check that a character has a high enough fitness level and
+    Check that a character has a high enough fitness level and has reached the correct square to defeat the boss.
 
-    :param character:
-    :return:
+    :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: displays the character's progress towards their goal if their fitness level is 30 or higher or
+                    if they've found the final square
+    :return: True if goal achieved, else False
+    :raises TypeError: if character is not a dictionary
     """
+    if type(character) != dict:
+        raise TypeError("Character must be a dictionary to call check_goal!")
+
+    character_coordinates = (character["row"], character["column"])
+
+    if character["Fitness"] >= 30 and character_coordinates == (9, 9):
+        print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
+              f"boss!!!")
+        return True
+    elif character["Fitness"] >= 30 and character_coordinates != (9, 9):
+        print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
+              f"way to the final square for the final battle...")
+        return False
+    elif character["Fitness"] < 30 and character_coordinates == (9, 9):
+        print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
+              f"boss yet! Keep trucking...")
+        return False
+    else:
+        return False
+
+
 def main():
     """
     Drive the program.
