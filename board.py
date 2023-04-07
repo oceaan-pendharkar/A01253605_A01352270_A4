@@ -6,43 +6,36 @@ LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
 
 
-def event_happens(description: str, chance: int, event: str) -> bool:
+def welcome_message(character: dict) -> None:
     """
-    Generate a room for a player to interact with in a game.
+    Welcome a player to a game.
 
-    :param description: the description of the room, as a string
-    :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
-    :param event: the event that might happen in that room
-    :precondition: description must be one of the strings in LOCATIONS
-    :precondition: percent must be an integer
-    :precondition: event must be a string
-    :precondition: attribute must be a string that exists in the character's dictionary keys
+    :param character: the character, as a dictionary
     :precondition: character must be a dictionary
-    :postcondition: the player interacts with the room
-    :return: True if the event happens, else False
+    :postcondition: Welcomes a player to a game
+    :raises TypeError: if character is not a dictionary
     """
-    print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
-          f"numbers.")
-    number = random.randint(1, chance)
-    guess = int(input(f"Type an integer [1, {chance}]: "))
-    if number == guess:
-        print(f"You KNEW this would happen! You {event}.")
-        return True
-    else:
-        print(f"The number was {number}")
-        print(f"You did not {event}. As you were...")
-        return False
+    if type(character) != dict:
+        raise TypeError("I cannot welcome a character that is not a dictionary to this game!")
+
+    print(f"Welcome to the game, {character['Name']}! You are on MISSION: COMPLETE ASSIGNMENT 4.\nYou're at the end "
+          f"of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do "
+          f"it!\nYour mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to "
+          f"defeat the final boss, and make it to the last square of the board for the final battle...")
 
 
 def enter_room(character: dict) -> None:
     """
-    Decide which event happens to a character based on the room they've entered, in a game.
+    Creates a scenario for a player to engage with when they've entered a room in a game.
 
     :param character: the character, as a dictionary
     :precondition: description must be a string
     :precondition: character must be a dictionary
-    :postcondition: selects a particular room for a player to interact with in a game
+    :postcondition: the player interacts with the room in a game
+    :postcondition: the player's stats and points are displayed
+    :postcondition: a message saying the player is leaving the room is displayed
     """
+
     def generate_room() -> str:
         """
         Randomly select a room for a player to enter, in a game.
@@ -50,8 +43,8 @@ def enter_room(character: dict) -> None:
         :postcondition: the room is selected for the player
         :return: the name of the room, as a string
         """
-        if character["Luck"] > 75:
-            room_indices = [6, 0, 7, 9, 4, 5, 8]  # more lucky rooms than not
+        if character["Luck"] > 35:
+            room_indices = [7, 9, 4, 5]  # more lucky rooms than not
             selection = room_indices[random.randint(0, 6)]
         else:
             selection = random.randint(0, 9)
@@ -61,63 +54,62 @@ def enter_room(character: dict) -> None:
 
     print("You're in ", room)
 
+    def complete_assignment() -> None:
+        """
+        Adjust a character's intelligence, frustration, and luck points to complete an assignment in a game.
+
+        :precondition: the character must be a dictionary
+        :precondition: the character must contain "Intelligence" and "Frustration" as keys, as strings
+        :precondition: the values of "Intelligence" and "Frustration" in character must be integers
+        """
+        character["Intelligence"] += 10
+        character["Frustration"] += 10
+        character["Luck"] -= 5
+
+    def event_happens(description: str, chance: int, event: str) -> None:
+        """
+        Generate a room for a player to interact with in a game.
+
+        :param description: the description of the room, as a string
+        :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
+        :param event: the event that might happen in that room
+        :precondition: description must be one of the strings in LOCATIONS
+        :precondition: percent must be an integer
+        :precondition: event must be a string
+        :precondition: attribute must be a string that exists in the character's dictionary keys
+        :precondition: character must be a dictionary
+        :postcondition: the player interacts with the room
+        """
+        print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
+              f"numbers.")
+        number = random.randint(1, chance)
+        guess = int(input(f"Type an integer [1, {chance}]: "))
+        if number == guess:
+            print(f"You KNEW this would happen! You {event}.")
+            if event == 'get assigned ANOTHER assignment':
+                complete_assignment()
+            elif event == 'have to fight':
+                battle(character)
+            elif event == 'gain motivation':
+                character["Motivation"] += 10
+            elif event == 'lose self-control':
+                character["Self-control"] -= 10
+        else:
+            print(f"The number was {number}.\nYou did not {event}. As you were...")
+
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
-        event = event_happens(room, 3, 'get assigned ANOTHER assignment')
-        if event:
-            character['Frustration'] += 5
+        event_happens(room, 3, 'get assigned ANOTHER assignment')
 
     elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
-        event = event_happens(room, 2, 'have to fight')
-        if event:
-            battle(character)
+        event_happens(room, 2, 'have to fight')
 
     elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
-        event = event_happens(room, 3, 'gain motivation')
-        if event:
-            character["Motivation"] += 10
+        event_happens(room, 3, 'lose self-control')
 
     else:
-        print("Nothing happens in this room. Such is life...")
+        event_happens(room, 3, 'gain motivation')
 
-
-def validate_move(board: tuple, character: dict, direction: str) -> bool:
-    """
-    Check that a character's move in a particular direction lands on the board of a game being played.
-
-    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
-    :param character: the character's row position, column position, and current stats, as a dictionary
-    :param direction: either 'n', 's', 'e', or 'w' as a string
-    :precondition: board must be a tuple
-    :precondition: character must be a dictionary
-    :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
-    :postcondition: determines whether a character's move in a particular direction lands on the playing board
-    :return: True if the move falls within the board, else False
-    :raises TypeError: if board is not a tuple
-    :raises TypeError: if character is not a dict
-    :raises TypeError: if direction is not a string
-    """
-    if type(board) != tuple or type(character) != dict or type(direction) != str:
-        raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
-
-    bounds = board
-
-    row = character["row"]
-    column = character["column"]
-
-    if direction == "n":
-        row = character["row"] - 1
-    elif direction == "s":
-        row = character["row"] + 1
-    elif direction == "e":
-        column = character["column"] + 1
-    elif direction == "w":
-        column = character["column"] - 1
-
-    if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
-        return True
-    else:
-        print("Your move must stay within the bounds of the board!")
-        return False
+    print(f"You are now leaving {room}.\n\nHere's what your points and stats look like:\n{character}")
 
 
 def move_character(board: tuple, character: dict) -> None:
@@ -129,7 +121,11 @@ def move_character(board: tuple, character: dict) -> None:
     :precondition: character must be a dictionary that contains keys "row" and "column"
     :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: the move must have been validated to make sure it is possible on the board
-    :postcondition: updates the character's row and column
+    :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
+    :postcondition: updates the character's row or column based on the move chosen by the user
+    :raises TypeError: if board is not a tuple
+    :raises TypeError: if direction is not a string
+    :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
     """
 
     def get_user_choice() -> str:
@@ -146,6 +142,63 @@ def move_character(board: tuple, character: dict) -> None:
             raise ValueError
         return user_choice
 
+    def get_row_coordinate(move: str) -> int:
+        """
+        Assign a new row value based on the move being validated or made.
+
+        :param move: the direction of the move, as a string 'n' or 's'
+        :return: the new coordinate, as an integer
+        :raises ValueError: if move is not 'n' or 's'
+        """
+        if move != 'n' and move != 's':
+            raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
+        if move == 'n':
+            return character["row"] - 1
+        elif direction == 's':
+            return character["row"] + 1
+
+    def get_column_coordinate(move: str) -> int:
+        """
+        Assign a new row value based on the move being validated or made.
+
+        :param move: the direction of the move, as a string 'e' or 'w'
+        :return: the new coordinate, as an integer
+        :raises ValueError: if move is not 'e' or 'w'
+        """
+        if move != 'e' and move != 'w':
+            raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
+        if direction == 'e':
+            return character["column"] + 1
+        elif direction == "w":
+            return character["column"] - 1
+
+    def validate_move() -> bool:
+        """
+        Check that a character's move in a particular direction lands on the board of a game being played.
+
+        :precondition: board must be a tuple
+        :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
+        :postcondition: determines whether a character's move in a particular direction lands on the playing board
+        :return: True if the move falls within the board, else False
+        :raises TypeError: if board is not a tuple
+        :raises TypeError: if direction is not a string
+        """
+        if type(board) != tuple or type(direction) != str:
+            raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
+
+        row, column = character["row"], character["column"]
+
+        if direction == "n" or direction == "s":
+            row = get_row_coordinate(direction)
+        elif direction == 'e' or direction == 'w':
+            column = get_column_coordinate(direction)
+
+        if board[0][0] <= row < board[0][1] and board[1][0] <= column < board[1][1]:
+            return True
+        else:
+            print(f"Your move must stay within the bounds of the board!")
+            return False
+
     choice_is_valid = False
     direction = None
     while not choice_is_valid:
@@ -154,16 +207,12 @@ def move_character(board: tuple, character: dict) -> None:
         except ValueError:
             print("Direction must be 'n', 's', 'e', or 'w'!")
         else:
-            choice_is_valid = validate_move(board, character, direction)
+            choice_is_valid = validate_move()
 
-    if direction == "n":
-        character["row"] -= 1
-    elif direction == "s":
-        character["row"] += 1
-    elif direction == "e":
-        character["column"] += 1
-    elif direction == "w":
-        character["column"] -= 1
+    if direction == "n" or direction == "s":
+        character["row"] = get_row_coordinate(direction)
+    elif direction == 'e' or direction == 'w':
+        character["column"] = get_column_coordinate(direction)
 
 
 def make_board(rows: int, columns: int) -> tuple:
@@ -207,14 +256,13 @@ def main():
     """
     bottom_row = False
     board = make_board(10, 10)
-    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20, "Speed": 20,
-                 'Name': "Oceaan", 'row': 0, 'column': 0}
+    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20,
+                 "Speed": 20, "Fitness": 0, 'Name': "Oceaan", 'row': 0, 'column': 0}
     while not bottom_row:
         enter_room(character)
         move_character(board, character)
         if character['row'] == 9:
             bottom_row = True
-        print(character)
     print("You reached the bottom row!")
 
 

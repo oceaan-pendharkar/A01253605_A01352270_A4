@@ -29,29 +29,56 @@ def make_custom_character(character: dict) -> None:
         print(f"You have {points} points left to distribute between your attributes.")
 
 
-def populate_points(character: dict, selection: str) -> dict:
+def make_preset_character(character: dict, selection: str):
     """
-    Create a character with a lot of intelligence points.
+    Create a character with more points in one attribute, depending on the selection.
 
     :param character: a dictionary with attributes as strings for keys and zeroes as integers for values
-    :param selection: the character type, as a string of length 1
+    :param selection: the character type selection, as a string of length 1
     :precondition: character must be a dictionary
     :precondition: character's attributes must have zero as values to begin with
+    :precondition: selection must be a string either 'n', 'l', 'g', 'j', or 'r'
     :postcondition: adds 120 points total to the character's attributes
+    :raises TypeError: if selection is not a string
+    :raises TypeError: if character is not a dict
+    :raises TypeError: if selection is not a string
+    :raises ValueError: if selection is not 'n', 'l', 'g', 'j', or 'r'
     """
-    for key in character.keys():
-        character[key] = 15
-    if selection == 'n':
-        character['Intelligence'] += 25
+    if type(character) != dict or type(selection) != str:
+        raise TypeError("Character must be a dictionary! Selection must be a string!")
+    if selection not in ['n', 'l', 'g', 'j', 'r']:
+        raise ValueError("Character option can only be 'n', 'l', 'g', 'j', or 'r'")
+
+    def populate_points(attribute: str) -> None:
+        """
+        Populate a character's points based on their selection.
+
+        :param attribute: the attribute to give extra points, as a string, based on the user's selection
+        :precondition: attribute must be a string
+        :precondition: character's points must be at zero to begin with
+        :precondition: character must be a dict
+        :postcondition: character's points are initialized ofr game play
+        :raises TypeError: if attribute is not a string
+        """
+        if type(attribute) != str:
+            raise TypeError("The attribute you pass to populate_points must be a string!")
+        key_generator = iter([attribute for attribute in character.keys() if attribute not in ["Name", "row", "column",
+                                                                                               "Fitness"]])
+        for _ in range(6):
+            character[next(key_generator)] = 15
+        character[attribute] *= 2
+
+    if selection == 'r':
+        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness"]]:
+            character[key] = 20
+    elif selection == 'n':
+        populate_points('Intelligence')
     elif selection == 'l':
-        character['Luck'] += 25
+        populate_points('Luck')
     elif selection == 'g':
-        character['Self-control'] += 25
+        populate_points('Self-Control')
     elif selection == 'j':
-        character['Speed'] += 25
-    elif selection == 'r':
-        for key in character.keys():
-            character[key] += 5
+        populate_points('Speed')
 
 
 def create_character() -> dict:
@@ -63,7 +90,7 @@ def create_character() -> dict:
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
                  "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0}
-    choice = input("Would you like to choose how many points to put in each category? y/n")
+    choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
         print(f"Alright! You have ***120 points*** to distribute between Motivation, Frustration, Self-Control, "
@@ -77,10 +104,60 @@ def create_character() -> dict:
         character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the character "
                                "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
                                "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
-                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
-        populate_points(character, character_type)
+                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r) ")
+        make_preset_character(character, character_type)
 
     return character
+
+
+def check_alive(character: dict) -> bool:
+    """
+    Check to see if a character's motivation has dropped to or below zero in a game.
+
+    :param character: the character, as a dictionary
+    :precondition: character must be a dictionary
+    :return: True if alive, else False
+    :raises TypeError: if character is not a dictionary
+    """
+    if type(character) != dict:
+        raise TypeError("Character must be a dictionary to call check_alive!")
+
+    if character["Motivation"] < 0:
+        return True
+    else:
+        return False
+
+
+def check_goal(character: dict) -> bool:
+    """
+    Check that a character has a high enough fitness level and has reached the correct square to defeat the boss.
+
+    :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: displays the character's progress towards their goal if their fitness level is 30 or higher or
+                    if they've found the final square
+    :return: True if goal achieved, else False
+    :raises TypeError: if character is not a dictionary
+    """
+    if type(character) != dict:
+        raise TypeError("Character must be a dictionary to call check_goal!")
+
+    character_coordinates = (character["row"], character["column"])
+
+    if character["Fitness"] >= 30 and character_coordinates == (9, 9):
+        print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
+              f"boss!!!")
+        return True
+    elif character["Fitness"] >= 30 and character_coordinates != (9, 9):
+        print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
+              f"way to the final square for the final battle...")
+        return False
+    elif character["Fitness"] < 30 and character_coordinates == (9, 9):
+        print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
+              f"boss yet! Keep trucking...")
+        return False
+    else:
+        return False
 
 
 def main():
