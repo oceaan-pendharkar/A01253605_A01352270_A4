@@ -134,7 +134,7 @@ def move_character(board: tuple, character: dict) -> None:
         elif direction == "w":
             column = character["column"] - 1
 
-        if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
+        if bounds[0][0] <= row < bounds[0][1] and bounds[1][0] <= column < bounds[1][1]:
             return True
         else:
             print("Your move must stay within the bounds of the board!")
