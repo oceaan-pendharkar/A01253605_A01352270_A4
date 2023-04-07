@@ -36,12 +36,12 @@ def event_happens(description: str, chance: int, event: str) -> bool:
 
 def enter_room(character: dict) -> None:
     """
-    Decide which event happens to a character based on the room they've entered, in a game.
+    Creates a scenario for a player to engage with when they've entered a room in a game.
 
     :param character: the character, as a dictionary
     :precondition: description must be a string
     :precondition: character must be a dictionary
-    :postcondition: selects a particular room for a player to interact with in a game
+    :postcondition: the player interacts with the room in a game
     """
     def generate_room() -> str:
         """
