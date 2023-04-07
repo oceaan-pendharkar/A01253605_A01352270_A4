@@ -1,5 +1,6 @@
 import board
 import character
+import end_game
 
 
 def game():
@@ -21,7 +22,7 @@ def game():
         #         level_up()
         character.check_alive(game_properties[1])
         character.check_goal()
-    endgame()
+    end_game.endgame()
 
 
 def main():
