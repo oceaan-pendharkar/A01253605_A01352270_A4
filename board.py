@@ -89,7 +89,8 @@ def move_character(board: tuple, character: dict) -> None:
     :precondition: character must be a dictionary that contains keys "row" and "column"
     :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: the move must have been validated to make sure it is possible on the board
-    :postcondition: updates the character's row and column
+    :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
+    :postcondition: updates the character's row or column based on the move chosen by the user
     :raises TypeError: if board is not a tuple
     :raises TypeError: if direction is not a string
     :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
@@ -109,6 +110,36 @@ def move_character(board: tuple, character: dict) -> None:
             raise ValueError
         return user_choice
 
+    def get_row_coordinate(move: str) -> int:
+        """
+        Assign a new row value based on the move being validated or made.
+
+        :param move: the direction of the move, as a string 'n' or 's'
+        :return: the new coordinate, as an integer
+        :raises ValueError: if move is not 'n' or 's'
+        """
+        if move != 'n' and move != 's':
+            raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
+        if move == 'n':
+            return character["row"] - 1
+        elif direction == 's':
+            return character["row"] - 1
+
+    def get_column_coordinate(move: str) -> int:
+        """
+        Assign a new row value based on the move being validated or made.
+
+        :param move: the direction of the move, as a string 'e' or 'w'
+        :return: the new coordinate, as an integer
+        :raises ValueError: if move is not 'e' or 'w'
+        """
+        if move != 'e' and move != 'w':
+            raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
+        if direction == 'e':
+            return character["column"] + 1
+        elif direction == "w":
+            return character["column"] - 1
+
     def validate_move() -> bool:
         """
         Check that a character's move in a particular direction lands on the board of a game being played.
@@ -123,24 +154,17 @@ def move_character(board: tuple, character: dict) -> None:
         if type(board) != tuple or type(direction) != str:
             raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
 
-        bounds = board
+        row, column = character["row"], character["column"]
 
-        row = character["row"]
-        column = character["column"]
+        if direction == "n" or direction == "s":
+            row = get_row_coordinate(direction)
+        elif direction == 'e' or direction == 'w':
+            column = get_column_coordinate(direction)
 
-        if direction == "n":
-            row = character["row"] - 1
-        elif direction == "s":
-            row = character["row"] + 1
-        elif direction == "e":
-            column = character["column"] + 1
-        elif direction == "w":
-            column = character["column"] - 1
-
-        if bounds[0][0] <= row < bounds[0][1] and bounds[1][0] <= column < bounds[1][1]:
+        if board[0][0] <= row < board[0][1] and board[1][0] <= column < board[1][1]:
             return True
         else:
-            print("Your move must stay within the bounds of the board!")
+            print(f"Your move must stay within the bounds of the board!")
             return False
 
     choice_is_valid = False
@@ -153,14 +177,10 @@ def move_character(board: tuple, character: dict) -> None:
         else:
             choice_is_valid = validate_move()
 
-    if direction == "n":
-        character["row"] -= 1
-    elif direction == "s":
-        character["row"] += 1
-    elif direction == "e":
-        character["column"] += 1
-    elif direction == "w":
-        character["column"] -= 1
+    if direction == "n" or direction == "s":
+        character["row"] = get_row_coordinate(direction)
+    elif direction == 'e' or direction == 'w':
+        character["column"] = get_column_coordinate(direction)
 
 
 def make_board(rows: int, columns: int) -> tuple:
