@@ -5,7 +5,7 @@ import end_game
 
 def game():
     game_properties = board.initialize_game(board.make_board(10, 10), character.create_character())
-    board.welcome_message()
+    board.welcome_message(game_properties[1])
     board.enter_room(game_properties[1])
     vitals = {"alive": True, "goal achieved": False}
     while vitals["alive"] and not vitals["goal achieved"]:
@@ -21,8 +21,8 @@ def game():
         #     if character_has_leveled():
         #         level_up()
         character.check_alive(game_properties[1])
-        character.check_goal()
-    end_game.endgame()
+        character.check_goal(game_properties[1])
+    end_game.endgame(game_properties[1])
 
 
 def main():
