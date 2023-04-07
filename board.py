@@ -90,11 +90,9 @@ def enter_room(character: dict) -> None:
                 battle(character)
             elif event == 'gain motivation':
                 character["Motivation"] += 10
-
         else:
             print(f"The number was {number}")
             print(f"You did not {event}. As you were...")
-            return False
 
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event_happens(room, 3, 'get assigned ANOTHER assignment')
@@ -104,7 +102,6 @@ def enter_room(character: dict) -> None:
 
     elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
         event_happens(room, 3, 'gain motivation')
-
 
     else:
         print("Nothing happens in this room. Such is life...")
