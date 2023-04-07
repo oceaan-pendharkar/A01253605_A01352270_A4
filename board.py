@@ -80,46 +80,6 @@ def enter_room(character: dict) -> None:
         print("Nothing happens in this room. Such is life...")
 
 
-def validate_move(board: tuple, character: dict, direction: str) -> bool:
-    """
-    Check that a character's move in a particular direction lands on the board of a game being played.
-
-    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
-    :param character: the character's row position, column position, and current stats, as a dictionary
-    :param direction: either 'n', 's', 'e', or 'w' as a string
-    :precondition: board must be a tuple
-    :precondition: character must be a dictionary
-    :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
-    :postcondition: determines whether a character's move in a particular direction lands on the playing board
-    :return: True if the move falls within the board, else False
-    :raises TypeError: if board is not a tuple
-    :raises TypeError: if character is not a dict
-    :raises TypeError: if direction is not a string
-    """
-    if type(board) != tuple or type(character) != dict or type(direction) != str:
-        raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
-
-    bounds = board
-
-    row = character["row"]
-    column = character["column"]
-
-    if direction == "n":
-        row = character["row"] - 1
-    elif direction == "s":
-        row = character["row"] + 1
-    elif direction == "e":
-        column = character["column"] + 1
-    elif direction == "w":
-        column = character["column"] - 1
-
-    if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
-        return True
-    else:
-        print("Your move must stay within the bounds of the board!")
-        return False
-
-
 def move_character(board: tuple, character: dict) -> None:
     """
     Move a character up, down, left, or right within a game board.
@@ -146,6 +106,42 @@ def move_character(board: tuple, character: dict) -> None:
             raise ValueError
         return user_choice
 
+    def validate_move() -> bool:
+        """
+        Check that a character's move in a particular direction lands on the board of a game being played.
+
+        :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
+        :param direction: either 'n', 's', 'e', or 'w' as a string
+        :precondition: board must be a tuple
+        :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
+        :postcondition: determines whether a character's move in a particular direction lands on the playing board
+        :return: True if the move falls within the board, else False
+        :raises TypeError: if board is not a tuple
+        :raises TypeError: if direction is not a string
+        """
+        if type(board) != tuple or type(direction) != str:
+            raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
+
+        bounds = board
+
+        row = character["row"]
+        column = character["column"]
+
+        if direction == "n":
+            row = character["row"] - 1
+        elif direction == "s":
+            row = character["row"] + 1
+        elif direction == "e":
+            column = character["column"] + 1
+        elif direction == "w":
+            column = character["column"] - 1
+
+        if bounds[0][0] <= row <= bounds[0][1] and bounds[1][0] <= column <= bounds[1][1]:
+            return True
+        else:
+            print("Your move must stay within the bounds of the board!")
+            return False
+
     choice_is_valid = False
     direction = None
     while not choice_is_valid:
@@ -154,7 +150,7 @@ def move_character(board: tuple, character: dict) -> None:
         except ValueError:
             print("Direction must be 'n', 's', 'e', or 'w'!")
         else:
-            choice_is_valid = validate_move(board, character, direction)
+            choice_is_valid = validate_move()
 
     if direction == "n":
         character["row"] -= 1
