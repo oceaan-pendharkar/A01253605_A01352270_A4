@@ -90,6 +90,9 @@ def move_character(board: tuple, character: dict) -> None:
     :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: the move must have been validated to make sure it is possible on the board
     :postcondition: updates the character's row and column
+    :raises TypeError: if board is not a tuple
+    :raises TypeError: if direction is not a string
+    :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
     """
 
     def get_user_choice() -> str:
