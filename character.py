@@ -62,8 +62,8 @@ def make_preset_character(character: dict, selection: str):
         """
         if type(attribute) != str:
             raise TypeError("The attribute you pass to populate_points must be a string!")
-        key_generator = iter([attribute for attribute in character.keys() if key not in ["Name", "row", "column",
-                                                                                         "Fitness"]])
+        key_generator = iter([attribute for attribute in character.keys() if attribute not in ["Name", "row", "column",
+                                                                                               "Fitness"]])
         for _ in range(6):
             character[next(key_generator)] = 15
         character[attribute] *= 2
@@ -90,7 +90,7 @@ def create_character() -> dict:
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
                  "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0}
-    choice = input("Would you like to choose how many points to put in each category? y/n")
+    choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
         print(f"Alright! You have ***120 points*** to distribute between Motivation, Frustration, Self-Control, "
@@ -104,7 +104,7 @@ def create_character() -> dict:
         character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the character "
                                "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
                                "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
-                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
+                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r) ")
         make_preset_character(character, character_type)
 
     return character
