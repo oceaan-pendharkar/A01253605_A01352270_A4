@@ -39,13 +39,17 @@ def check_result(character):
         print("You won the battle!")
 
 
-def battle(character):
+def battle(character_is_faster, character, enemy, enemy_frustration):
+    while character['Frustration'] <= 0 or enemy['Frustration'] <= enemy_frustration:
+        deal_damage(character_is_faster, character, enemy)
+        if character['Frustration'] > 0 or enemy['Frustration'] > enemy_frustration:
+            deal_damage(not character_is_faster, character, enemy)
+
+
+def battle_sequence(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
-    while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
-        deal_damage(character_is_faster, character, enemy)
-        while character['Frustration'] <= 0 or enemy['Frustration'] <= 0:
-            deal_damage(not character_is_faster, character, enemy)
+    battle(character_is_faster, character, enemy, 0)
     check_result(character)
 
 
@@ -54,7 +58,7 @@ def main():
     Drive the program.
     """
     character = {'Motivation': 100, 'Frustration': 75, 'Intelligence': 10, 'Speed': 8, 'Luck': 5}
-    battle(character)
+    battle_sequence(character)
 
 
 if __name__ == '__main__':
