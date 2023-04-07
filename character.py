@@ -128,6 +128,13 @@ def check_alive(character: dict) -> None:
         return False
 
 
+def check_goal(character: dict) -> None:
+    """
+    Check that a character has a high enough fitness level and
+
+    :param character:
+    :return:
+    """
 def main():
     """
     Drive the program.

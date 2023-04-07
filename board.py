@@ -21,7 +21,7 @@ def welcome_message(character: dict) -> None:
     print(f"Welcome to the game, {character['Name']}! You are on MISSION: COMPLETE ASSIGNMENT 4.\nYou're at the end "
           f"of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do "
           f"it!\nYour mission is to stay Motivated enough to stay alive, achieve a high enough fitness level to "
-          f"defeat the final boss, and make it to the last square of the board...")
+          f"defeat the final boss, and make it to the last square of the board for the final battle...")
 
 
 def event_happens(description: str, chance: int, event: str) -> bool:
