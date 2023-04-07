@@ -1,5 +1,5 @@
 import random
-from Martn import battle
+from battle import battle
 
 LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Granville Station', 'Waterfront Station', 'Pacific Centre',
