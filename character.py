@@ -29,29 +29,56 @@ def make_custom_character(character: dict) -> None:
         print(f"You have {points} points left to distribute between your attributes.")
 
 
-def populate_points(character: dict, selection: str) -> dict:
+def make_preset_character(character: dict, selection: str):
     """
-    Create a character with a lot of intelligence points.
+    Create a character with more points in one attribute, depending on the selection.
 
     :param character: a dictionary with attributes as strings for keys and zeroes as integers for values
-    :param selection: the character type, as a string of length 1
+    :param selection: the character type selection, as a string of length 1
     :precondition: character must be a dictionary
     :precondition: character's attributes must have zero as values to begin with
+    :precondition: selection must be a string either 'n', 'l', 'g', 'j', or 'r'
     :postcondition: adds 120 points total to the character's attributes
+    :raises TypeError: if selection is not a string
+    :raises TypeError: if character is not a dict
+    :raises TypeError: if selection is not a string
+    :raises ValueError: if selection is not 'n', 'l', 'g', 'j', or 'r'
     """
-    for key in character.keys():
-        character[key] = 15
-    if selection == 'n':
-        character['Intelligence'] += 25
+    if type(character) != dict or type(selection) != str:
+        raise TypeError("Character must be a dictionary! Selection must be a string!")
+    if selection not in ['n', 'l', 'g', 'j', 'r']:
+        raise ValueError("Character option can only be 'n', 'l', 'g', 'j', or 'r'")
+
+    def populate_points(attribute: str) -> None:
+        """
+        Populate a character's points based on their selection.
+
+        :param attribute: the attribute to give extra points, as a string, based on the user's selection
+        :precondition: attribute must be a string
+        :precondition: character's points must be at zero to begin with
+        :precondition: character must be a dict
+        :postcondition: character's points are initialized ofr game play
+        :raises TypeError: if attribute is not a string
+        """
+        if type(attribute) != str:
+            raise TypeError("The attribute you pass to populate_points must be a string!")
+        key_generator = iter([attribute for attribute in character.keys() if key not in ["Name", "row", "column",
+                                                                                         "Fitness"]])
+        for _ in range(6):
+            character[next(key_generator)] = 15
+        character[attribute] *= 2
+
+    if selection == 'r':
+        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness"]]:
+            character[key] = 20
+    elif selection == 'n':
+        populate_points('Intelligence')
     elif selection == 'l':
-        character['Luck'] += 25
+        populate_points('Luck')
     elif selection == 'g':
-        character['Self-control'] += 25
+        populate_points('Self-Control')
     elif selection == 'j':
-        character['Speed'] += 25
-    elif selection == 'r':
-        for key in character.keys():
-            character[key] += 5
+        populate_points('Speed')
 
 
 def create_character() -> dict:
@@ -78,7 +105,7 @@ def create_character() -> dict:
                                "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
                                "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
                                "\njock: has a lot of speed\nregular person: has an even distribution of points(r)")
-        populate_points(character, character_type)
+        make_preset_character(character, character_type)
 
     return character
 
