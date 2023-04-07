@@ -9,13 +9,18 @@ def game():
     vitals = {"alive": True, "goal achieved": False}
     while vitals["alive"] and not vitals["goal achieved"]:
         board.move_character(game_properties[0], game_properties[1])
-            if challenge:
-                battle()
-                check_level()
-                if character_has_leveled():
-                    level_up()
-            check_alive()
-            check_goal()
+
+            """Hey Martin! Just leaving a note to say that I think all of these should be part of the battle.py module.
+            I've been playing the game in board.py and with the current setup (having battle chance be decided 
+            when entering a room) battle is reasonably likely. """
+
+            # if challenge:
+            #     battle()
+            #     check_level()
+            #     if character_has_leveled():
+            #         level_up()
+        character.check_alive(game_properties[1])
+        check_goal()
     endgame()
 
 

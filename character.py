@@ -110,6 +110,24 @@ def create_character() -> dict:
     return character
 
 
+def check_alive(character: dict) -> None:
+    """
+    Check to see if a character's motivation has dropped to or below zero in a game.
+
+    :param character: the character, as a dictionary
+    :precondition: character must be a dictionary
+    :return: True if alive, else False
+    :raises TypeError: if character is not a dictionary
+    """
+    if type(character) != dict:
+        raise TypeError("Character must be a dictionary to call check_alive!")
+
+    if character["Motivation"] < 0:
+        return True
+    else:
+        return False
+
+
 def main():
     """
     Drive the program.
