@@ -100,7 +100,7 @@ def calculate_fitness(character, enemy):
 
 
 def battle_loss(character, enemy):
-    print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.)
+    print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.")
     character["Motivation"] -= 20
 
 
