@@ -17,7 +17,7 @@ def mid_boss_event(character, boss):
 
 def go_for_a_walk(character):
     character["row"] += battle.luck_roll(0, -2, 2)
-    character["column"] += battle.luck_roll(0, .2, 2)
+    character["column"] += battle.luck_roll(0, -2, 2)
 
 
 def boss_lose(character, enemy):
@@ -46,8 +46,9 @@ def endgame(character):
     print(alive)
     if alive:
         boss_fight(character)
-    # else:
-    #     death()
+    else:
+        print("You lost all your motivation to finish assignment 4 and you decided that it's not worth it. It's such "
+              "a nice day out right now you might as well go and enjoy life. Like a normal person...")
 
 
 def main():
@@ -55,7 +56,7 @@ def main():
     Drive the program.
     """
     character = {'Motivation': 100, 'Frustration': 0, "Max_Frustration": 500, 'Intelligence': 100,
-                 'Speed': 85, "Self-Control": 5, 'Luck': 45}
+                 'Speed': 85, "Self-Control": 5, 'Luck': 45, "row": 85, "column": 85}
     endgame(character)
 
 
