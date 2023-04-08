@@ -3,9 +3,9 @@ import random
 
 def determine_enemy():
     enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
-                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Exp": 2},
+                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, 'Max_Frustration': 20, "Exp": 2},
                2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
-                   'Speed': 5, "Exp": 1}}
+                   'Speed': 5, 'Max_Frustration': 20, "Exp": 1}}
 
     selector = random.randint(1, len(enemies))
     enemy = enemies[selector]
@@ -19,17 +19,19 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
 
 
 def check_first(character, enemy):
-    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) >= enemy['Speed'] + luck_roll(0, -2, 2):
+    character_speed = character['Speed'] + luck_roll(character['Luck'], -2, 2, 0.3)
+    enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
+    if character_speed >= enemy_speed:
         return True
-    if character['Speed'] + luck_roll(character['Luck'], 1, 3, 0.3) < enemy['Speed'] + luck_roll(0, -2, 2):
+    if character_speed < enemy_speed:
         return False
 
 
 def deal_damage(character_is_faster, character, enemy):
     if character_is_faster:
-        enemy['Frustration'] -= character['Intelligence'] + luck_roll(0, -2, 2)
+        enemy['Frustration'] += (character['Intelligence'] + luck_roll(0, -2, 2))
     if not character_is_faster:
-        character['Frustration'] -= enemy['Intelligence'] + luck_roll(0, -2, 2)
+        character['Frustration'] += (enemy['Intelligence'] + luck_roll(0, -2, 2))
 
 
 def check_result(character):
@@ -40,10 +42,12 @@ def check_result(character):
 
 
 def battle(character_is_faster, character, enemy, enemy_frustration):
-    while character['Frustration'] <= 0 or enemy['Frustration'] <= enemy_frustration:
+    while character['Frustration'] <= character["Max_Frustration"] or enemy['Frustration'] <= enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
-        if character['Frustration'] > 0 or enemy['Frustration'] > enemy_frustration:
+        print(character)
+        if character['Frustration'] < character["Max_Frustration"] or enemy['Frustration'] < enemy_frustration:
             deal_damage(not character_is_faster, character, enemy)
+            print(character)
 
 
 def calculate_fitness(character, enemy):
@@ -62,7 +66,8 @@ def calculate_fitness(character, enemy):
 def battle_sequence(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
-    battle(character_is_faster, character, enemy, 0)
+    print(character_is_faster)
+    battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
     check_result(character)
     calculate_fitness(character, enemy)
 
@@ -71,8 +76,8 @@ def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 75, 'Intelligence': 10, 'Speed': 8, 'Luck': 5, "Level": 1,
-                 "Fitness": 14}
+    character = {'Motivation': 100, 'Frustration': 1, 'Intelligence': 10, 'Speed': 1, 'Luck': 5, "Level": 1,
+                 "Fitness": 14, "Max_Frustration": 2}
     battle_sequence(character)
 
 
