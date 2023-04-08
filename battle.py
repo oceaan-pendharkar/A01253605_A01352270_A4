@@ -64,24 +64,22 @@ def calculate_critical(luck):
 
 
 def deal_damage(character_is_faster, character, enemy):
-    character_critical = calculate_critical(character["Luck"])
-    enemy_critical = calculate_critical(0)
-    if character_critical:
-        character_damage = character["Intelligence"] * 1.5
-        print("You landed a critical hit!")
-    else:
-        character_damage = character['Intelligence'] - enemy["Self-Control"]
-
-    if enemy_critical:
-        enemy_damage = enemy['Intelligence'] * 1.5
-        print(f"Oh no! {enemy['Name']} landed a critical hit on you!")
-    else:
-        enemy_damage = enemy['Intelligence'] - character["Self-Control"]
-
     if character_is_faster:
+        character_critical = calculate_critical(character["Luck"])
+        if character_critical:
+            character_damage = character["Intelligence"] * 1.5
+            print("You landed a critical hit!")
+        else:
+            character_damage = character['Intelligence'] - enemy["Self-Control"]
         enemy['Frustration'] += character_damage
         print(f"You frustrated {enemy['Name']} by {character_damage} points")
     else:
+        enemy_critical = calculate_critical(0)
+        if enemy_critical:
+            enemy_damage = enemy['Intelligence'] * 1.5
+            print(f"Oh no! {enemy['Name']} landed a critical hit on you!")
+        else:
+            enemy_damage = enemy['Intelligence'] - character["Self-Control"]
         character['Frustration'] += enemy_damage
         print(f"{enemy['Name']} frustrated you by {enemy_damage} points")
 
