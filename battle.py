@@ -38,22 +38,6 @@ def deal_damage(character_is_faster, character, enemy):
         character['Frustration'] += enemy_damage
 
 
-def check_result(character):
-    if character['Frustration'] >= character["Max_Frustration"]:
-        print("Sorry you lost the battle!")
-    else:
-        print("You won the battle!")
-
-
-def battle(character_is_faster, character, enemy, enemy_frustration):
-    while character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
-        deal_damage(character_is_faster, character, enemy)
-        print(character)
-        if character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
-            deal_damage(not character_is_faster, character, enemy)
-            print(character)
-
-
 def calculate_fitness(character, enemy):
     character["Fitness"] += enemy["Exp"]
     print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
@@ -67,20 +51,36 @@ def calculate_fitness(character, enemy):
         pass
 
 
+def check_result(character, exp):
+    if character['Frustration'] >= character["Max_Frustration"]:
+        print("Sorry you lost the battle!")
+    else:
+        print("You won the battle!")
+        calculate_fitness(character, exp)
+
+
+def battle(character_is_faster, character, enemy, enemy_frustration):
+    while character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
+        deal_damage(character_is_faster, character, enemy)
+        print(character)
+        if character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
+            deal_damage(not character_is_faster, character, enemy)
+            print(character)
+
+
 def battle_sequence(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
     print(character_is_faster)
     battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
-    check_result(character)
-    calculate_fitness(character, enemy)
+    check_result(character, enemy)
 
 
 def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 1, 'Intelligence': 10, 'Speed': 1, 'Luck': 5, "Level": 1,
+    character = {'Motivation': 100, 'Frustration': 1, 'Intelligence': 10, 'Speed': 3, 'Luck': 5, "Level": 1,
                  "Fitness": 14, "Max_Frustration": 2}
     battle_sequence(character)
 
