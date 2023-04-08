@@ -20,6 +20,24 @@ def determine_enemy():
 
 
 def luck_roll(luck, lower, upper, luck_multiplier=0):
+    """
+    Determine the number of a roll with luck modifiers.
+
+    Randomly generates a number for a roll and adds on luck modifiers to the roll.
+
+    :param luck: an integer
+    :param lower: another integer
+    :param upper: another integer
+    :param luck_multiplier: a float number, default is 0
+    :precondition: luck must be an integer
+    :precondition: lower must be an integer
+    :precondition: upper must be an integer
+    :precondition: luck_multiplier must a float
+    :precondition: if no argument is passed for luck_multiplier, default value is 0
+    :postcondition: generates and returns a number that is randomly between lower and upper inclusive and
+                    adds a luck multiplier to the number
+    :return: the random number as an int
+    """
     roll = round(random.randint(lower, upper) + luck * luck_multiplier)
     return roll
 
