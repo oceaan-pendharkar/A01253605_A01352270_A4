@@ -14,7 +14,7 @@ def determine_enemy():
 
 
 def luck_roll(luck, lower, upper, luck_multiplier=0):
-    roll = random.randint(lower, upper) + luck * luck_multiplier
+    roll = round(random.randint(lower, upper) + luck * luck_multiplier)
     return roll
 
 
@@ -27,9 +27,19 @@ def check_first(character, enemy):
         return False
 
 
+def calculate_critical(character):
+    base_crit_chance = 5
+    random_number = random.randint(1, 100)
+    critical = base_crit_chance + luck_roll(character["Luck"], 0, 0, 0.3)
+    if random_number <= critical:
+        return True
+    else:
+        return False
+
+
 def deal_damage(character_is_faster, character, enemy):
-    character_damage = (character['Intelligence'] + luck_roll(0, -2, 2))
-    enemy_damage = (enemy['Intelligence'] + luck_roll(0, -2, 2))
+    character_damage = character['Intelligence'] + luck_roll(0, -2, 2)
+    enemy_damage = enemy['Intelligence'] + luck_roll(0, -2, 2)
 
     if character_is_faster:
         enemy['Frustration'] += character_damage
