@@ -27,10 +27,10 @@ def check_first(character, enemy):
         return False
 
 
-def calculate_critical(character):
+def calculate_critical(luck):
     base_crit_chance = 5
     random_number = random.randint(1, 100)
-    critical = base_crit_chance + luck_roll(character["Luck"], 0, 0, 0.3)
+    critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
     if random_number <= critical:
         return True
     else:
@@ -38,8 +38,17 @@ def calculate_critical(character):
 
 
 def deal_damage(character_is_faster, character, enemy):
-    character_damage = character['Intelligence'] + luck_roll(0, -2, 2)
-    enemy_damage = enemy['Intelligence'] + luck_roll(0, -2, 2)
+    character_critical = calculate_critical(character["Luck"])
+    enemy_critical = calculate_critical(0)
+    if character_critical:
+        character_damage = character["Intelligence"] * 1.5
+    else:
+        character_damage = character['Intelligence'] - enemy["Self-Control"]
+
+    if enemy_critical:
+        enemy_damage = enemy['Intelligence'] * 1.5
+    else:
+        enemy_damage = enemy['Intelligence'] - character["Self-Control"]
 
     if character_is_faster:
         enemy['Frustration'] += character_damage
