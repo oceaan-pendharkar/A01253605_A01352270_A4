@@ -22,8 +22,10 @@ def check_first(character, enemy):
     character_speed = character['Speed'] + luck_roll(character['Luck'], -2, 2, 0.3)
     enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
     if character_speed >= enemy_speed:
+        print(f"{enemy['Name']} has higher speed and attacks first")
         return True
     else:
+        print("You have higher speed and attack first")
         return False
 
 
@@ -52,8 +54,10 @@ def deal_damage(character_is_faster, character, enemy):
 
     if character_is_faster:
         enemy['Frustration'] += character_damage
+        print(f"You frustrated {enemy['Name']} by {character_damage} points")
     else:
         character['Frustration'] += enemy_damage
+        print(f"{enemy['Name']} frustrated you by {enemy_damage} points")
 
 
 def calculate_fitness(character, enemy):
