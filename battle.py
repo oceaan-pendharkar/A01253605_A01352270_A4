@@ -3,9 +3,9 @@ import random
 
 def determine_enemy():
     enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
-                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, 'Max_Frustration': 20, "Exp": 2},
+                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2, 'Max_Frustration': 20, "Exp": 2},
                2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
-                   'Speed': 5, 'Max_Frustration': 20, "Exp": 1}}
+                   'Speed': 5, "Self-Control": 2, 'Max_Frustration': 20, "Exp": 1}}
 
     selector = random.randint(1, len(enemies))
     enemy = enemies[selector]
@@ -22,10 +22,10 @@ def check_first(character, enemy):
     character_speed = character['Speed'] + luck_roll(character['Luck'], -2, 2, 0.3)
     enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
     if character_speed >= enemy_speed:
-        print(f"{enemy['Name']} has higher speed and attacks first")
+        print("You have higher speed and attack first")
         return True
     else:
-        print("You have higher speed and attack first")
+        print(f"{enemy['Name']} has higher speed and attacks first")
         return False
 
 
@@ -101,8 +101,8 @@ def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 1, 'Intelligence': 10, 'Speed': 3, 'Luck': 5, "Level": 1,
-                 "Fitness": 14, "Max_Frustration": 2}
+    character = {'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
+                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max_Frustration": 10}
     battle_sequence(character)
 
 
