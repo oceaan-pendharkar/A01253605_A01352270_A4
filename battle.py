@@ -44,11 +44,13 @@ def deal_damage(character_is_faster, character, enemy):
     enemy_critical = calculate_critical(0)
     if character_critical:
         character_damage = character["Intelligence"] * 1.5
+        print("You landed a critical hit!")
     else:
         character_damage = character['Intelligence'] - enemy["Self-Control"]
 
     if enemy_critical:
         enemy_damage = enemy['Intelligence'] * 1.5
+        print(f"Oh no! {enemy['Name']} landed a critical hit on you!")
     else:
         enemy_damage = enemy['Intelligence'] - character["Self-Control"]
 
@@ -87,7 +89,6 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
         deal_damage(character_is_faster, character, enemy)
         if character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
             deal_damage(not character_is_faster, character, enemy)
-            print(character)
 
 
 def battle_sequence(character):
