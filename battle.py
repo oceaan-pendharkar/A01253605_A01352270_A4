@@ -23,7 +23,7 @@ def check_first(character, enemy):
     enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
     if character_speed >= enemy_speed:
         return True
-    if character_speed < enemy_speed:
+    else:
         return False
 
 
