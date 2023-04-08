@@ -9,7 +9,10 @@ def is_alive(character):
 
 
 def mid_boss_event(character, boss):
-    print("An annoying event is happening!")
+    print("You've finished making all the code for assignment 1! You bask in your achievement before a sinking "
+          "realization dawns upon you. You still have to unit test everything... The thought of the endless unit tests"
+          "makes you more frustrated and makes Assignment 4 so much harder to complete. Assignment 4's stats have"
+          "increased and your frustration increases by 50.")
     boss["Intelligence"] *= 1.5
     boss["Speed"] *= 1.5
     character["Frustration"] += 50
