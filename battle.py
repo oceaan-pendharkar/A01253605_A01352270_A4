@@ -30,8 +30,7 @@ def check_first(character, enemy):
 def deal_damage(character_is_faster, character, enemy):
     character_damage = (character['Intelligence'] + luck_roll(0, -2, 2))
     enemy_damage = (enemy['Intelligence'] + luck_roll(0, -2, 2))
-    print(character_damage)
-    print(enemy_damage)
+
     if character_is_faster:
         enemy['Frustration'] += character_damage
     else:
@@ -63,7 +62,6 @@ def check_result(character, exp):
 def battle(character_is_faster, character, enemy, enemy_frustration):
     while character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
-        print(character)
         if character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
             deal_damage(not character_is_faster, character, enemy)
             print(character)
@@ -72,7 +70,6 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 def battle_sequence(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
-    print(character_is_faster)
     battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
     check_result(character, enemy)
 
