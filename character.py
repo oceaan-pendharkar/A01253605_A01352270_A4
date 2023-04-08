@@ -12,7 +12,7 @@ def make_custom_character(character: dict) -> None:
     """
     points = 120
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
-                                                                                    "Fitness"]])
+                                                                                    "Fitness", "Level"]])
     while points > 0:
         key = next(key_generator)
         character[key] = int(input(f"How many points do you want to add to your {key}?"))
@@ -63,13 +63,13 @@ def make_preset_character(character: dict, selection: str):
         if type(attribute) != str:
             raise TypeError("The attribute you pass to populate_points must be a string!")
         key_generator = iter([attribute for attribute in character.keys() if attribute not in ["Name", "row", "column",
-                                                                                               "Fitness"]])
+                                                                                               "Fitness", "Level"]])
         for _ in range(6):
             character[next(key_generator)] = 15
         character[attribute] *= 2
 
     if selection == 'r':
-        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness"]]:
+        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness", "Level"]]:
             character[key] = 20
     elif selection == 'n':
         populate_points('Intelligence')
@@ -89,7 +89,7 @@ def create_character() -> dict:
     :return: the character, as a dictionary
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0}
+                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1}
     choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
