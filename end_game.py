@@ -1,13 +1,6 @@
 import battle
 
 
-def is_alive(character):
-    if character["Motivation"] <= 0:
-        return False
-    else:
-        return True
-
-
 def mid_boss_event(character, boss):
     print("You've finished making all the code for assignment 1! You bask in your achievement before a sinking "
           "realization dawns upon you. You still have to unit test everything... The thought of the endless unit tests"
@@ -24,9 +17,9 @@ def go_for_a_walk(character):
 
 
 def boss_lose(character, enemy):
-    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You lost 30 motivation. You decided to "
+    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You lost 50 motivation. You decided to "
           f"go for a walk and ended up near the school")
-    character["Motivation"] -= 30
+    character["Motivation"] -= 50
     go_for_a_walk(character)
 
 
@@ -44,8 +37,7 @@ def boss_fight(character):
     battle.check_result(character, boss, boss_lose, boss_win)
 
 
-def endgame(character):
-    alive = is_alive(character)
+def endgame(character, alive):
     print(alive)
     if alive:
         boss_fight(character)
@@ -60,7 +52,7 @@ def main():
     """
     character = {'Motivation': 100, 'Frustration': 0, "Max_Frustration": 500, 'Intelligence': 100,
                  'Speed': 85, "Self-Control": 5, 'Luck': 45, "row": 85, "column": 85}
-    endgame(character)
+    endgame(character, True)
 
 
 if __name__ == '__main__':
