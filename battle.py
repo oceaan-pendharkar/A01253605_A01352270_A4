@@ -53,7 +53,8 @@ def calculate_fitness(character, enemy):
 
 def check_result(character, exp):
     if character['Frustration'] >= character["Max_Frustration"]:
-        print("Sorry you lost the battle!")
+        print("Sorry you lost the battle! You've lost 20 motivation from giving into the temptation")
+        character["Motivation"] -= 20
     else:
         print("You won the battle!")
         calculate_fitness(character, exp)
