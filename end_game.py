@@ -15,11 +15,16 @@ def mid_boss_event(character, boss):
     character["Frustration"] += 50
 
 
+def go_for_a_walk(character):
+    character["row"] += battle.luck_roll(0, -2, 2)
+    character["column"] += battle.luck_roll(0, .2, 2)
+
+
 def boss_lose(character, enemy):
     print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You lost 30 motivation. You decided to "
           f"go for a walk and ended up near the school")
     character["Motivation"] -= 30
-    go_for_a_walk()
+    go_for_a_walk(character)
 
 
 def boss_win(character, enemy):
