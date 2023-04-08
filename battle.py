@@ -2,6 +2,12 @@ import random
 
 
 def determine_enemy():
+    """
+    Select enemy from list of enemies.
+
+    :postcondition: randomly selects and returns an enemy from a dictionary of preset enemy dictionaries
+    :return: the randomly selected enemy dictionary
+    """
     enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
                    'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2, 'Max_Frustration': 20, "Exp": 2},
                2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
