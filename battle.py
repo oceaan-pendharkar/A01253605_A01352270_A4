@@ -99,8 +99,8 @@ def calculate_fitness(character, enemy):
         pass
 
 
-def battle_loss(character):
-    print("Sorry you lost the battle! You've lost 20 motivation from giving into the temptation")
+def battle_loss(character, enemy):
+    print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.)
     character["Motivation"] -= 20
 
 
@@ -109,11 +109,11 @@ def battle_win(character, enemy):
     calculate_fitness(character, enemy)
 
 
-def check_result(character, lose_function, win_function):
+def check_result(character, enemy, lose_function, win_function):
     if character['Frustration'] >= character["Max_Frustration"]:
-        lose_function
+        lose_function(character, enemy)
     else:
-        win_function
+        win_function(character, enemy)
 
 
 def battle(character_is_faster, character, enemy, enemy_frustration):
@@ -127,7 +127,7 @@ def battle_sequence(character):
     enemy = determine_enemy()
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
-    check_result(character, battle_loss(character), battle_win(character, enemy))
+    check_result(character, enemy, battle_loss, battle_win)
 
 
 def main():
