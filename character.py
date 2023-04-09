@@ -32,57 +32,32 @@ def populate_custom_points(character: dict, points) -> None:
 
 def make_preset_character(character: dict, selection: str):
     """
-    Create a character with more points in one attribute, depending on the selection.
+    Give 10 extra points to a character in one attribute, depending on the selection.
 
-    :param character: a dictionary with attributes as strings for keys and zeroes as integers for values
+    :param character: a dictionary with attributes as strings for keys and integers for values
     :param selection: the character type selection, as a string of length 1
     :precondition: character must be a dictionary
     :precondition: character's attributes must have zero as values to begin with
-    :precondition: selection must be a string either 'n', 'l', 'g', 'j', or 'r'
+    :precondition: selection must be a string either 'n', 'l', 'g', or 'j'
     :postcondition: adds 120 points total to the character's attributes
     :raises TypeError: if selection is not a string
     :raises TypeError: if character is not a dict
     :raises TypeError: if selection is not a string
-    :raises ValueError: if selection is not 'n', 'l', 'g', 'j', or 'r'
+    :raises ValueError: if selection is not 'n', 'l', 'g', or 'j'
     """
     if type(character) != dict or type(selection) != str:
         raise TypeError("Character must be a dictionary! Selection must be a string!")
-    if selection not in ['n', 'l', 'g', 'j', 'r']:
-        raise ValueError("Character option can only be 'n', 'l', 'g', 'j', or 'r'")
+    if selection not in ['n', 'l', 'g', 'j']:
+        raise ValueError("Character option can only be 'n', 'l', 'g', or 'j'")
 
-    def populate_points(attribute: str) -> None:
-        """
-        Populate a character's points based on their selection.
-
-        :param attribute: the attribute to give extra points, as a string, based on the user's selection
-        :precondition: attribute must be a string
-        :precondition: character's points must be at zero to begin with
-        :precondition: character must be a dict
-        :postcondition: character's points are initialized ofr game play
-        :raises TypeError: if attribute is not a string
-        """
-        if type(attribute) != str:
-            raise TypeError("The attribute you pass to populate_points must be a string!")
-        key_generator = iter([attribute for attribute in character.keys() if attribute not in ["Name", "row", "column",
-                                                                                               "Fitness", "Level",
-                                                                                               "alive",
-                                                                                               "goal achieved"]])
-        for _ in range(6):
-            character[next(key_generator)] = 15
-        character[attribute] *= 2
-
-    if selection == 'r':
-        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness", "Level",
-                                                                   "alive", "goal achieved"]]:
-            character[key] = 20
-    elif selection == 'n':
-        populate_points('Intelligence')
+    if selection == 'n':
+        character["Intelligence"] += 10
     elif selection == 'l':
-        populate_points('Luck')
+        character["Luck"] += 10
     elif selection == 'g':
-        populate_points('Self-Control')
+        character["Self-Control"] += 10
     elif selection == 'j':
-        populate_points('Speed')
+        character["Speed"] += 10
 
 
 def create_character() -> dict:
@@ -111,8 +86,7 @@ def create_character() -> dict:
             character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the "
                                    f"character type to select it.\nnerd: has a lot of intelligence, obviously(n)\n"
                                    f"leprechaun: has a lot of luck, obviously(l)\ngreat ape: has a lot of self control "
-                                   f"(maybe not obvious) (g)\njock: has a lot of speed\nregular person: has an even "
-                                   f"distribution of points(r) ")
+                                   f"(maybe not obvious) (g)\njock: has a lot of speed")
             make_preset_character(character, character_type)
         else:
             print("You entered something other than 'y' or 'n'. Try again...")
