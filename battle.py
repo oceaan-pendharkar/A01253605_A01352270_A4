@@ -1,7 +1,8 @@
 import random
+import copy
 
 
-def determine_enemy():
+def determine_enemy(character):
     """
     Select enemy from list of enemies.
 
@@ -55,7 +56,10 @@ def determine_enemy():
                    "Exp": 2}}
 
     selector = random.randint(1, len(enemies))
-    enemy = enemies[selector]
+    enemy = copy.deepcopy(enemies[selector])
+    for key, value in enemy.items():
+        if key not in ["Name", "Description", "Frustration", "Exp"]:
+            value *= 1 + character["Level"] * 0.2
     print(enemies[selector]['Description'])
     return enemy
 
@@ -163,7 +167,7 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 
 
 def battle_sequence(character):
-    enemy = determine_enemy()
+    enemy = determine_enemy(character)
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max Frustration"])
