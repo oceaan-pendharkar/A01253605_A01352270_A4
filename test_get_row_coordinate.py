@@ -18,3 +18,13 @@ class Test(TestCase):
     def test_big_north(self):
         character = {"row": 24, "column": 3}
         self.assertEqual(get_row_coordinate(character, 'n'), 23)
+
+    def test_raises(self):
+        character = {"row": 24, "column": 3}
+        with self.assertRaises(ValueError):
+            get_row_coordinate(character, 'j')
+
+    def test_raises_N(self):
+        character = {"row": 24, "column": 3}
+        with self.assertRaises(ValueError):
+            get_row_coordinate(character, 'N')
