@@ -130,6 +130,12 @@ def get_column_coordinate(character: dict, move: str) -> int:
     :postcondition: assigns a new row value to the character based on the move
     :return: the new coordinate, as an integer
     :raises ValueError: if move is not 'e' or 'w'
+    >>> get_column_coordinate({"row": 0, "column": 0}, 'e')
+    1
+    >>> get_column_coordinate({"row": 5, "column": 3}, 'w')
+    2
+    >>> get_column_coordinate({"row": 6, "column": 0}, 'w')
+    -1
     """
     if move != 'e' and move != 'w':
         raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
