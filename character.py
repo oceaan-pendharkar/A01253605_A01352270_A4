@@ -92,7 +92,7 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    character = {"Motivation": 0, "Max Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
+    character = {"Motivation": 0, "Max Frustration": 0, "Self-Control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
                  "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
                  "alive": True, "goal achieved": False}
     choice = input("Would you like to choose how many points to put in each category? y/n ")
@@ -174,8 +174,6 @@ def main():
     """
     Drive the program.
     """
-    character = create_character()
-    print(character)
 
 
 if __name__ == "__main__":

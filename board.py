@@ -90,23 +90,23 @@ def enter_room(character: dict) -> None:
             elif event == 'gain motivation':
                 character["Motivation"] += 10
             elif event == 'lose self-control':
-                character["Self-control"] -= 10
+                character["Self-Control"] -= 2
         else:
             print(f"The number was {number}.\nYou did not {event}. As you were...")
 
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event_happens(room, 3, 'get assigned ANOTHER assignment')
 
-    elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
+    elif room in [LOCATIONS[1], LOCATIONS[2], LOCATIONS[8], LOCATIONS[9]]:
         event_happens(room, 2, 'have to fight')
 
-    elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
+    elif room == LOCATIONS[6] or room == LOCATIONS[7]:
         event_happens(room, 3, 'lose self-control')
 
     else:
         event_happens(room, 3, 'gain motivation')
 
-    print(f"You are now leaving {room}.\n\nHere's what your points and stats look like:\n{character}")
+    print(f"You are now leaving {room}.\nHere's what your points and stats look like:\n{character}")
 
 
 def move_character(board: tuple, character: dict) -> None:
@@ -251,16 +251,6 @@ def main():
     """
     Drive the program.
     """
-    bottom_row = False
-    board = make_board(10, 10)
-    character = {"Motivation": 20, "Frustration": 20, "Self-control": 20, "Intelligence": 20, "Luck": 20,
-                 "Speed": 20, "Fitness": 0, 'Name': "Oceaan", 'row': 0, 'column': 0}
-    while not bottom_row:
-        enter_room(character)
-        move_character(board, character)
-        if character['row'] == 9:
-            bottom_row = True
-    print("You reached the bottom row!")
 
 
 if __name__ == "__main__":
