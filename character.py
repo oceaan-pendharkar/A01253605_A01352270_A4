@@ -95,23 +95,27 @@ def create_character() -> dict:
     character = {"Motivation": 10, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
                  "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
                  "alive": True, "goal achieved": False}
-    choice = input("Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
+    choice = None
+    while choice != 'y' and choice != 'n':
+        choice = input("Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
+        if choice == 'y':
+            print(f"Alright! Here are your base stats:\n{character}\nYou have ***10 points*** to distribute between "
+                  "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you "
+                  "stay alive\nMax Frustration: the higher this is, the longer you last in battle\nSelf-Control: like "
+                  "defense\nIntelligence: helps you damage your enemies\nLuck: determines how likely you are to meet "
+                  "difficult opponents\nSpeed: helps you be quicker than your enemies!\nYou also have Fitness, which "
+                  "keeps track of your experience level (0 for now!).")
+            make_custom_character(character, 10)
 
-    if choice == 'y':
-        print(f"Alright! Here are your base stats:\n{character}\nYou have ***10 points*** to distribute between "
-              "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you stay "
-              "alive\nMax Frustration: the higher this is, the longer you last in battle\nSelf-Control: like defense"
-              "\nIntelligence: helps you damage your enemies\nLuck: determines how likely you are to meet difficult "
-              "opponents\nSpeed: helps you be quicker than your enemies!\nYou also have Fitness, which keeps track "
-              "of your experience level (0 for now!).")
-        make_custom_character(character, 10)
-
-    else:
-        character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the character "
-                               "type to select it.\nnerd: has a lot of intelligence, obviously(n)\nleprechaun: has a "
-                               "lot of luck, obviously(l)\ngreat ape: has a lot of self control (maybe not obvious) (g)"
-                               "\njock: has a lot of speed\nregular person: has an even distribution of points(r) ")
-        make_preset_character(character, character_type)
+        elif choice == 'n':
+            character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the "
+                                   f"character type to select it.\nnerd: has a lot of intelligence, obviously(n)\n"
+                                   f"leprechaun: has a lot of luck, obviously(l)\ngreat ape: has a lot of self control "
+                                   f"(maybe not obvious) (g)\njock: has a lot of speed\nregular person: has an even "
+                                   f"distribution of points(r) ")
+            make_preset_character(character, character_type)
+        else:
+            print("You entered something other than 'y' or 'n'. Try again...")
 
     return character
 
