@@ -49,7 +49,7 @@ def make_preset_character(character: dict) -> None:
         selection = input(f"That's cool, we have a few preset categories. Type the first letter of the "
                           f"character type to select it.\nnerd: has a lot of intelligence, obviously(n)\n"
                           f"leprechaun: has a lot of luck, obviously(l)\ngreat ape: has a lot of self control "
-                          f"(maybe not obvious) (g)\njock: has a lot of speed")
+                          f"(maybe not obvious) (g)\njock: has a lot of speed(j) ")
         if selection == 'n':
             character["Intelligence"] += 10
         elif selection == 'l':
