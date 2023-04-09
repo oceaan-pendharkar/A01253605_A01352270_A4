@@ -21,3 +21,6 @@ class Test(TestCase):
                                                  "enough Fitness level to defeat the final boss, and\nmake it to the "
                                                  "last square of the board for the final battle...\n")
 
+    def test_raises_board(self):
+        with self.assertRaises(TypeError):
+            initialize_game([(0, 5), (0, 5)], {"Name": "Tiny", "stats": 0})
