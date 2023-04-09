@@ -30,34 +30,36 @@ def populate_custom_points(character: dict, points) -> None:
         print(f"You have {points} points left to distribute between your attributes.")
 
 
-def make_preset_character(character: dict, selection: str):
+def make_preset_character(character: dict) -> None:
     """
     Give 10 extra points to a character in one attribute, depending on the selection.
 
     :param character: a dictionary with attributes as strings for keys and integers for values
-    :param selection: the character type selection, as a string of length 1
     :precondition: character must be a dictionary
     :precondition: character's attributes must have zero as values to begin with
-    :precondition: selection must be a string either 'n', 'l', 'g', or 'j'
     :postcondition: adds 120 points total to the character's attributes
-    :raises TypeError: if selection is not a string
+    :postcondition: the user selects 'n', 'l', 'g', or 'j' (otherwise will loop forever)
+    :postcondition: the character's attribute is given 10 points based on the user's selection
     :raises TypeError: if character is not a dict
-    :raises TypeError: if selection is not a string
-    :raises ValueError: if selection is not 'n', 'l', 'g', or 'j'
     """
-    if type(character) != dict or type(selection) != str:
+    if type(character) != dict:
         raise TypeError("Character must be a dictionary! Selection must be a string!")
-    if selection not in ['n', 'l', 'g', 'j']:
-        raise ValueError("Character option can only be 'n', 'l', 'g', or 'j'")
-
-    if selection == 'n':
-        character["Intelligence"] += 10
-    elif selection == 'l':
-        character["Luck"] += 10
-    elif selection == 'g':
-        character["Self-Control"] += 10
-    elif selection == 'j':
-        character["Speed"] += 10
+    selection = None
+    while selection not in ['n', 'l', 'g', 'j']:
+        selection = input(f"That's cool, we have a few preset categories. Type the first letter of the "
+                          f"character type to select it.\nnerd: has a lot of intelligence, obviously(n)\n"
+                          f"leprechaun: has a lot of luck, obviously(l)\ngreat ape: has a lot of self control "
+                          f"(maybe not obvious) (g)\njock: has a lot of speed")
+        if selection == 'n':
+            character["Intelligence"] += 10
+        elif selection == 'l':
+            character["Luck"] += 10
+        elif selection == 'g':
+            character["Self-Control"] += 10
+        elif selection == 'j':
+            character["Speed"] += 10
+        else:
+            print("You must enter 'n', 'l', 'g', or 'j'. Try again...")
 
 
 def create_character() -> dict:
@@ -83,11 +85,7 @@ def create_character() -> dict:
             populate_custom_points(character, 10)
 
         elif choice == 'n':
-            character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the "
-                                   f"character type to select it.\nnerd: has a lot of intelligence, obviously(n)\n"
-                                   f"leprechaun: has a lot of luck, obviously(l)\ngreat ape: has a lot of self control "
-                                   f"(maybe not obvious) (g)\njock: has a lot of speed")
-            make_preset_character(character, character_type)
+            make_preset_character(character)
         else:
             print("You entered something other than 'y' or 'n'. Try again...")
 
@@ -153,6 +151,8 @@ def main():
     """
     Drive the program.
     """
+    me = create_character()
+    print(me)
 
 
 if __name__ == "__main__":
