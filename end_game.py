@@ -17,14 +17,13 @@ def go_for_a_walk(character):
 
 
 def boss_lose(character, enemy):
-    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You lost 50 motivation. You decided to "
-          f"go for a walk and ended up near the school")
-    character["Motivation"] -= 50
-    go_for_a_walk(character)
+    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You decided that life is too short to "
+          f"be working all the time, and you need to enjoy life.")
 
 
 def boss_win(character, enemy):
-    print(f"Congratulations! You've beaten {enemy['Name']} and have completed the game!")
+    print(f"Congratulations! You've beaten {enemy['Name']} and have completed the game! Hopefully your instructor will"
+          f"give you a good mark for it? Please?")
 
 
 def boss_fight(character):
