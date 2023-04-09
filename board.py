@@ -189,15 +189,27 @@ def move_character(board: tuple, character: dict) -> None:
             print(f"Your move must stay within the bounds of the board!")
             return False
 
-    choice_is_valid = False
-    direction = None
-    while not choice_is_valid:
-        try:
-            direction = get_user_choice()
-        except ValueError:
-            print("Direction must be 'n', 's', 'e', or 'w'!")
-        else:
-            choice_is_valid = validate_move()
+    def keep_checking_move() -> str:
+        """
+        Make sure the user enters an appropriate direction, and that the direction is a valid move.
+
+        :precondition: the user must be on the board
+        :postcondition: validates the move in the chosen direction
+        :postcondition: ensures that the move is only 'n', 's', 'e', or 'w'
+        return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
+        """
+        choice_is_valid = False
+        move = None
+        while not choice_is_valid:
+            try:
+                move = get_user_choice()
+            except ValueError:
+                print("Direction must be 'n', 's', 'e', or 'w'!")
+            else:
+                choice_is_valid = validate_move()
+        return move
+
+    direction = keep_checking_move()
 
     if direction == "n" or direction == "s":
         character["row"] = get_row_coordinate(direction)
