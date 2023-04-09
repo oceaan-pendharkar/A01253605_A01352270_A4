@@ -106,7 +106,7 @@ def enter_room(character: dict) -> None:
     else:
         event_happens(room, 3, 'gain motivation')
 
-    print(f"You are now leaving {room}.\n\nHere's what your points and stats look like:\n{character}")
+    print(f"You are now leaving {room}.\nHere's what your points and stats look like:\n{character}")
 
 
 def move_character(board: tuple, character: dict) -> None:
