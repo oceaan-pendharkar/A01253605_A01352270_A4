@@ -232,6 +232,7 @@ def initialize_game(game_board: tuple, character: dict) -> tuple:
           f"defeat the final boss, and make it to the last square of the board for the final battle...")
     return game_board, character
 
+
 def main():
     """
     Drive the program.
