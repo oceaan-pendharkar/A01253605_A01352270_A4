@@ -1,6 +1,6 @@
 import random
 import copy
-from character import make_custom_character
+from character import populate_custom_points
 
 
 def determine_enemy(character):
@@ -141,7 +141,7 @@ def level_up(character):
     points = 10
     print(f"You have {points} to allocate to your stats. Possible stats to increase are Motivation, Max Frustration,"
           "Self-Control, Intelligence, Luck, and Speed. Please allocate your points. ")
-    make_custom_character(character, 10)
+    populate_custom_points(character, 10)
 
 
 def calculate_fitness(character, enemy):
