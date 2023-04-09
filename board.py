@@ -13,21 +13,18 @@ def enter_room(character: dict) -> None:
     :param character: the character, as a dictionary
     :precondition: description must be a string
     :precondition: character must be a dictionary
-    :precondition: the constant tuple LOCATIONS must exist within the same module
     :postcondition: the player interacts with the room in a game
     :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
-    :raises NameError: if LOCATIONS does not exist
     """
 
     def generate_room() -> str:
         """
         Randomly select a room for a player to enter, in a game.
 
-        :precondition: the constant tuple LOCATIONS must exist within the same module
+        :precondition: the character must be in the game
         :postcondition: the room is selected for the player
         :return: the name of the room, as a string
-        :raises NameError: if LOCATIONS does not exist
         """
         if character["Luck"] > 35:
             room_indices = [7, 9, 4, 5, 4, 5, 1]  # more lucky rooms than not
@@ -43,8 +40,8 @@ def enter_room(character: dict) -> None:
         Adjust a character's intelligence, frustration, and luck points to complete an assignment in a game.
 
         :precondition: the character must be a dictionary
-        :precondition: the character must contain "Intelligence" and "Frustration" as keys, as strings
-        :precondition: the values of "Intelligence" and "Frustration" in character must be integers
+        :precondition: the character must contain "Intelligence" and "Luck" as keys, as strings
+        :precondition: the values of "Intelligence" and "Luck" in character must be integers
         """
         character["Intelligence"] += 10
         character["Luck"] -= 5
