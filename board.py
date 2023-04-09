@@ -22,8 +22,10 @@ def enter_room(character: dict) -> None:
         """
         Randomly select a room for a player to enter, in a game.
 
+        :precondition: the constant tuple LOCATIONS must exist within the same module
         :postcondition: the room is selected for the player
         :return: the name of the room, as a string
+        :raises NameError: if LOCATIONS does not exist
         """
         if character["Luck"] > 35:
             room_indices = [7, 9, 4, 5, 4, 5, 1]  # more lucky rooms than not
