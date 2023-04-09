@@ -8,10 +8,51 @@ def determine_enemy():
     :postcondition: randomly selects and returns an enemy from a dictionary of preset enemy dictionaries
     :return: the randomly selected enemy dictionary
     """
-    enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
-                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2, 'Max Frustration': 20, "Exp": 2},
-               2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
-                   'Speed': 5, "Self-Control": 2, 'Max Frustration': 20, "Exp": 1}}
+    enemies = {1: {'Name': 'Chicken Sandwich', 'Description': 'On the table lies a delicious chicken sandwich. The '
+                                                              'crisp, juicy, and tender chicken strips lie between 2 '
+                                                              'slices of freshly baked bread. You can feel the '
+                                                              'growling in our stomach drawing you towards it...',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               2: {'Name': 'Donut', 'Description': 'You can see a donut on display by the front counter. The glaze '
+                                                   'on top of the donut glistens in the light, tempting you towards '
+                                                   'its sweetness.',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               3: {'Name': 'Latte', 'Description': 'Looking at the menu, you dream about holding a warm latte in your '
+                                                   'hands. The scent of the tea and milk fills your mind and you can'
+                                                   'almost taste the contrast of the smooth milky foam and the '
+                                                   'green tea under it. Will you end up ordering it?',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               4: {'Name': 'Breakfast Sandwich', 'Description': 'You see someone eating a warm breakfast sandwich '
+                                                                'through the window. The perfectly cooked egg, crispy'
+                                                                'bacon and melted cheese beckon you towards the store.',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               5: {'Name': 'Hashbrowns', 'Description': 'The thought of hashbrowns fill your mind. From the satisfying'
+                                                        'crunch of the potatoes to the savory flavors of the potatoes'
+                                                        'your body craves for a rest to indulge in this fried '
+                                                        'delicacy.',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               6: {'Name': 'Soft Drink', 'Description': 'A cold soft drink sits on the counter here. The fizzing of '
+                                                        'the bubble reaches your ears, inviting you to partake in the '
+                                                        'sweet beverage. You resist its temptation as you try to pop'
+                                                        'your cravings.',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               7: {'Name': 'Muffin', 'Description': 'The aroma of freshly baked muffins hits you. You think of the '
+                                                    'golden brown exterior of the muffin, and its soft fruity interior.'
+                                                    'You wonder if you should sit down and enjoy this breakfast treat.',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2},
+               8: {'Name': 'Ice Cream', 'Description': 'As you watch someone eat their delicious ice cream cone, you '
+                                                       'imagine the smooth, creamy texture of it. The sweet milky'
+                                                       'flavor of the ice cream mixed with whatever flavor you desire. '
+                                                       'Vanilla, chocolate, and oreo, it could all be yours...',
+                   'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2,
+                   "Exp": 2}}
 
     selector = random.randint(1, len(enemies))
     enemy = enemies[selector]
