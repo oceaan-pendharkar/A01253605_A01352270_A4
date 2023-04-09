@@ -6,9 +6,9 @@ def mid_boss_event(character, boss):
           "realization dawns upon you. You still have to unit test everything... The thought of the endless unit tests"
           "makes you more frustrated and makes Assignment 4 so much harder to complete. Assignment 4's stats have"
           "increased and your frustration increases by 50.")
-    boss["Intelligence"] *= 1.5
-    boss["Speed"] *= 1.5
-    character["Frustration"] += 50
+    boss["Intelligence"] = round(boss["Intelligence"] * 1.1)
+    boss["Speed"] *= round(boss["Speed"] * 1.1)
+    character["Frustration"] += 10
 
 
 def go_for_a_walk(character):
@@ -23,17 +23,17 @@ def boss_lose(character, enemy):
 
 def boss_win(character, enemy):
     print(f"Congratulations! You've beaten {enemy['Name']} and have completed the game! Hopefully your instructor will"
-          f"give you a good mark for it? Please?")
+          f" give you a good mark for it? Please?")
 
 
 def boss_fight(character):
-    boss = {"Name": "Assignment 1", "Frustration": 0, "Max_Frustration": 200, "Intelligence": 25, "Speed": 30,
+    boss = {"Name": "Assignment 1", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
             "Self-Control": 15, "Luck": 0}
     character_is_faster = battle.check_first(character, boss)
-    battle.battle(character_is_faster, character, boss, boss["Max_Frustration"] / 2)
-    if character["Frustration"] < character["Max_Frustration"]:
+    battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
+    if character["Frustration"] < character["Max Frustration"]:
         mid_boss_event(character, boss)
-    battle.battle(character_is_faster, character, boss, boss["Max_Frustration"])
+    battle.battle(character_is_faster, character, boss, boss["Max Frustration"])
     battle.check_result(character, boss, boss_lose, boss_win)
 
 
@@ -50,7 +50,7 @@ def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 0, "Max_Frustration": 500, 'Intelligence': 100,
+    character = {'Motivation': 100, 'Frustration': 0, "Max Frustration": 500, 'Intelligence': 100,
                  'Speed': 85, "Self-Control": 5, 'Luck': 45, "row": 85, "column": 85}
     endgame(character, True)
 
