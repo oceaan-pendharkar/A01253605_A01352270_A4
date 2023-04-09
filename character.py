@@ -10,22 +10,25 @@ def make_custom_character(character: dict) -> None:
     :precondition: character's attributes must have values of zero to start
     :postcondition: adds 120 points total to the character's attributes
     """
-    points = 120
+    points = 30
+    print(points)
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
                                                                                     "goal achieved"]])
     while points > 0:
+        print(points)
         key = next(key_generator)
-        character[key] = int(input(f"How many points do you want to add to your {key}?"))
-        points -= character[key]
+        point_increase = int(input(f"How many points do you want to add to your {key}?"))
+        character[key] += point_increase
+        points -= point_increase
         if points == 0:
             print("You've used all your points!")
             break
         elif points < 0:
-            print("Woah there, that was more than 120 points!! \nSince you cheated, that's all the points you get for "
-                  "now. \nAnd you can forget about getting points for the category you just over-filled. \nThat's not "
-                  "how operation COMPLETE ASSIGNMENT 4 works...")
-            character[key] = 0
+            print(f"Woah there, that was more than {points} points!! \nSince you cheated, that's all the points you "
+                  "get for now. \nAnd you can forget about getting points for the category you just over-filled. "
+                  "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...")
+            character[key] -= point_increase
             break
         print(f"You have {points} points left to distribute between your attributes.")
 
@@ -92,17 +95,18 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    character = {"Motivation": 0, "Max Frustration": 0, "Self-Control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
+    character = {"Motivation": 70, "Max Frustration": 50, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
+                 "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
                  "alive": True, "goal achieved": False}
     choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
-        print(f"Alright! You have ***120 points*** to distribute between Motivation, Max Frustration, Self-Control, "
-              "Intelligence, Luck, and Speed.\nMotivation: helps you stay alive\nMax Frustration: the higher this is, "
-              "the longer you last in battle\nSelf-Control: like defense\nIntelligence: helps you damage your enemies\n"
-              "Luck: determines how likely you are to meet difficult opponents\nSpeed: helps you be quicker than your "
-              "enemies!\nYou also have Fitness, which keeps track of your experience level (0 for now!).")
+        print(f"Alright! Here are your base stats:\n{character}\nYou have ***30 points*** to distribute between "
+              "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you stay "
+              "alive\nMax Frustration: the higher this is, the longer you last in battle\nSelf-Control: like defense"
+              "\nIntelligence: helps you damage your enemies\nLuck: determines how likely you are to meet difficult "
+              "opponents\nSpeed: helps you be quicker than your enemies!\nYou also have Fitness, which keeps track "
+              "of your experience level (0 for now!).")
         make_custom_character(character)
 
     else:
