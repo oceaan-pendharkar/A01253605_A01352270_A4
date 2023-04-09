@@ -15,46 +15,46 @@ def determine_enemy(character):
                                                               'slices of freshly baked bread. You can feel the '
                                                               'growling in our stomach drawing you towards it...',
                    'Frustration': 0, 'Max Frustration': 18, 'Intelligence': 21, 'Speed': 5, "Self-Control": 3,
-                   "Exp": 1},
+                   "Luck": 0, "Exp": 1},
                2: {'Name': 'Donut', 'Description': 'You can see a donut on display by the front counter. The glaze '
                                                    'on top of the donut glistens in the light, tempting you towards '
                                                    'its sweetness.',
                    'Frustration': 0, 'Max Frustration': 11, 'Intelligence': 19, 'Speed': 3, "Self-Control": 7,
-                   "Exp": 2},
+                   "Luck": 0, "Exp": 2},
                3: {'Name': 'Latte', 'Description': 'Looking at the menu, you dream about holding a warm latte in your '
                                                    'hands. The scent of the tea and milk fills your mind and you can'
                                                    'almost taste the contrast of the smooth milky foam and the '
                                                    'green tea under it. Will you end up ordering it?',
                    'Frustration': 0, 'Max Frustration': 14, 'Intelligence': 24, 'Speed': 11, "Self-Control": 1,
-                   "Exp": 1},
+                   "Luck": 0, "Exp": 1},
                4: {'Name': 'Breakfast Sandwich', 'Description': 'You see someone eating a warm breakfast sandwich '
                                                                 'through the window. The perfectly cooked egg, crispy'
                                                                 'bacon and melted cheese beckon you towards the store.',
                    'Frustration': 0, 'Max Frustration': 25, 'Intelligence': 15, 'Speed': 4, "Self-Control": 3,
-                   "Exp": 2},
-               5: {'Name': 'Hashbrowns', 'Description': 'The thought of hashbrowns fill your mind. From the satisfying'
+                   "Luck": 0, "Exp": 2},
+               5: {'Name': 'Hashbrowns', 'Description': 'The thought of hashbrowns fill your mind. From the satisfying '
                                                         'crunch of the potatoes to the savory flavors of the potatoes'
                                                         'your body craves for a rest to indulge in this fried '
                                                         'delicacy.',
                    'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 20, 'Speed': 4, "Self-Control": 3,
-                   "Exp": 2},
+                   "Luck": 0, "Exp": 2},
                6: {'Name': 'Soft Drink', 'Description': 'A cold soft drink sits on the counter here. The fizzing of '
                                                         'the bubble reaches your ears, inviting you to partake in the '
                                                         'sweet beverage. You resist its temptation as you try to pop'
                                                         'your cravings.',
                    'Frustration': 0, 'Max Frustration': 18, 'Intelligence': 20, 'Speed': 6, "Self-Control": 2,
-                   "Exp": 2},
+                   "Luck": 0, "Exp": 2},
                7: {'Name': 'Muffin', 'Description': 'The aroma of freshly baked muffins hits you. You think of the '
                                                     'golden brown exterior of the muffin, and its soft fruity interior.'
                                                     'You wonder if you should sit down and enjoy this breakfast treat.',
                    'Frustration': 0, 'Max Frustration': 16, 'Intelligence': 19, 'Speed': 4, "Self-Control": 5,
-                   "Exp": 2},
+                   "Luck": 0, "Exp": 2},
                8: {'Name': 'Ice Cream', 'Description': 'As you watch someone eat their delicious ice cream cone, you '
                                                        'imagine the smooth, creamy texture of it. The sweet milky'
                                                        'flavor of the ice cream mixed with whatever flavor you desire. '
                                                        'Vanilla, chocolate, and oreo, it could all be yours...',
                    'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 21, 'Speed': 6, "Self-Control": 4,
-                   "Exp": 2}}
+                   "Luck": 0, "Exp": 2}}
 
     selector = random.randint(1, len(enemies))
     enemy = copy.deepcopy(enemies[selector])
@@ -110,22 +110,21 @@ def calculate_critical(luck):
 
 
 def deal_damage(character_is_faster, character, enemy):
-    if character_is_faster:
-        character_critical = calculate_critical(character["Luck"])
-        if character_critical:
-            character_damage = character["Intelligence"] * 1.5
+    def calculate_damage(attacker, defender):
+        attacker_critical = calculate_critical(attacker["Luck"])
+        if attacker_critical:
+            attacker_damage = attacker["Intelligence"] * 1.5
             print("You landed a critical hit!")
         else:
-            character_damage = character['Intelligence'] - enemy["Self-Control"]
+            attacker_damage = attacker['Intelligence'] - defender["Self-Control"]
+        return attacker_damage
+
+    if character_is_faster:
+        character_damage = calculate_damage(character, enemy)
         enemy['Frustration'] += character_damage
         print(f"You frustrated {enemy['Name']} by {character_damage} points")
     else:
-        enemy_critical = calculate_critical(0)
-        if enemy_critical:
-            enemy_damage = enemy['Intelligence'] * 1.5
-            print(f"Oh no! {enemy['Name']} landed a critical hit on you!")
-        else:
-            enemy_damage = enemy['Intelligence'] - character["Self-Control"]
+        enemy_damage = calculate_damage(enemy, character)
         character['Frustration'] += enemy_damage
         print(f"{enemy['Name']} frustrated you by {enemy_damage} points")
 
