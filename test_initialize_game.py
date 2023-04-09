@@ -28,3 +28,11 @@ class Test(TestCase):
     def test_raises_character(self):
         with self.assertRaises(TypeError):
             initialize_game(((0, 2), (0, 2)), [{"Name": "Tiny"}, {"stats": 0}])
+
+    def test_board_type(self):
+        game = initialize_game(((0, 2), (0, 2)), {"Name": "Tiny", "stats": 0})
+        self.assertEqual(type(game[0]), tuple)
+
+    def test_character_type(self):
+        game = initialize_game(((0, 5), (0, 5)), {"Name": "Big", "stats": 0})
+        self.assertEqual(type(game[1]), dict)
