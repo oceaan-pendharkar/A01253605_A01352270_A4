@@ -21,6 +21,22 @@ class Test(TestCase):
         with self.assertRaises(ValueError):
             move_character(((0, 2), (0, 2)), {"Name": "Saucy", "Luck": "zero"})
 
+    def test_raises_row(self):
+        with self.assertRaises(ValueError):
+            move_character(((0, 2), (0, 2)), {"Name": "Saucy", "Luck": 0, "column": 0})
+
+    def test_raises_column(self):
+        with self.assertRaises(ValueError):
+            move_character(((0, 2), (0, 2)), {"Name": "Saucy", "Luck": 0, "row": 0})
+
+    def test_raises_type_row(self):
+        with self.assertRaises(TypeError):
+            move_character(((0, 2), (0, 2)), {"Name": "Saucy", "Luck": 0, "row": '0', "column": 0})
+
+    def test_raises_type_column(self):
+        with self.assertRaises(TypeError):
+            move_character(((0, 2), (0, 2)), {"Name": "Saucy", "Luck": 0, "row": 0, "column": '0'})
+
     @patch('builtins.input', side_effect=['s'])
     def test_south(self, _):
         character = {"Name": "Saucy", "row": 0, "column": 0, "Luck": 20}
