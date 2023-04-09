@@ -8,7 +8,6 @@ def game():
     board.enter_room(game_properties[1])
     while game_properties[1]["alive"] and not game_properties[1]["goal achieved"]:
         board.move_character(game_properties[0], game_properties[1])
-        board.enter_room(game_properties[1])
         character.check_vitals(game_properties[1])
     end_game.endgame(game_properties[1], game_properties[1]["alive"])
 

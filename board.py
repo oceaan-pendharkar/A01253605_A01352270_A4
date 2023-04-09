@@ -193,6 +193,8 @@ def move_character(board: tuple, character: dict) -> None:
     elif direction == 'e' or direction == 'w':
         character["column"] = get_column_coordinate(direction)
 
+    enter_room(character)
+
 
 def make_board(rows: int, columns: int) -> tuple:
     """
