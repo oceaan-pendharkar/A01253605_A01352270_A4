@@ -27,7 +27,8 @@ def boss_win(character, enemy):
 
 
 def boss_fight(character):
-    boss = {"Name": "Assignment 1", "Frustration": 0, "Max_Frustration": 1000, "Intelligence": 69, "Speed": 69, "Self-Control": 69}
+    boss = {"Name": "Assignment 1", "Frustration": 0, "Max_Frustration": 200, "Intelligence": 25, "Speed": 30,
+            "Self-Control": 15, "Luck": 0}
     character_is_faster = battle.check_first(character, boss)
     battle.battle(character_is_faster, character, boss, boss["Max_Frustration"] / 2)
     if character["Frustration"] < character["Max_Frustration"]:
