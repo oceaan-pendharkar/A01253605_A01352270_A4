@@ -12,7 +12,8 @@ def make_custom_character(character: dict) -> None:
     """
     points = 120
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
-                                                                                    "Fitness", "Level"]])
+                                                                                    "Fitness", "Level", "alive",
+                                                                                    "goal achieved"]])
     while points > 0:
         key = next(key_generator)
         character[key] = int(input(f"How many points do you want to add to your {key}?"))
@@ -63,13 +64,16 @@ def make_preset_character(character: dict, selection: str):
         if type(attribute) != str:
             raise TypeError("The attribute you pass to populate_points must be a string!")
         key_generator = iter([attribute for attribute in character.keys() if attribute not in ["Name", "row", "column",
-                                                                                               "Fitness", "Level"]])
+                                                                                               "Fitness", "Level",
+                                                                                               "alive",
+                                                                                               "goal achieved"]])
         for _ in range(6):
             character[next(key_generator)] = 15
         character[attribute] *= 2
 
     if selection == 'r':
-        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness", "Level"]]:
+        for key in [key for key in character.keys() if key not in ["Name", "row", "column", "Fitness", "Level",
+                                                                   "alive", "goal achieved"]]:
             character[key] = 20
     elif selection == 'n':
         populate_points('Intelligence')
@@ -89,7 +93,8 @@ def create_character() -> dict:
     :return: the character, as a dictionary
     """
     character = {"Motivation": 0, "Frustration": 0, "Self-control": 0, "Intelligence": 0, "Luck": 0, "Speed": 0,
-                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1}
+                 "Fitness": 0, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
+                 "alive": True, "goal achieved": False}
     choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
@@ -158,6 +163,15 @@ def check_goal(character: dict) -> bool:
         return False
     else:
         return False
+
+
+def check_vitals(character: dict) -> bool:
+    """
+    Check if a character is alive and whether they have achieved their goal
+
+    :param character:
+    :return: True if character is still in the game, False if
+    """
 
 
 def main():
