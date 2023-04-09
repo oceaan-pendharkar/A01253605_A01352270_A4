@@ -10,12 +10,10 @@ def make_custom_character(character: dict, points) -> None:
     :precondition: character's attributes must have values of zero to start
     :postcondition: adds 120 points total to the character's attributes
     """
-    print(points)
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
                                                                                     "goal achieved"]])
     while points > 0:
-        print(points)
         key = next(key_generator)
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
         character[key] += point_increase
