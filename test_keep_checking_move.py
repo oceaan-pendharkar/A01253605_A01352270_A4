@@ -1,3 +1,4 @@
+import io
 from unittest import TestCase
 from unittest.mock import patch
 from board import keep_checking_move
@@ -19,3 +20,11 @@ class Test(TestCase):
     @patch('builtins.input', side_effect=['w'])
     def test_valid_west(self, _):
         self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 'w')
+
+    @patch('builtins.input', side_effect=['2', 'n'])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_value_error_output(self, mock_output, _):
+        keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1})
+        self.assertEqual(mock_output.getvalue(), "Direction must be 'n', 's', 'e', or 'w'!\n")
+
+
