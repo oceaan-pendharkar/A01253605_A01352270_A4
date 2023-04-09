@@ -109,6 +109,8 @@ def get_row_coordinate(character: dict, move: str) -> int:
     1
     >>> get_row_coordinate({"row": 5, "column": 3}, 'n')
     4
+    >>> get_row_coordinate({"row": 0, "column": 5}, 'n')
+    -1
     """
     if move != 'n' and move != 's':
         raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
