@@ -88,7 +88,6 @@ def create_character() -> dict:
             make_preset_character(character)
         else:
             print("You entered something other than 'y' or 'n'. Try again...")
-
     return character
 
 
