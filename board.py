@@ -140,7 +140,7 @@ def keep_checking_move(board: tuple, character: dict) -> str:
     :precondition: the user must be on the board
     :postcondition: validates the move in the chosen direction
     :postcondition: ensures that the move is only 'n', 's', 'e', or 'w'
-    return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
+    :return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
     """
 
     def get_user_choice() -> str:
