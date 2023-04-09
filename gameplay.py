@@ -11,7 +11,7 @@ def game():
         board.move_character(game_properties[0], game_properties[1])
         board.enter_room(game_properties[1])
         character.check_vitals(game_properties[1])
-    end_game.endgame(game_properties[1])
+    end_game.endgame(game_properties[1], game_properties[1]["alive"])
 
 
 def main():
