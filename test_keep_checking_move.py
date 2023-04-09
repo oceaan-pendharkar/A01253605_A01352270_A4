@@ -27,4 +27,12 @@ class Test(TestCase):
         keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1})
         self.assertEqual(mock_output.getvalue(), "Direction must be 'n', 's', 'e', or 'w'!\n")
 
+    @patch('builtins.input', side_effect=['2', 'i', '9', 's'])
+    def test_loops(self, _):
+        self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 's')
+
+
+
+
+
 
