@@ -97,18 +97,21 @@ def enter_room(character: dict) -> None:
 
 def move_character(board: tuple, character: dict) -> None:
     """
-    Move a character up, down, left, or right within a game board.
+    Move a character north, south, east, or west within a game board.
 
     :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
     :precondition: character must be a dictionary that contains keys "row" and "column"
     :precondition: direction must either 'n', 's', 'e', or 'w', as a string of length 1
     :precondition: the move must have been validated to make sure it is possible on the board
+    :precondition: the function enter_room must be accessible within the same module
     :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
     :postcondition: updates the character's row or column based on the move chosen by the user
+    :postcondition: calls enter_room
     :raises TypeError: if board is not a tuple
     :raises TypeError: if direction is not a string
     :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
+    :raises NameError: if enter_room does not exist within the same module
     """
 
     def get_user_choice() -> str:
