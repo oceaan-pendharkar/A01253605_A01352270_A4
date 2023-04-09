@@ -169,9 +169,12 @@ def keep_checking_move(board: tuple, character: dict) -> str:
         :return: True if the move falls within the board, else False
         :raises TypeError: if bounds is not a tuple
         :raises TypeError: if move is not a string
+        :raises ValueError: if move is not 'n', 's', 'e', or 'w'
         """
         if type(bounds) != tuple or type(move) != str:
-            raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
+            raise TypeError("You have passed an argument of the wrong type. Please check the function documentation!")
+        if move not in ['n', 's', 'e', 'w']:
+            raise ValueError("You have passed an invalid move parameter to validate_move")
 
         row, column = character["row"], character["column"]
 
