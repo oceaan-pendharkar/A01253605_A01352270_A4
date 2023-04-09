@@ -43,8 +43,8 @@ def enter_room(character: dict) -> None:
         :precondition: the character must contain "Intelligence" and "Luck" as keys, as strings
         :precondition: the values of "Intelligence" and "Luck" in character must be integers
         """
-        character["Intelligence"] += 10
-        character["Luck"] -= 5
+        character["Intelligence"] += 5
+        character["Luck"] -= 2
 
     def event_happens(description: str, chance: int, event: str) -> None:
         """
