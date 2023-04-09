@@ -140,7 +140,7 @@ def move_character(board: tuple, character: dict) -> None:
             raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
         if move == 'n':
             return character["row"] - 1
-        elif direction == 's':
+        elif move == 's':
             return character["row"] + 1
 
     def get_column_coordinate(move: str) -> int:
@@ -155,9 +155,9 @@ def move_character(board: tuple, character: dict) -> None:
         """
         if move != 'e' and move != 'w':
             raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
-        if direction == 'e':
+        if move == 'e':
             return character["column"] + 1
-        elif direction == "w":
+        elif move == "w":
             return character["column"] - 1
 
     def validate_move(bounds: tuple, move: str) -> bool:
