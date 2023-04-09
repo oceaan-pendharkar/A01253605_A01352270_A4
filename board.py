@@ -221,15 +221,21 @@ def move_character(board: tuple, character: dict) -> None:
     :param character: a dictionary
     :precondition: character must be a dictionary that contains keys "row" and "column"
     :precondition: the function enter_room must be accessible within the same module
+    :precondition: character must contain a key "Luck" which has an integer value
     :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
     :postcondition: updates the character's row or column based on the move chosen by the user
     :postcondition: calls enter_room
     :raises TypeError: if board is not a tuple
     :raises TypeError: if character is not a dict
     :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
+    :raises ValueError: if "Luck" is not a key in character
+    :raises ValueError: if the value of "Luck" in character is not an integer
     """
     if type(board) != tuple or type(character) != dict:
         raise TypeError("Board must be a tuple! Character must be a dict!")
+
+    if "Luck" not in list(character.keys()) or type(character["Luck"]) != int:
+        raise ValueError("Your character must have a key called 'Luck' with an integer value!")
 
     direction = keep_checking_move(board, character)
 
