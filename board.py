@@ -219,7 +219,7 @@ def move_character(board: tuple, character: dict) -> None:
 
     :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
-    :precondition: character must be a dictionary that contains keys "row" and "column"
+    :precondition: character must be a dictionary that contains keys "row" and "column" with integers as values
     :precondition: character must contain a key "Luck" which has an integer value
     :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
     :postcondition: updates the character's row or column based on the move chosen by the user
@@ -227,12 +227,21 @@ def move_character(board: tuple, character: dict) -> None:
     :raises TypeError: if character is not a dict
     :raises ValueError: if "Luck" is not a key in character
     :raises ValueError: if the value of "Luck" in character is not an integer
+    :raises ValueError: if row is not a key in character
+    :raises ValueError: if column is not a key in character
+    :raises TypeError: if row or column values in character are not integers
     """
     if type(board) != tuple or type(character) != dict:
         raise TypeError("Board must be a tuple! Character must be a dict!")
 
     if "Luck" not in list(character.keys()) or type(character["Luck"]) != int:
         raise ValueError("Your character must have a key called 'Luck' with an integer value!")
+
+    if "row" not in character.keys() or "column" not in character.keys():
+        raise ValueError("Your character must contain 'row' and 'column as keys")
+
+    if type(character["row"]) != int or type(character["column"]) != int:
+        raise TypeError("Your row and column keys must have integers as values in character!")
 
     direction = keep_checking_move(board, character)
 
