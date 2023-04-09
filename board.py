@@ -220,11 +220,9 @@ def move_character(board: tuple, character: dict) -> None:
     :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
     :precondition: character must be a dictionary that contains keys "row" and "column"
-    :precondition: the function enter_room must be accessible within the same module
     :precondition: character must contain a key "Luck" which has an integer value
     :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
     :postcondition: updates the character's row or column based on the move chosen by the user
-    :postcondition: calls enter_room
     :raises TypeError: if board is not a tuple
     :raises TypeError: if character is not a dict
     :raises ValueError: if "Luck" is not a key in character
