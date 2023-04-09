@@ -234,7 +234,7 @@ def move_character(board: tuple, character: dict) -> None:
     if type(board) != tuple or type(character) != dict:
         raise TypeError("Board must be a tuple! Character must be a dict!")
 
-    if "Luck" not in list(character.keys()) or type(character["Luck"]) != int:
+    if "Luck" not in character.keys() or type(character["Luck"]) != int:
         raise ValueError("Your character must have a key called 'Luck' with an integer value!")
 
     if "row" not in character.keys() or "column" not in character.keys():
