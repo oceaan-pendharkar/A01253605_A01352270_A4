@@ -105,6 +105,10 @@ def get_row_coordinate(character: dict, move: str) -> int:
     :postcondition: assigns a new column value to the character based on the move
     :return: the new coordinate, as an integer
     :raises ValueError: if move is not 'n' or 's'
+    >>> get_row_coordinate({"row": 0, "column": 0}, 's')
+    1
+    >>> get_row_coordinate({"row": 5, "column": 3}, 'n')
+    4
     """
     if move != 'n' and move != 's':
         raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
