@@ -1,9 +1,9 @@
 import itertools
 
 
-def make_custom_character(character: dict, points) -> None:
+def populate_custom_points(character: dict, points) -> None:
     """
-    Create a character with custom values for Motivation, Frustration, Self-Control, Intelligence, and Luck attributes.
+    Add points to a selection of attributes of a character based on user input.
 
     :character: a dictionary of attributes as strings for keys and integers for values
     :precondition: character must be a dictionary
@@ -105,7 +105,7 @@ def create_character() -> dict:
                   "defense\nIntelligence: helps you damage your enemies\nLuck: determines how likely you are to meet "
                   "difficult opponents\nSpeed: helps you be quicker than your enemies!\nYou also have Fitness, which "
                   "keeps track of your experience level (0 for now!).")
-            make_custom_character(character, 10)
+            populate_custom_points(character, 10)
 
         elif choice == 'n':
             character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the "
