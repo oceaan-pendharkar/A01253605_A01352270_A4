@@ -36,3 +36,7 @@ class Test(TestCase):
     def test_character_type(self):
         game = initialize_game(((0, 5), (0, 5)), {"Name": "Big", "stats": 0})
         self.assertEqual(type(game[1]), dict)
+
+    def test_game_type(self):
+        game = initialize_game(((0, 10), (0, 10)), {"Name": "Big", "stats": 12398})
+        self.assertEqual(type(game), tuple)
