@@ -130,7 +130,7 @@ def move_character(board: tuple, character: dict) -> None:
 
     def get_row_coordinate(move: str) -> int:
         """
-        Assign a new row value based on the move being validated or made.
+        Assign a new row value to a character based on the move being validated or made.
 
         :param move: the direction of the move, as a string 'n' or 's'
         :return: the new coordinate, as an integer
