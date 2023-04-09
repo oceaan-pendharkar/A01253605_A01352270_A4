@@ -227,21 +227,44 @@ def make_board(rows: int, columns: int) -> tuple:
 
 def initialize_game(game_board: tuple, character: dict) -> tuple:
     """
-    Create a board a character to engage in a game scenario.
+    Initialize a game.
+
+    Create a board, create a character, and print an explanatory welcome messsage.
 
     :param game_board: the board, as a tuple of row and column boundaries
     :param character: the character, as a dictionary
-    :postcondition: creates a board and character to play a game
+    :precondition: game_board must be a tuple with 2 sets of row/column coordinates
+    :precondition: character must be a dictionary
+    :precondition: character must have a "Name" key with a string as a value
+    :postcondition: creates a board
+    :postcondition: creates a character
+    :postcondition: prints an explanatory welcome message
     :return: the board and player as two elements within a tuple
     :raises TypeError: if game_board is not a tuple
     :raises TypeError: if player is not a dict
+    :raises KeyError: if "Name" does not exist as a key within character
+    >>> game = initialize_game(((0, 5), (0,5)), {"Name": "Chris"})
+    Welcome to the game, Chris! You are on MISSION: COMPLETE ASSIGNMENT 4.
+    You're at the end of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do it!
+    Your mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to defeat the final boss, and
+    make it to the last square of the board for the final battle...
+    >>> game
+    (((0, 5), (0, 5)), {'Name': 'Chris'})
+
+    >>> game = initialize_game(((0, 7), (0, 9)), {"Name": "Newton"})
+    Welcome to the game, Newton! You are on MISSION: COMPLETE ASSIGNMENT 4.
+    You're at the end of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do it!
+    Your mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to defeat the final boss, and
+    make it to the last square of the board for the final battle...
+    >>> game
+    (((0, 7), (0, 9)), {'Name': 'Newton'})
     """
     if type(game_board) != tuple or type(character) != dict:
         raise TypeError("Your board must be a tuple and your player must be a dictionary!")
     print(f"Welcome to the game, {character['Name']}! You are on MISSION: COMPLETE ASSIGNMENT 4.\nYou're at the end "
           f"of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do "
           f"it!\nYour mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to "
-          f"defeat the final boss, and make it to the last square of the board for the final battle...")
+          f"defeat the final boss, and\nmake it to the last square of the board for the final battle...")
     return game_board, character
 
 
