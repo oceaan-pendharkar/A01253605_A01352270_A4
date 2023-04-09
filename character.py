@@ -92,19 +92,19 @@ def create_character() -> dict:
     :postcondition: creates a character, as a dictionary of attributes as keys and integer values
     :return: the character, as a dictionary
     """
-    character = {"Motivation": 70, "Max Frustration": 50, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
+    character = {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
                  "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
                  "alive": True, "goal achieved": False}
     choice = input("Would you like to choose how many points to put in each category? y/n ")
 
     if choice == 'y':
-        print(f"Alright! Here are your base stats:\n{character}\nYou have ***30 points*** to distribute between "
+        print(f"Alright! Here are your base stats:\n{character}\nYou have ***10 points*** to distribute between "
               "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you stay "
               "alive\nMax Frustration: the higher this is, the longer you last in battle\nSelf-Control: like defense"
               "\nIntelligence: helps you damage your enemies\nLuck: determines how likely you are to meet difficult "
               "opponents\nSpeed: helps you be quicker than your enemies!\nYou also have Fitness, which keeps track "
               "of your experience level (0 for now!).")
-        make_custom_character(character, 30)
+        make_custom_character(character, 10)
 
     else:
         character_type = input(f"That's cool, we have a few preset categories. Type the first letter of the character "
