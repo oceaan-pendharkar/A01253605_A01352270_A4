@@ -174,8 +174,6 @@ def main():
     """
     Drive the program.
     """
-    character = create_character()
-    print(character)
 
 
 if __name__ == "__main__":
