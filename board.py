@@ -252,16 +252,18 @@ def initialize_game(game_board: tuple, character: dict) -> tuple:
     :raises KeyError: if "Name" does not exist as a key within character
     >>> game = initialize_game(((0, 5), (0,5)), {"Name": "Chris"})
     Welcome to the game, Chris! You are on MISSION: COMPLETE ASSIGNMENT 4.
-    You're at the end of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do it!
-    Your mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to defeat the final boss, and
+    You're at the end of your first term in CST and things have been hectic as HECK.
+    But don't worry, we know you can do it!
+    Your mission is to stay Motivated enough to stay alive, achieve enough Fitness level to defeat the final boss, and
     make it to the last square of the board for the final battle...
     >>> game
     (((0, 5), (0, 5)), {'Name': 'Chris'})
 
     >>> game = initialize_game(((0, 7), (0, 9)), {"Name": "Newton"})
     Welcome to the game, Newton! You are on MISSION: COMPLETE ASSIGNMENT 4.
-    You're at the end of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do it!
-    Your mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to defeat the final boss, and
+    You're at the end of your first term in CST and things have been hectic as HECK.
+    But don't worry, we know you can do it!
+    Your mission is to stay Motivated enough to stay alive, achieve enough Fitness level to defeat the final boss, and
     make it to the last square of the board for the final battle...
     >>> game
     (((0, 7), (0, 9)), {'Name': 'Newton'})
@@ -269,8 +271,8 @@ def initialize_game(game_board: tuple, character: dict) -> tuple:
     if type(game_board) != tuple or type(character) != dict:
         raise TypeError("Your board must be a tuple and your player must be a dictionary!")
     print(f"Welcome to the game, {character['Name']}! You are on MISSION: COMPLETE ASSIGNMENT 4.\nYou're at the end "
-          f"of your first term in CST and things have been hectic as HECK. But don't worry, we know you can do "
-          f"it!\nYour mission is to stay Motivated enough to stay alive, achieve a high enough Fitness level to "
+          f"of your first term in CST and things have been hectic as HECK.\nBut don't worry, we know you can do "
+          f"it!\nYour mission is to stay Motivated enough to stay alive, achieve enough Fitness level to "
           f"defeat the final boss, and\nmake it to the last square of the board for the final battle...")
     return game_board, character
 
