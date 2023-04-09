@@ -60,7 +60,7 @@ def determine_enemy(character):
     enemy = copy.deepcopy(enemies[selector])
     for key, value in enemy.items():
         if key not in ["Name", "Description", "Frustration", "Exp"]:
-            value *= 1 + character["Level"] * 0.2
+            value *= 1 + character["Level"] * 0.1
     print(enemies[selector]['Description'])
     return enemy
 
