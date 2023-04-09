@@ -20,13 +20,31 @@ class Test(TestCase):
     def test_valid_south(self, _):
         self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 's')
 
+    @patch('builtins.input', side_effect=['s', 'n'])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_invalid_south(self, mock_output, _):
+        keep_checking_move(((0, 5), (0, 5)), {"row": 4, "column": 1})
+        self.assertEqual(mock_output.getvalue(), "Your move must stay within the bounds of the board!\n")
+
     @patch('builtins.input', side_effect=['e'])
     def test_valid_east(self, _):
         self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 'e')
 
+    @patch('builtins.input', side_effect=['e', 'n'])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_invalid_east(self, mock_output, _):
+        keep_checking_move(((0, 5), (0, 5)), {"row": 4, "column": 4})
+        self.assertEqual(mock_output.getvalue(), "Your move must stay within the bounds of the board!\n")
+
     @patch('builtins.input', side_effect=['w'])
     def test_valid_west(self, _):
         self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 'w')
+
+    @patch('builtins.input', side_effect=['w', 'n'])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_invalid_west(self, mock_output, _):
+        keep_checking_move(((0, 5), (0, 5)), {"row": 4, "column": 0})
+        self.assertEqual(mock_output.getvalue(), "Your move must stay within the bounds of the board!\n")
 
     @patch('builtins.input', side_effect=['2', 'n'])
     @patch('sys.stdout', new_callable=io.StringIO)
