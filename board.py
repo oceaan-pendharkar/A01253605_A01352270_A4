@@ -215,6 +215,9 @@ def make_board(rows: int, columns: int) -> tuple:
     >>> board = make_board(5, 5)
     >>> board
     ((0, 5), (0, 5))
+    >>> board = make_board(95, 3)
+    >>> board
+    ((0, 95), (0, 3))
     """
     if rows < 2 or columns < 2:
         raise ValueError("Dimensions must be 2 or greater")
