@@ -109,7 +109,7 @@ def move_character(board: tuple, character: dict) -> None:
     :postcondition: updates the character's row or column based on the move chosen by the user
     :postcondition: calls enter_room
     :raises TypeError: if board is not a tuple
-    :raises TypeError: if direction is not a string
+    :raises TypeError: if character is not a dict
     :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
     :raises NameError: if enter_room does not exist within the same module
     """
@@ -208,6 +208,9 @@ def move_character(board: tuple, character: dict) -> None:
             else:
                 choice_is_valid = validate_move()
         return move
+
+    if type(board) != tuple or type(character) != dict:
+        raise TypeError("Board must be a tuple! Character must be a dict!")
 
     direction = keep_checking_move()
 
