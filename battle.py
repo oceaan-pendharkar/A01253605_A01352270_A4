@@ -114,7 +114,7 @@ def deal_damage(character_is_faster, character, enemy):
         attacker_critical = calculate_critical(attacker["Luck"])
         if attacker_critical:
             attacker_damage = attacker["Intelligence"] * 1.5
-            print("You landed a critical hit!")
+            print(f"{attacker['Name']} landed a critical hit!")
         else:
             attacker_damage = attacker['Intelligence'] - defender["Self-Control"]
 
