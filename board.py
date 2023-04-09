@@ -145,9 +145,11 @@ def move_character(board: tuple, character: dict) -> None:
 
     def get_column_coordinate(move: str) -> int:
         """
-        Assign a new row value based on the move being validated or made.
+        Assign a new row value to a character based on the move being validated or made.
 
         :param move: the direction of the move, as a string 'e' or 'w'
+        :precondition: move must be a string of size 1, either 'e' or 'w'
+        :postcondition: assigns a new row value to the character based on the move
         :return: the new coordinate, as an integer
         :raises ValueError: if move is not 'e' or 'w'
         """
