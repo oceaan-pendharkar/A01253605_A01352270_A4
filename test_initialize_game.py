@@ -1,8 +1,23 @@
+import io
 from unittest import TestCase
+from unittest.mock import patch
+
 from board import initialize_game
 
 
 class Test(TestCase):
-    def test_small_board(self):
+    def test_return_values(self):
         self.assertEqual((((0, 2), (0, 2)), {"Name": "Tiny", "stats": 0}), initialize_game(((0, 2), (0, 2)),
-                                                                                        {"Name": "Tiny", "stats": 0}))
+                                                                                           {"Name": "Tiny",
+                                                                                            "stats": 0}))
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_prints_welcome(self, mock_output):
+        initialize_game(((0, 5), (0, 5)), {"Name": "Tiny", "stats": 0})
+        self.assertEqual(mock_output.getvalue(), "Welcome to the game, Tiny! You are on MISSION: COMPLETE ASSIGNMENT 4."
+                                                 "\nYou're at the end of your first term in CST and things have been "
+                                                 "hectic as HECK.\nBut don't worry, we know you can do it!\nYour "
+                                                 "mission is to stay Motivated enough to stay alive, achieve "
+                                                 "enough Fitness level to defeat the final boss, and\nmake it to the "
+                                                 "last square of the board for the final battle...\n")
+
