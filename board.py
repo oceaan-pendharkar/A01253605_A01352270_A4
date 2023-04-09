@@ -90,7 +90,7 @@ def enter_room(character: dict) -> None:
             elif event == 'gain motivation':
                 character["Motivation"] += 10
             elif event == 'lose self-control':
-                character["Self-control"] -= 2
+                character["Self-Control"] -= 2
         else:
             print(f"The number was {number}.\nYou did not {event}. As you were...")
 
