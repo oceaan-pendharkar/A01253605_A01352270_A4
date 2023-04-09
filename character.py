@@ -115,25 +115,23 @@ def create_character() -> dict:
     return character
 
 
-def check_alive(character: dict) -> bool:
+def check_alive(character: dict) -> None:
     """
     Check to see if a character's motivation has dropped to or below zero in a game.
 
     :param character: the character, as a dictionary
     :precondition: character must be a dictionary
-    :return: True if alive, else False
+    :postcondition: updates character's "alive" attribute to False if their motivation has dropped to zero or below
     :raises TypeError: if character is not a dictionary
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
 
     if character["Motivation"] < 0:
-        return True
-    else:
-        return False
+        character["alive"] = False
 
 
-def check_goal(character: dict) -> bool:
+def check_goal(character: dict) -> None:
     """
     Check that a character has a high enough fitness level and has reached the correct square to defeat the boss.
 
@@ -141,7 +139,7 @@ def check_goal(character: dict) -> bool:
     :precondition: character must be a dictionary
     :postcondition: displays the character's progress towards their goal if their fitness level is 30 or higher or
                     if they've found the final square
-    :return: True if goal achieved, else False
+    :postcondition: updates "goal achieved" attribute of character if Fitness >= 30 and coordinates = (9, 9)
     :raises TypeError: if character is not a dictionary
     """
     if type(character) != dict:
@@ -152,26 +150,24 @@ def check_goal(character: dict) -> bool:
     if character["Fitness"] >= 30 and character_coordinates == (9, 9):
         print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
               f"boss!!!")
-        return True
+        character["goal achieved"] = True
     elif character["Fitness"] >= 30 and character_coordinates != (9, 9):
         print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
               f"way to the final square for the final battle...")
-        return False
     elif character["Fitness"] < 30 and character_coordinates == (9, 9):
         print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
               f"boss yet! Keep trucking...")
-        return False
-    else:
-        return False
 
 
-def check_vitals(character: dict) -> bool:
+def check_vitals(character: dict) -> None:
     """
     Check if a character is alive and whether they have achieved their goal
 
-    :param character:
-    :return: True if character is still in the game, False if
+    :param character: a dictionary
+    :return: True if character is still in the game, else False
     """
+    check_alive(character)
+    check_goal(character)
 
 
 def main():
