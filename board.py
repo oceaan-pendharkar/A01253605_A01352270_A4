@@ -97,10 +97,10 @@ def enter_room(character: dict) -> None:
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event_happens(room, 3, 'get assigned ANOTHER assignment')
 
-    elif room == LOCATIONS[1] or room == LOCATIONS[2] or room == LOCATIONS[8]:
+    elif room in [LOCATIONS[1], LOCATIONS[2], LOCATIONS[8], LOCATIONS[9]]:
         event_happens(room, 2, 'have to fight')
 
-    elif room == LOCATIONS[6] or room == LOCATIONS[7] or room == LOCATIONS[9]:
+    elif room == LOCATIONS[6] or room == LOCATIONS[7]:
         event_happens(room, 3, 'lose self-control')
 
     else:
