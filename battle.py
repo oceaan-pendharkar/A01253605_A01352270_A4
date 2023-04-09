@@ -123,6 +123,7 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 
 def battle_sequence(character):
     enemy = determine_enemy()
+    character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
     check_result(character, enemy, battle_loss, battle_win)
