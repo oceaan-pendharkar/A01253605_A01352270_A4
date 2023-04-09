@@ -160,28 +160,30 @@ def move_character(board: tuple, character: dict) -> None:
         elif direction == "w":
             return character["column"] - 1
 
-    def validate_move() -> bool:
+    def validate_move(bounds: tuple, move: str) -> bool:
         """
         Check that a character's move in a particular direction lands on the board of a game being played.
 
-        :precondition: board must be a tuple
-        :precondition: direction must be a string, either 'n', 's', 'e', or 'w'
+        :param bounds: a tuple of the board boundaries
+        :param move: the direction, as a string, either 'n', 's', 'e', or 'w'
+        :precondition: bounds must be a tuple
+        :precondition: move must be a string, either 'n', 's', 'e', or 'w'
         :postcondition: determines whether a character's move in a particular direction lands on the playing board
         :return: True if the move falls within the board, else False
-        :raises TypeError: if board is not a tuple
-        :raises TypeError: if direction is not a string
+        :raises TypeError: if bounds is not a tuple
+        :raises TypeError: if move is not a string
         """
-        if type(board) != tuple or type(direction) != str:
+        if type(bounds) != tuple or type(move) != str:
             raise ValueError("You have passed an argument of the wrong type. Please check the function documentation!")
 
         row, column = character["row"], character["column"]
 
-        if direction == "n" or direction == "s":
-            row = get_row_coordinate(direction)
-        elif direction == 'e' or direction == 'w':
-            column = get_column_coordinate(direction)
+        if move == "n" or move == "s":
+            row = get_row_coordinate(move)
+        elif move == 'e' or move == 'w':
+            column = get_column_coordinate(move)
 
-        if board[0][0] <= row < board[0][1] and board[1][0] <= column < board[1][1]:
+        if bounds[0][0] <= row < bounds[0][1] and bounds[1][0] <= column < bounds[1][1]:
             return True
         else:
             print(f"Your move must stay within the bounds of the board!")
@@ -204,7 +206,7 @@ def move_character(board: tuple, character: dict) -> None:
             except ValueError:
                 print("Direction must be 'n', 's', 'e', or 'w'!")
             else:
-                choice_is_valid = validate_move()
+                choice_is_valid = validate_move(board, move)
         return move
 
     if type(board) != tuple or type(character) != dict:
