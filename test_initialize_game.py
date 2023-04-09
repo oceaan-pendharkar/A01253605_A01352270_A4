@@ -24,3 +24,7 @@ class Test(TestCase):
     def test_raises_board(self):
         with self.assertRaises(TypeError):
             initialize_game([(0, 5), (0, 5)], {"Name": "Tiny", "stats": 0})
+
+    def test_raises_character(self):
+        with self.assertRaises(TypeError):
+            initialize_game(((0, 2), (0, 2)), [{"Name": "Tiny"}, {"stats": 0}])
