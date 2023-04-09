@@ -13,9 +13,11 @@ def enter_room(character: dict) -> None:
     :param character: the character, as a dictionary
     :precondition: description must be a string
     :precondition: character must be a dictionary
+    :precondition: the constant tuple LOCATIONS must exist within the same module
     :postcondition: the player interacts with the room in a game
     :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
+    :raises NameError: if LOCATIONS does not exist
     """
 
     def generate_room() -> str:
