@@ -9,9 +9,9 @@ def determine_enemy():
     :return: the randomly selected enemy dictionary
     """
     enemies = {1: {'Name': 'Tim Hortons', 'Description': 'You are at Tim Hortons and there is a muffin that you want.',
-                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2, 'Max_Frustration': 20, "Exp": 2},
+                   'Frustration': 15, 'Intelligence': 7, 'Speed': 2, "Self-Control": 2, 'Max Frustration': 20, "Exp": 2},
                2: {'Name': "McDonald's", 'Description': "You are at Mcdonald's", 'Frustration': 12, 'Intelligence': 8,
-                   'Speed': 5, "Self-Control": 2, 'Max_Frustration': 20, "Exp": 1}}
+                   'Speed': 5, "Self-Control": 2, 'Max Frustration': 20, "Exp": 1}}
 
     selector = random.randint(1, len(enemies))
     enemy = enemies[selector]
@@ -108,16 +108,16 @@ def battle_win(character, enemy):
 
 
 def check_result(character, enemy, lose_function, win_function):
-    if character['Frustration'] >= character["Max_Frustration"]:
+    if character['Frustration'] >= character["Max Frustration"]:
         lose_function(character, enemy)
     else:
         win_function(character, enemy)
 
 
 def battle(character_is_faster, character, enemy, enemy_frustration):
-    while character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
+    while character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
-        if character['Frustration'] < character["Max_Frustration"] and enemy['Frustration'] < enemy_frustration:
+        if character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
             deal_damage(not character_is_faster, character, enemy)
 
 
@@ -125,7 +125,7 @@ def battle_sequence(character):
     enemy = determine_enemy()
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
-    battle(character_is_faster, character, enemy, enemy["Max_Frustration"])
+    battle(character_is_faster, character, enemy, enemy["Max Frustration"])
     check_result(character, enemy, battle_loss, battle_win)
 
 
@@ -134,7 +134,7 @@ def main():
     Drive the program.
     """
     character = {'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
-                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max_Frustration": 10}
+                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 10}
     battle_sequence(character)
 
 
