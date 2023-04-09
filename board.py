@@ -109,7 +109,6 @@ def move_character(board: tuple, character: dict) -> None:
     :raises TypeError: if board is not a tuple
     :raises TypeError: if character is not a dict
     :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
-    :raises NameError: if enter_room does not exist within the same module
     """
 
     def get_user_choice() -> str:
