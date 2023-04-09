@@ -95,20 +95,52 @@ def enter_room(character: dict) -> None:
     print(f"You are now leaving {room}.\nHere's what your points and stats look like:\n{character}")
 
 
-def move_character(board: tuple, character: dict) -> None:
+def get_row_coordinate(character: dict, move: str) -> int:
     """
-    Move a character north, south, east, or west within a game board.
+    Assign a new row value to a character based on the move being validated or made.
 
-    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
     :param character: a dictionary
-    :precondition: character must be a dictionary that contains keys "row" and "column"
-    :precondition: the function enter_room must be accessible within the same module
-    :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
-    :postcondition: updates the character's row or column based on the move chosen by the user
-    :postcondition: calls enter_room
-    :raises TypeError: if board is not a tuple
-    :raises TypeError: if character is not a dict
-    :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
+    :param move: the direction of the move, as a string 'n' or 's'
+    :precondition: move must be a string of size 1, either 'n' or 's'
+    :postcondition: assigns a new column value to the character based on the move
+    :return: the new coordinate, as an integer
+    :raises ValueError: if move is not 'n' or 's'
+    """
+    if move != 'n' and move != 's':
+        raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
+    if move == 'n':
+        return character["row"] - 1
+    elif move == 's':
+        return character["row"] + 1
+
+
+def get_column_coordinate(character: dict, move: str) -> int:
+    """
+    Assign a new row value to a character based on the move being validated or made.
+
+    :param character: a dictionary
+    :param move: the direction of the move, as a string 'e' or 'w'
+    :precondition: move must be a string of size 1, either 'e' or 'w'
+    :postcondition: assigns a new row value to the character based on the move
+    :return: the new coordinate, as an integer
+    :raises ValueError: if move is not 'e' or 'w'
+    """
+    if move != 'e' and move != 'w':
+        raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
+    if move == 'e':
+        return character["column"] + 1
+    elif move == "w":
+        return character["column"] - 1
+
+
+def keep_checking_move(board: tuple, character: dict) -> str:
+    """
+    Make sure the user enters an appropriate direction, and that the direction is a valid move.
+
+    :precondition: the user must be on the board
+    :postcondition: validates the move in the chosen direction
+    :postcondition: ensures that the move is only 'n', 's', 'e', or 'w'
+    return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
     """
 
     def get_user_choice() -> str:
@@ -124,40 +156,6 @@ def move_character(board: tuple, character: dict) -> None:
         if user_choice != 'n' and user_choice != 's' and user_choice != 'w' and user_choice != 'e':
             raise ValueError
         return user_choice
-
-    def get_row_coordinate(move: str) -> int:
-        """
-        Assign a new row value to a character based on the move being validated or made.
-
-        :param move: the direction of the move, as a string 'n' or 's'
-        :precondition: move must be a string of size 1, either 'n' or 's'
-        :postcondition: assigns a new column value to the character based on the move
-        :return: the new coordinate, as an integer
-        :raises ValueError: if move is not 'n' or 's'
-        """
-        if move != 'n' and move != 's':
-            raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
-        if move == 'n':
-            return character["row"] - 1
-        elif move == 's':
-            return character["row"] + 1
-
-    def get_column_coordinate(move: str) -> int:
-        """
-        Assign a new row value to a character based on the move being validated or made.
-
-        :param move: the direction of the move, as a string 'e' or 'w'
-        :precondition: move must be a string of size 1, either 'e' or 'w'
-        :postcondition: assigns a new row value to the character based on the move
-        :return: the new coordinate, as an integer
-        :raises ValueError: if move is not 'e' or 'w'
-        """
-        if move != 'e' and move != 'w':
-            raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
-        if move == 'e':
-            return character["column"] + 1
-        elif move == "w":
-            return character["column"] - 1
 
     def validate_move(bounds: tuple, move: str) -> bool:
         """
@@ -178,9 +176,9 @@ def move_character(board: tuple, character: dict) -> None:
         row, column = character["row"], character["column"]
 
         if move == "n" or move == "s":
-            row = get_row_coordinate(move)
+            row = get_row_coordinate(character, move)
         elif move == 'e' or move == 'w':
-            column = get_column_coordinate(move)
+            column = get_column_coordinate(character, move)
 
         if bounds[0][0] <= row < bounds[0][1] and bounds[1][0] <= column < bounds[1][1]:
             return True
@@ -188,35 +186,42 @@ def move_character(board: tuple, character: dict) -> None:
             print(f"Your move must stay within the bounds of the board!")
             return False
 
-    def keep_checking_move() -> str:
-        """
-        Make sure the user enters an appropriate direction, and that the direction is a valid move.
+    choice_is_valid = False
+    direction = None
+    while not choice_is_valid:
+        try:
+            direction = get_user_choice()
+        except ValueError:
+            print("Direction must be 'n', 's', 'e', or 'w'!")
+        else:
+            choice_is_valid = validate_move(board, direction)
+    return direction
 
-        :precondition: the user must be on the board
-        :postcondition: validates the move in the chosen direction
-        :postcondition: ensures that the move is only 'n', 's', 'e', or 'w'
-        return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
-        """
-        choice_is_valid = False
-        move = None
-        while not choice_is_valid:
-            try:
-                move = get_user_choice()
-            except ValueError:
-                print("Direction must be 'n', 's', 'e', or 'w'!")
-            else:
-                choice_is_valid = validate_move(board, move)
-        return move
 
+def move_character(board: tuple, character: dict) -> None:
+    """
+    Move a character north, south, east, or west within a game board.
+
+    :param board: the game board, as a tuple containing row and column boundaries as sub-tuples of size 2
+    :param character: a dictionary
+    :precondition: character must be a dictionary that contains keys "row" and "column"
+    :precondition: the function enter_room must be accessible within the same module
+    :postcondition: the user enters a direction 'n', 's', 'e', or 'w' to move
+    :postcondition: updates the character's row or column based on the move chosen by the user
+    :postcondition: calls enter_room
+    :raises TypeError: if board is not a tuple
+    :raises TypeError: if character is not a dict
+    :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
+    """
     if type(board) != tuple or type(character) != dict:
         raise TypeError("Board must be a tuple! Character must be a dict!")
 
-    direction = keep_checking_move()
+    direction = keep_checking_move(board, character)
 
     if direction == "n" or direction == "s":
-        character["row"] = get_row_coordinate(direction)
+        character["row"] = get_row_coordinate(character, direction)
     elif direction == 'e' or direction == 'w':
-        character["column"] = get_column_coordinate(direction)
+        character["column"] = get_column_coordinate(character, direction)
 
     enter_room(character)
 
