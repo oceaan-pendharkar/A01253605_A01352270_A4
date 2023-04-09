@@ -202,16 +202,19 @@ def move_character(board: tuple, character: dict) -> None:
 
 def make_board(rows: int, columns: int) -> tuple:
     """
-    Create a board for a game.
+    Create the bounds of a board for a game, lower bound inclusive, upper bound exclusive.
 
     :param rows: an integer 2 or greater
     :param columns: an integer 2 or greater
     :precondition: rows must be an integer 2 or greater
     :precondition: columns must be an integer 2 or greater
-    :postcondition: creates a board for a game
+    :postcondition: creates the bounds of a board for a game, lower bound inclusive, upper bound exclusive
     :return: the boundaries of the board, as a tuple with 2 sub-tuples that give the row and column bounds respectively
     :raises ValueError: if rows < 2
     :raises ValueError: if columns < 2
+    >>> board = make_board(5, 5)
+    >>> board
+    ((0, 5), (0, 5))
     """
     if rows < 2 or columns < 2:
         raise ValueError("Dimensions must be 2 or greater")
