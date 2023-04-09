@@ -227,7 +227,6 @@ def move_character(board: tuple, character: dict) -> None:
     :postcondition: calls enter_room
     :raises TypeError: if board is not a tuple
     :raises TypeError: if character is not a dict
-    :raises ValueError: if the direction entered by the user is not 'n', 's', 'e', or 'w'
     :raises ValueError: if "Luck" is not a key in character
     :raises ValueError: if the value of "Luck" in character is not an integer
     """
