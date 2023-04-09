@@ -29,6 +29,7 @@ def main():
     """
     Drive the program.
     """
+    game()
 
 
 if __name__ == "__main__":

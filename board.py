@@ -1,5 +1,5 @@
 import random
-from battle import battle
+from battle import battle_sequence
 
 LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Granville Station', 'Waterfront Station', 'Pacific Centre',
@@ -52,8 +52,6 @@ def enter_room(character: dict) -> None:
 
     room = generate_room()
 
-    print("You're in ", room)
-
     def complete_assignment() -> None:
         """
         Adjust a character's intelligence, frustration, and luck points to complete an assignment in a game.
@@ -89,7 +87,7 @@ def enter_room(character: dict) -> None:
             if event == 'get assigned ANOTHER assignment':
                 complete_assignment()
             elif event == 'have to fight':
-                battle(character)
+                battle_sequence(character)
             elif event == 'gain motivation':
                 character["Motivation"] += 10
             elif event == 'lose self-control':
