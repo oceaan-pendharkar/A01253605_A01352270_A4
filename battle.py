@@ -1,5 +1,6 @@
 import random
 import copy
+from character import make_custom_character
 
 
 def determine_enemy(character):
@@ -129,15 +130,24 @@ def deal_damage(character_is_faster, character, enemy):
         print(f"{enemy['Name']} frustrated you by {enemy_damage} points")
 
 
+def level_up(character):
+    points = 10
+    print(f"You have {points} to allocate to your stats. Possible stats to increase are Motivation, Max Frustration,"
+          "Self-Control, Intelligence, Luck, and Speed. Please allocate your points. ")
+    make_custom_character(character, 10)
+
+
 def calculate_fitness(character, enemy):
     character["Fitness"] += enemy["Exp"]
     print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
     if character["Fitness"] >= 15 and character["Level"] < 2:
         character["Level"] = 2
         print("Congratulations! You have reached level 2!")
+        level_up(character)
     elif character["Fitness"] >= 30 and character["Level"] < 3:
         character["Level"] = 3
         print("Congratulations! You've reached level 3! Go get that boss now.")
+        level_up(character)
     else:
         pass
 
