@@ -43,6 +43,7 @@ def enter_room(character: dict) -> None:
     :param character: the character, as a dictionary
     :precondition: description must be a string
     :precondition: character must be a dictionary
+    :precondition: character's keys must include Intelligence, Luck, Motivation, and Self-Control as strings
     :postcondition: the player interacts with the room in a game
     :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
@@ -62,8 +63,6 @@ def enter_room(character: dict) -> None:
         else:
             selection = random.randint(0, 9)
         return LOCATIONS[selection]
-
-    room = generate_room()
 
     def complete_assignment() -> None:
         """
@@ -107,6 +106,8 @@ def enter_room(character: dict) -> None:
                 character["Self-Control"] -= 2
         else:
             print(f"The number was {number}.\nYou did not {event}. As you were...")
+
+    room = generate_room()
 
     if room == LOCATIONS[0] or room == LOCATIONS[3]:
         event_happens(room, 3, 'get assigned ANOTHER assignment')
