@@ -187,9 +187,9 @@ class Test(TestCase):
                          "You're in Waterfront Station. There is a 1/3 chance you will gain motivation if you enter "
                          "one of the listed numbers.\nYou KNEW this would happen! You gain motivation.\nYou are now "
                          "leaving Waterfront Station.\nHere's what your points and stats look like:\n{"
-                         "'Luck': 20, 'Intelligence': 10, 'Motivation': 20, 'Self-Control': 10, 'Level': 1, "
+                         "'Luck': 20, 'Intelligence': 10, 'Motivation': 12, 'Self-Control': 10, 'Level': 1, "
                          "'Speed': 10, 'Frustration': 10, 'Max Frustration': 80, 'Name': 'Oceaan', 'Fitness': 0}\n")
-        self.assertEqual(character["Motivation"], 20)
+        self.assertEqual(character["Motivation"], 12)
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', side_effect=[5, 2])
