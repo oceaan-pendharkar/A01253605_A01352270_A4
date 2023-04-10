@@ -365,6 +365,25 @@ def battle_loss(character, enemy):
 
 
 def check_result(character, enemy, lose_function, win_function):
+    """
+    Check if the character won the battle or not.
+
+    :param character: a dictionary
+    :param enemy: another dictionary
+    :param lose_function: a function to execute when the character wins the battle
+    :param win_function: a function to execute when the character loses the battle
+    :precondition: character must be a dictionary
+    :precondition: character must have keys named 'Motivation', 'Fitness', 'Name', and 'Level'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have a keys named 'Name' and 'Exp'
+    :postcondition: execute lose_function if the character lost the battle and win_function if they won
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises TypeError: if lose_function is not a function
+    :raises TypeError: if win_function is not a function
+    :raises KeyError: if character does not have keys 'Motivation', 'Fitness', 'Name', and 'Level'
+    :raises KeyError: if enemy does not have keys 'Name' and 'Exp'
+    """
     if character['Frustration'] >= character["Max Frustration"]:
         lose_function(character, enemy)
     else:
