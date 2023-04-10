@@ -36,10 +36,12 @@ class Test(TestCase):
         self.assertEqual(guessing_game(3), (True, 2))
         self.assertEqual(mock_output.getvalue(), "")
 
+    @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', return_value=2)
     @patch('builtins.input', side_effect=[3])
-    def test_false(self, _, __):
+    def test_false(self, _, __, mock_output):
         self.assertEqual(guessing_game(3), (False, 2))
+        self.assertEqual("", mock_output.getvalue())
 
     @patch('random.randint', return_value=22)
     @patch('builtins.input', side_effect=[555, "nice", 22])
