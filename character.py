@@ -123,11 +123,12 @@ def check_alive(character: dict) -> None:
         character["alive"] = False
 
 
-def check_goal(character: dict) -> None:
+def check_goal(character: dict, board: tuple) -> None:
     """
     Check that a character has a high enough fitness level and has reached the correct square to defeat the boss.
 
     :param character: a dictionary
+    :param board: a tuple with boundaries of a board as two sub-tuples of size 2
     :precondition: character must be a dictionary
     :precondition: character must contain the keys "column", "row", "Fitness", and "Name", as strings
     :precondition: values for keys "column", "row", "Fitness", and "Name" in character must be integers
@@ -135,8 +136,10 @@ def check_goal(character: dict) -> None:
                     if they've found the final square
     :postcondition: updates "goal achieved" attribute of character if Fitness >= 30 and coordinates = (9, 9)
     :raises TypeError: if character is not a dictionary
+    :raises TypeError: if board is not a tuple
     :raises ValueError: if character does not contain the keys "column", "row", "Fitness", or "Name"
     :raises TypeError: if character's values at "column", "row", "Fitness" are not integers
+    :raises IndexError: if board is a tuple less than size 2
     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
     >>> check_goal(my_player)
 
@@ -147,8 +150,8 @@ def check_goal(character: dict) -> None:
     >>> check_goal(my_player)
     Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
-    if type(character) != dict:
-        raise TypeError("Character must be a dictionary to call check_goal!")
+    if type(character) != dict or type(board) != tuple:
+        raise TypeError("Character must be a dictionary and board must be a tuple to call check_goal!")
     for key in ["column", "row", "Fitness", "Name"]:
         if key not in character.keys():
             raise ValueError("Character does not contain all necessary keys to check_goal!")
@@ -158,37 +161,44 @@ def check_goal(character: dict) -> None:
 
     character_coordinates = (character["row"], character["column"])
 
-    if character["Fitness"] >= 30 and character_coordinates == (9, 9):
+    if character["Fitness"] >= 30 and character_coordinates == (board[0][1], board[1][1]):
         print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
               f"boss!!!")
         character["goal achieved"] = True
-    elif character["Fitness"] >= 30 and character_coordinates != (9, 9):
+    elif character["Fitness"] >= 30 and character_coordinates != (board[0][1], board[1][1]):
         print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
               f"way to the final square for the final battle...")
-    elif character["Fitness"] < 30 and character_coordinates == (9, 9):
+    elif character["Fitness"] < 30 and character_coordinates == (board[0][1], board[1][1]):
         print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
               f"boss yet! Keep trucking...")
 
 
-def check_vitals(character: dict) -> None:
+def check_vitals(character: dict, board: tuple) -> None:
     """
     Check if a character is alive and whether they have achieved their goal
 
     :param character: a dictionary containing the keys "Name", "row", "column", "Fitness", and "Motivation", as strings
+    :param board: a tuple with boundaries of a board as two sub-tuples of size 2
+    :precondition: board must be a tuple
     :precondition: character must be a dictionary
     :precondition: character must contain the keys "Name", "row", "column", "Fitness", "Motivation", "alive" as strings
     :precondition: character's values at keys "row", "column", "Fitness", and "Motivation" must be integers
     :return: True if character is still in the game, else False
     :raises TypeError: if character is not a dictionary
+    :raises TypeError: if board is not a tuple
     :raises TypeError: if character values at specified keys are not integers
     :raises ValueError: if character does not contain specified keys
-     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
-    >>> check_goal(my_player)
-    >>> check_vitals()
+    >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player", "alive": True}
+    >>> check_vitals(my_player)
+
+    >>> my_guy = {"Motivation": 0, "alive": True, "row": 9, "column": 9}
+    >>> check_alive(my_guy)
+    >>> my_guy
+    {'Motivation': 0, 'alive': False}
     """
     keys = ["Name", "alive", "row", "column", "Fitness", "Motivation"]
-    if type(character) != dict:
-        raise TypeError("Character must be a dictionary!")
+    if type(character) != dict or type(board) != tuple:
+        raise TypeError("Character must be a dictionary! Board must be a tuple!")
 
     keys_with_int_values = keys[2:]
     for key in keys_with_int_values:
@@ -196,7 +206,7 @@ def check_vitals(character: dict) -> None:
             raise TypeError("One or more of the specified keys do not have integer values!")
 
     check_alive(character)
-    check_goal(character)
+    check_goal(character, board)
 
 
 def main():
