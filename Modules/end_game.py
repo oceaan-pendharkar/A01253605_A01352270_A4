@@ -1,4 +1,4 @@
-import battle
+import Modules.battle
 
 
 def mid_boss_event(character, boss):
@@ -24,12 +24,12 @@ def boss_win(character, enemy):
 def boss_fight(character):
     boss = {"Name": "Assignment 1", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
             "Self-Control": 15, "Luck": 0}
-    character_is_faster = battle.check_first(character, boss)
-    battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
+    character_is_faster = Modules.battle.check_first(character, boss)
+    Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
     if character["Frustration"] < character["Max Frustration"]:
         mid_boss_event(character, boss)
-    battle.battle(character_is_faster, character, boss, boss["Max Frustration"])
-    battle.check_result(character, boss, boss_lose, boss_win)
+    Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"])
+    Modules.battle.check_result(character, boss, boss_lose, boss_win)
 
 
 def endgame(character, alive):
