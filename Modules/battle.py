@@ -387,7 +387,7 @@ def check_result(character, enemy, lose_function, win_function):
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and enemy must be dictionaries!")
-    if not callable(win_function) and not callable(lose_function):
+    if not callable(win_function) or not callable(lose_function):
         raise TypeError("win_function and lose_function need to be functions!")
     if not all(key in character for key in ['Motivation', 'Fitness', 'Name', 'Level']):
         raise KeyError("Character must have keys 'Motivation', 'Fitness', 'Name', and 'Level'!")
