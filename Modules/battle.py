@@ -360,6 +360,12 @@ def battle_loss(character, enemy):
     :raises KeyError: if character does not have key 'Motivation'
     :raises KeyError: if enemy does not have key 'Name'
     """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy must be dictionaries!")
+    if 'Motivation' not in character:
+        raise KeyError("Character must have key 'Motivation'!")
+    if 'Name' not in enemy:
+        raise KeyError("Enemy must have key 'Name'!")
     print(f"You gave in to the temptation of {enemy['Name']}! You lost 2 motivation.")
     character["Motivation"] -= 2
 
