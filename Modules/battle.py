@@ -468,6 +468,13 @@ def battle_sequence(character):
     :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                       'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
     """
+    if type(character) is not dict:
+        raise TypeError("Character needs to be a dictionary!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control',
+                                            'Max Frustration', 'Luck', 'Motivation', 'Fitness', 'Level']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
+                       "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
+
     enemy = determine_enemy(character['Level'])
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
