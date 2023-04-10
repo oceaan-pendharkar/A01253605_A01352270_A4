@@ -23,6 +23,11 @@ def mid_boss_event(character, boss):
     :raises KeyError: if character does not have key 'Frustration'
     :raises KeyErrr: if boss does not have keys 'Intelligence' and 'Speed'
     """
+    if type(character) is not dict or type(boss) is not dict:
+        raise TypeError("Character and Enemy must be dictionaries!")
+    if 'Frustration' not in character or not all(key in character for key in ['Intelligence', 'Speed']):
+        raise KeyError("Character must have 'Frustration' key! Enemy must have 'Intelligence' and 'Speed' keys!")
+
     print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
           "realization dawns upon you.\nYou still have to unit test everything... The thought of the endless unit tests"
           "makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
