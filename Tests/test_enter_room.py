@@ -7,14 +7,25 @@ from board import enter_room
 
 class Test(TestCase):
     # test second condition: 'have to fight'
-
-    @patch('random.randint', return_value=2)
-    @patch('random.randint', side_effect=[2, 2])
-    @patch('builtins.input', side_effect=[2])
-    def test_enter_room(self, _, __, ___):
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[2, 2, 2, -2, 2, 2, 0, 2, 0, 2, 2])  # all the calls to random.randint()
+    @patch('builtins.input', side_effect=[2])  # input for guessing game
+    def test_fight_correct(self, _, __, mock_output):
         character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
                      "Frustration": 10, "Max Frustration": 80, "Name": "Oceaan", "Fitness": 0}
         enter_room(character)
+        self.assertEqual(mock_output.getvalue(), "You're in McDonald's. There is a 1/2 chance you will have to fight if"
+                                                 " you enter one of the listed numbers.\nYou KNEW this would happen! "
+                                                 "You have to fight.\nYou can see a donut on display by the front "
+                                                 "counter. The glaze on top of the donut glistens in the light, "
+                                                 "tempting you towards its sweetness.\nYou have higher speed and "
+                                                 "attack first\nOceaan landed a critical hit!\nYou frustrated Donut by "
+                                                 "15.0 points\nYou won the battle!\nYou've gained 2 fitness points from"
+                                                 " defeating Donut\nYou are now leaving McDonald's.\nHere's what your "
+                                                 "points and stats look like:\n{'Luck': 20, 'Intelligence': 10, "
+                                                 "'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
+                                                 "'Frustration': 0, 'Max Frustration': 80, 'Name': 'Oceaan', "
+                                                 "'Fitness': 2}\n")
 
     # test first condition: 'get assigned ANOTHER assignment', guessing correct value
     @patch('sys.stdout', new_callable=io.StringIO)
