@@ -334,14 +334,15 @@ def calculate_fitness(character, enemy):
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and enemy must be dictionaries!")
-    if not all(key in character for key in ['Fitness', 'Level']):
-        raise KeyError("Character must have keys 'Fitness' and 'Level'!")
-    if 'Exp' not in enemy:
-        raise KeyError("Enemy must have key 'Exp'!")
+    if not all(key in character for key in ['Fitness', 'Level']) or 'Exp' not in enemy:
+        raise KeyError("Character must have keys 'Fitness' and 'Level'! Enemy must have key 'Exp'!")
 
-    print("You won the battle!")
-    character["Fitness"] += enemy["Exp"]
-    print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
+    def add_fitness():
+        print("You won the battle!")
+        character["Fitness"] += enemy["Exp"]
+        print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
+
+    add_fitness()
     if character["Fitness"] >= 15 and character["Level"] < 2:
         character["Level"] = 2
         print("Congratulations! You have reached level 2!")
