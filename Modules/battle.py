@@ -173,38 +173,14 @@ def deal_damage(character_is_faster, character, enemy):
     :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                   and 'Luck'
     """
-
-    def check_errors(character_is_faster, character, enemy):
-        """
-        Check parameters if they fit preconditions and raise errors if they do not.
-
-        :param character_is_faster: a boolean telling if the character is faster than the enemy or not
-        :param character: a dictionary showing the character's stats
-        :param enemy: a dictionary showing the enemy's stats
-        :precondition: character_is_faster must be a boolean
-        :precondition: character must be a dictionary
-        :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
-        :precondition: enemy must be a dictionary
-        :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
-        :postcondition: raise errors if any of the preconditions are not met
-        :raises TypeError: if character_is_faster is not a boolean
-        :raises TypeError: if character is not a dictionary
-        :raises TypeError: if enemy is not a dictionary
-        :raises KeyError: if character does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
-                      and 'Luck'
-        :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
-                      and 'Luck'
-        """
-        if type(character_is_faster) is not bool:
-            raise TypeError("character_is_faster needs to be a boolean!")
-        if type(character) is not dict or type(enemy) is not dict:
-            raise TypeError("Character and enemy need to be dictionaries!")
-        if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
-            raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'")
-        if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
-            raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
-
-    check_errors(character_is_faster, character, enemy)
+    if type(character_is_faster) is not bool or type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("character_is_faster needs to be a boolean! Character and enemy need to be dictionaries!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']) or \
+            not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'"
+                       "! Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
+    if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+        raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
 
     def calculate_critical(luck):
         """
