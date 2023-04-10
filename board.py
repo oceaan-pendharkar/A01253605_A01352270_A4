@@ -96,7 +96,7 @@ def enter_room(character: dict) -> None:
 
         guess = guessing_game(chance)
 
-        if guess:
+        if guess[0]:
             print(f"You KNEW this would happen! You {event}.")
             if event == 'get assigned ANOTHER assignment':
                 complete_assignment()
@@ -107,7 +107,7 @@ def enter_room(character: dict) -> None:
             elif event == 'lose self-control':
                 character["Self-Control"] -= 2
         else:
-            print(f"The number was {number}.\nYou did not {event}. As you were...")
+            print(f"The number was {guess[1]}.\nYou did not {event}. As you were...")
 
     def raise_value_errors() -> None:
         """
