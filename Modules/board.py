@@ -1,3 +1,7 @@
+"""
+Oceaan Pendharkar A01253605
+Martin Su A01352270
+"""
 import random
 import Modules.battle
 LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
@@ -101,7 +105,7 @@ def enter_room(character: dict) -> None:
             elif event == 'have to fight':
                 Modules.battle.battle_sequence(character)
             elif event == 'gain motivation':
-                character["Motivation"] += 10
+                character["Motivation"] += 2
             elif event == 'lose self-control':
                 character["Self-Control"] -= 2
         else:
