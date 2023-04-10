@@ -434,6 +434,21 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
     :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                   and 'Luck'
     """
+    if type(character_is_faster) is not bool:
+        raise TypeError("character_is_faster needs to be a boolean!")
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy need to be dictionaries!")
+    if type(enemy_frustration) is not int or type(enemy_frustration) is not float:
+        raise TypeError("enemy_frustration needs to be a number!")
+    if enemy_frustration <= 0:
+        raise ValueError("enemy_frustration needs to be positive!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Max Frustration',
+                                            'Luck']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', "
+                       "'Max Frustration', and 'Luck'")
+    if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+        raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
+
     while character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
         if character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
