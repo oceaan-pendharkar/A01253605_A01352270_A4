@@ -1,6 +1,6 @@
 """
 Oceaan Pendharkar A01253605
-Martin Su A01352270
+Martin Siu A01352270
 """
 import random
 import Modules.battle
