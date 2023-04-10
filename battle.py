@@ -167,6 +167,8 @@ def deal_damage(character_is_faster, character, enemy):
         :return: the validated damage as an int
         :raise TypeError: if damage is not an int or a float
         """
+        if type(damage) is not int and type(damage) is not float:
+            raise TypeError("Damage needs to be a number!")
         if damage <= 0:
             damage = 1
             return damage
