@@ -28,3 +28,12 @@ class Test(TestCase):
         check_goal(character, ((0, 5), (0, 5)))
         self.assertEqual(mock_output.getvalue(), "")
 
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_ready_response(self, mock_output):
+        character = {"column": 4, "row": 4, "Fitness": 30, "Name": "person"}
+        check_goal(character, ((0, 5), (0, 5)))
+        self.assertEqual(mock_output.getvalue(), "Nice job, person. You've reached the final square and you're ready to"
+                                                 " defeat the final boss!!!\n")
+
+
+
