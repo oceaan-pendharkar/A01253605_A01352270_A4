@@ -51,7 +51,7 @@ def boss_lose(character, enemy):
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if boss is not a dictionary
     :raises KeyError: if character does not have key 'Name'
-    :raises KeyErrr: if boss does not have keys 'Name'
+    :raises KeyError: if boss does not have keys 'Name'
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and Enemy must be dictionaries!")
@@ -64,6 +64,21 @@ def boss_lose(character, enemy):
 
 
 def boss_win(character, enemy):
+    """
+    Print a congratulatory message to the user after beating the boss.
+
+    :param character: a dictionary
+    :param enemy: another dictionary
+    :precondition: character must be a dictionary
+    :precondition: character must have key named 'Name'
+    :precondition: boss must be a dictionary
+    :precondition: boss must have keys named 'Name'
+    :postcondition: print a message to user congratulating their win
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if boss is not a dictionary
+    :raises KeyError: if character does not have key 'Name'
+    :raises KeyError: if boss does not have keys 'Name'
+    """
     print(f"Congratulations {character['Name']}! You've beaten {enemy['Name']} and have completed the game! Hopefully "
           f"your instructor will give you a good mark for it? Please?")
 
