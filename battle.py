@@ -155,11 +155,23 @@ def deal_damage(character_is_faster, character, enemy):
             return False
 
     def validate_damage(damage):
+        """
+        Validate the damage dealt.
+
+        Ensures that the damage dealt is not negative or zero.
+
+        :param damage: a number
+        :precondition: damage must be a number, either an int or a float
+        :postcondition: check if damage is less than or equal to zero and returns damage of 1 if it is
+        :postcondition: return damage unchanged if it is greater than zero
+        :return: the validated damage as an int
+        :raise TypeError: if damage is not an int or a float
+        """
         if damage <= 0:
             damage = 1
             return damage
         else:
-            return damage
+            return round(damage)
 
     def calculate_damage(attacker, defender):
         """
