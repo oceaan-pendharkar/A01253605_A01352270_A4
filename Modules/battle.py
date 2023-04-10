@@ -1,3 +1,7 @@
+"""
+Oceaan Pendharkar A01253605
+Martin Siu A01352270
+"""
 import random
 import copy
 import Modules.character
@@ -211,7 +215,7 @@ def deal_damage(character_is_faster, character, enemy):
             raise TypeError("Luck needs to be an integer!")
         base_crit_chance = 5
         random_number = random.randint(1, 100)
-        critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
+        critical = base_crit_chance + luck_roll(luck, 0, 0, 0.5)
         if random_number <= critical:
             return True
         else:
@@ -328,6 +332,7 @@ def calculate_fitness(character, enemy):
     if 'Exp' not in enemy:
         raise KeyError("Enemy must have key 'Exp'!")
 
+    print("You won the battle!")
     character["Fitness"] += enemy["Exp"]
     print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
     if character["Fitness"] >= 15 and character["Level"] < 2:
@@ -359,16 +364,45 @@ def battle_loss(character, enemy):
     :raises KeyError: if character does not have key 'Motivation'
     :raises KeyError: if enemy does not have key 'Name'
     """
-    print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.")
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy must be dictionaries!")
+    if 'Motivation' not in character:
+        raise KeyError("Character must have key 'Motivation'!")
+    if 'Name' not in enemy:
+        raise KeyError("Enemy must have key 'Name'!")
+    print(f"You gave in to the temptation of {enemy['Name']}! You lost 2 motivation.")
     character["Motivation"] -= 2
 
 
-def battle_win(character, enemy):
-    print("You won the battle!")
-    calculate_fitness(character, enemy)
-
-
 def check_result(character, enemy, lose_function, win_function):
+    """
+    Check if the character won the battle or not.
+
+    :param character: a dictionary
+    :param enemy: another dictionary
+    :param lose_function: a function to execute when the character wins the battle
+    :param win_function: a function to execute when the character loses the battle
+    :precondition: character must be a dictionary
+    :precondition: character must have keys named 'Motivation', 'Fitness', 'Name', and 'Level'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have a keys named 'Name' and 'Exp'
+    :postcondition: execute lose_function if the character lost the battle and win_function if they won
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises TypeError: if lose_function is not a function
+    :raises TypeError: if win_function is not a function
+    :raises KeyError: if character does not have keys 'Motivation', 'Fitness', 'Name', and 'Level'
+    :raises KeyError: if enemy does not have keys 'Name' and 'Exp'
+    """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy must be dictionaries!")
+    if not callable(win_function) and not callable(lose_function):
+        raise TypeError("win_function and lose_function need to be functions!")
+    if not all(key in character for key in ['Motivation', 'Fitness', 'Name', 'Level']):
+        raise KeyError("Character must have keys 'Motivation', 'Fitness', 'Name', and 'Level'!")
+    if not all(key in enemy for key in ['Name', 'Exp']):
+        raise KeyError("Enemy must have keys 'Name' and 'Exp'!")
+
     if character['Frustration'] >= character["Max Frustration"]:
         lose_function(character, enemy)
     else:
@@ -376,6 +410,49 @@ def check_result(character, enemy, lose_function, win_function):
 
 
 def battle(character_is_faster, character, enemy, enemy_frustration):
+    """
+    Deal damage to character and enemy.
+
+    Deals damage to the slower person and then deals damage to the faster person if slower is still alive.
+
+    :param character_is_faster: a boolean telling if the character is faster than the enemy or not
+    :param character: a dictionary showing the character's stats
+    :param enemy: a dictionary showing the enemy's stats
+    :param enemy_frustration: a number
+    :precondition: character_is_faster must be a boolean
+    :precondition: character must be a dictionary
+    :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                   'Max Frustration' and 'Luck'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
+    :precondition: enemy_frustration must be either an int or a float that is positive
+    :postcondition: deal damage to slower person and then deals damage to faster person if slower is still alive.
+    :postcondition: repeats until either character or enemy have max frustration
+    :raises TypeError: if character_is_faster is not a boolean
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises TypeError: if enemy_frustration is not an int or a float
+    :raises ValueError: if enemy_frustration is not positive
+    :raises KeyError: if character does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration' and 'Luck'
+    :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  and 'Luck'
+    """
+    if type(character_is_faster) is not bool:
+        raise TypeError("character_is_faster needs to be a boolean!")
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy need to be dictionaries!")
+    if type(enemy_frustration) is not int and type(enemy_frustration) is not float:
+        raise TypeError("enemy_frustration needs to be a number!")
+    if enemy_frustration <= 0:
+        raise ValueError("enemy_frustration needs to be positive!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Max Frustration',
+                                            'Luck']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', "
+                       "'Max Frustration', and 'Luck'")
+    if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+        raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
+
     while character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
         if character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
@@ -383,11 +460,30 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 
 
 def battle_sequence(character):
+    """
+    Drive the battle sequence.
+
+    :param character: a dictionary describing the character's stats
+    :precondition: character must be a dictionary
+    :precondition: character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    :postcondition: drive the battle sequence between a character and the enemy
+    :raises TypeError: if character is not a dictionary
+    :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    """
+    if type(character) is not dict:
+        raise TypeError("Character needs to be a dictionary!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control',
+                                            'Max Frustration', 'Luck', 'Motivation', 'Fitness', 'Level']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
+                       "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
+
     enemy = determine_enemy(character['Level'])
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max Frustration"])
-    check_result(character, enemy, battle_loss, battle_win)
+    check_result(character, enemy, battle_loss, calculate_fitness)
 
 
 def main():
@@ -395,7 +491,7 @@ def main():
     Drive the program.
     """
     character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
-                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 10}
+                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 100}
     battle_sequence(character)
 
 
