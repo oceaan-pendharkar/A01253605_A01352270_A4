@@ -8,8 +8,10 @@ def populate_custom_points(character: dict, points: int) -> None:
     :param character: a dictionary of attributes as strings for keys and integers for values
     :param points: a positive integer
     :precondition: character must be a dictionary
-    :precondition: character's attributes must have values of zero to start
+    :precondition: character's attributes must have integer values
     :postcondition: adds points to the character's attributes
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if points is not an integer
     """
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
@@ -17,7 +19,8 @@ def populate_custom_points(character: dict, points: int) -> None:
     while points > 0:
         key = next(key_generator)
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
-        character[key] += point_increase
+        if type(character[key]) == int:
+            character[key] += point_increase
         points -= point_increase
         if points == 0:
             print("You've used all your points!")
