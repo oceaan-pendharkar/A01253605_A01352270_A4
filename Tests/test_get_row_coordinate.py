@@ -28,3 +28,8 @@ class Test(TestCase):
         character = {"row": 24, "column": 3}
         with self.assertRaises(ValueError):
             get_row_coordinate(character, 'N')
+
+    def test_raises_row_key(self):
+        character = {"column": 0}
+        with self.assertRaises(KeyError):
+            get_row_coordinate(character, 's')
