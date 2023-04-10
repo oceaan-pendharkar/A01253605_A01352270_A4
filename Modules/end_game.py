@@ -27,7 +27,7 @@ def boss_win(character, enemy):
 
 def boss_fight(character):
     boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
-            "Self-Control": 15, "Luck": 0}
+            "Self-Control": 15, "Luck": 0, 'Exp': 0}
     character_is_faster = Modules.battle.check_first(character, boss)
     Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
     if character["Frustration"] < character["Max Frustration"]:
@@ -49,8 +49,8 @@ def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 0, "Max Frustration": 500, 'Intelligence': 100,
-                 'Speed': 85, "Self-Control": 5, 'Luck': 45, "row": 85, "column": 85}
+    character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, "Max Frustration": 500, 'Intelligence': 100,
+                 'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30, 'Luck': 45, "row": 85, "column": 85}
     endgame(character, True)
 
 
