@@ -17,7 +17,7 @@ def mid_boss_event(character, boss):
     :precondition: character must have key named 'Frustration'
     :precondition: boss must be a dictionary
     :precondition: boss must have keys named 'Intelligence' and 'Speed'
-    :postcondition: mulitplies the 'Intelligence' and 'Speed' stats of the boos by 110% and increases frustration by 10
+    :postcondition: mulitplies the 'Intelligence' and 'Speed' stats of the boss by 110% and increases frustration by 10
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if boss is not a dictionary
     :raises KeyError: if character does not have key 'Frustration'
@@ -38,6 +38,21 @@ def mid_boss_event(character, boss):
 
 
 def boss_lose(character, enemy):
+    """
+    Print a message for character upon losing to boss.
+
+    :param character: a dictionary
+    :param enemy: another dictionary
+    :precondition: character must be a dictionary
+    :precondition: character must have key named 'Name'
+    :precondition: boss must be a dictionary
+    :precondition: boss must have keys named 'Name'
+    :postcondition: print a message to user consoling them for their loss
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if boss is not a dictionary
+    :raises KeyError: if character does not have key 'Name'
+    :raises KeyErrr: if boss does not have keys 'Name'
+    """
     print(f"{enemy['Name']} has frustrated you so much, that you just gave up. Sorry you didn't win "
           f"{character['Name']}. You decided that life is too short to be working all the time, and you need "
           f"to enjoy life.")
