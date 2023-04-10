@@ -201,4 +201,4 @@ class Test(TestCase):
     def test_raise_type(self, _, __, ___):
         with self.assertRaises(TypeError):
             enter_room({"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1,
-                        "Speed": 10, "Frustration": '10', "Max Frustration": 80, 'Name': 'Oceaan', 'Fitness': 0})
+                        "Speed": 10, "Max Frustration": '80', 'Name': 'Oceaan', 'Fitness': 0})
