@@ -269,6 +269,9 @@ def keep_checking_move(board: tuple, character: dict) -> str:
             print(f"Your move must stay within the bounds of the board!")
             return False
 
+    if type(board) != tuple or type(character) != dict:
+        raise TypeError
+
     choice_is_valid = False
     direction = None
     while not choice_is_valid:
