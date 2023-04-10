@@ -211,7 +211,11 @@ def keep_checking_move(board: tuple, character: dict) -> str:
     """
     Ensure the user enters an appropriate direction, and that the direction is a valid move.
 
-    :precondition: the user must be on the board
+    :param board: a tuple of sub-tuples of size 2 of the board's boundaries
+    :param character: a dictionary
+    :precondition: board must be a tuple of sub-tuples of size 2
+    :precondition: character must be a dict
+    :precondition: character must be on the board
     :postcondition: validates the move in the chosen direction
     :postcondition: ensures that the move is only 'n', 's', 'e', or 'w'
     :return: the direction of the valid move, as a string 'n', 's', 'e', or 'w'
