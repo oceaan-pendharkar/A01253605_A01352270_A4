@@ -22,7 +22,7 @@ class Test(TestCase):
                                                  "You've used all your points!\n")
 
     @patch('sys.stdout', new_callable=io.StringIO)
-    @patch('builtins.input', side_effect=[0, 1, 1, 1, 2, 2, 2, 1])
+    @patch('builtins.input', side_effect=[1, 1, 1, 2, 2, 2, 1])
     def test_cycle(self, _, mock_output):
         character = {"Motivation": 2, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5,
                      "Speed": 5,
@@ -38,6 +38,19 @@ class Test(TestCase):
                          "You have 1 points left to distribute between your attributes.\n"
                          "You've used all your points!\n"
                          "You have 0 points left to distribute between your attributes.\n")
+        self.assertEqual(character, {'Fitness': 5,
+                                     'Intelligence': 7,
+                                     'Level': 1,
+                                     'Luck': 7,
+                                     'Max Frustration': 61,
+                                     'Motivation': 4,
+                                     'Name': 'Name',
+                                     'Self-Control': 6,
+                                     'Speed': 7,
+                                     'alive': True,
+                                     'column': 0,
+                                     'goal achieved': False,
+                                     'row': 0})
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=[0, 10])
