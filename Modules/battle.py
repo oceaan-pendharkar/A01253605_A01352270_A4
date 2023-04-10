@@ -359,7 +359,7 @@ def battle_loss(character, enemy):
     :raises KeyError: if character does not have key 'Motivation'
     :raises KeyError: if enemy does not have key 'Name'
     """
-    print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.")
+    print(f"You gave in to the temptation of {enemy['Name']}! You lost 2 motivation.")
     character["Motivation"] -= 2
 
 
