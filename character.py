@@ -113,13 +113,23 @@ def check_goal(character: dict) -> None:
 
     :param character: a dictionary
     :precondition: character must be a dictionary
+    :precondition: character must contain the keys "column", "row", "Fitness", and "Name", as strings
+    :precondition: values for keys "column", "row", "Fitness", and "Name" in character must be integers
     :postcondition: displays the character's progress towards their goal if their fitness level is 30 or higher or
                     if they've found the final square
     :postcondition: updates "goal achieved" attribute of character if Fitness >= 30 and coordinates = (9, 9)
     :raises TypeError: if character is not a dictionary
+    :raises ValueError: if character does not contain the keys "column", "row", "Fitness", or "Name"
+    :raises TypeError: if character's values at "column", "row", "Fitness", and "Name" are not integers
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_goal!")
+    for key in ["column", "row", "Fitness", "Name"]:
+        if key not in character.keys():
+            raise ValueError("Character does not contain all necessary keys to check_goal!")
+    for key in ["column", "row", "Fitness", "Name"]:
+        if type(character[key]) != int:
+            raise TypeError("Character's column, name, Fitness, and row must all have integer values!")
 
     character_coordinates = (character["row"], character["column"])
 
@@ -146,11 +156,13 @@ def check_vitals(character: dict) -> None:
     :return: True if character is still in the game, else False
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if character values at specified keys are not integers
+    :raises ValueError: if character does not contain specified keys
     """
+    keys = ["Name", "row", "column", "Fitness", "Motivation"]
     if type(character) != dict:
         raise TypeError("Character must be a dictionary!")
 
-    keys_with_int_values = ["row", "column", "Fitness", "Motivation"]
+    keys_with_int_values = keys[1:]
     for key in keys_with_int_values:
         if type(character[key]) != int:
             raise TypeError("One or more of the specified keys do not have integer values!")
