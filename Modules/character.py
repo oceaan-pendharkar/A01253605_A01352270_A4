@@ -31,7 +31,7 @@ def populate_custom_points(character: dict, points: int) -> None:
             points -= point_increase
 
         if points == 0:
-            print("You've used all your points!")
+            print(f"You've used all your points!")
 
         elif points < 0:
             print(f"Woah there, that was more points than we said!! \nSince you cheated, that's all the points you "
