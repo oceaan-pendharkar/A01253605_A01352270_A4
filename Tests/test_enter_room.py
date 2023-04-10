@@ -49,20 +49,70 @@ class Test(TestCase):
                                                  "what your points and stats look like:\n{'Luck': 20, 'Intelligence': "
                                                  "10, 'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
                                                  "'Frustration': 10, 'Max Frustration': 80}\n")
+        self.assertEqual(character["Motivation"], 10)
+        self.assertEqual(character["Luck"], 20)
 
-        # test third condition: 'lose self-control', guessing correct value
-        @patch('sys.stdout', new_callable=io.StringIO)
-        @patch('random.randint', side_effect=[0, 2])
-        @patch('builtins.input', side_effect=[1])
-        def test_assignment_incorrect(self, _, __, mock_output):
-            character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
-                         "Frustration": 10, "Max Frustration": 80}
-            enter_room(character)
-            self.assertEqual(mock_output.getvalue(),
-                             "You're in Some BCIT Classroom. There is a 1/3 chance you will get "
-                             "assigned ANOTHER assignment if you enter one of the listed numbers."
-                             "\nThe number was 2.\nYou did not get assigned ANOTHER assignment. "
-                             "As you were...\nYou are now leaving Some BCIT Classroom.\nHere's "
-                             "what your points and stats look like:\n{'Luck': 20, 'Intelligence': "
-                             "10, 'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
-                             "'Frustration': 10, 'Max Frustration': 80}\n")
+    # test third condition: 'lose self-control', guessing correct value
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[6, 2])
+    @patch('builtins.input', side_effect=[2])
+    def test_self_control_correct(self, _, __, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Pacific Centre. There is a 1/3 chance you will lose self-control if you enter one "
+                         "of the listed numbers.\nYou KNEW this would happen! You lose self-control.\nYou are now "
+                         "leaving Pacific Centre.\nHere's what your points and stats look like:\n{'Luck': 20, "
+                         "'Intelligence': 10, 'Motivation': 10, 'Self-Control': 8, 'Level': 1, 'Speed': 10, "
+                         "'Frustration': 10, 'Max Frustration': 80}\n")
+        self.assertEqual(character["Self-Control"], 8)
+
+    # test third condition: 'lose self-control', guessing incorrect value
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[7, 2])
+    @patch('builtins.input', side_effect=[3])
+    def test_self_control_incorrect(self, _, __, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Levels Nightclub. There is a 1/3 chance you will lose self-control if you enter "
+                         "one of the listed numbers.\nThe number was 2.\nYou did not lose self-control. As you "
+                         "were...\nYou are now leaving Levels Nightclub.\nHere's what your points and stats look "
+                         "like:\n{'Luck': 20, 'Intelligence': 10, 'Motivation': 10, 'Self-Control': 10, 'Level': 1, "
+                         "'Speed': 10, 'Frustration': 10, 'Max Frustration': 80}\n")
+        self.assertEqual(character["Self-Control"], 10)
+
+    # test fourth condition: 'lose self-control', guessing incorrect value
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[4, 2])
+    @patch('builtins.input', side_effect=[3])
+    def test_motivation_incorrect(self, _, __, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Granville Station. There is a 1/3 chance you will gain motivation if you enter "
+                         "one of the listed numbers.\nThe number was 2.\nYou did not gain motivation. As you "
+                         "were...\nYou are now leaving Granville Station.\nHere's what your points and stats look "
+                         "like:\n{'Luck': 20, 'Intelligence': 10, 'Motivation': 10, 'Self-Control': 10, 'Level': 1, "
+                         "'Speed': 10, 'Frustration': 10, 'Max Frustration': 80}\n")
+        self.assertEqual(character["Motivation"], 10)
+
+    # test fourth condition: 'lose self-control', guessing correct value
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[5, 2])
+    @patch('builtins.input', side_effect=[2])
+    def test_motivation_incorrect(self, _, __, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Waterfront Station. There is a 1/3 chance you will gain motivation if you enter "
+                         "one of the listed numbers.\nYou KNEW this would happen! You gain motivation.\nYou are now "
+                         "leaving Waterfront Station.\nHere's what your points and stats look like:\n{"
+                         "'Luck': 20, 'Intelligence': 10, 'Motivation': 20, 'Self-Control': 10, 'Level': 1, "
+                         "'Speed': 10, 'Frustration': 10, 'Max Frustration': 80}\n")
+        self.assertEqual(character["Motivation"], 20)
+
