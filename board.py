@@ -116,7 +116,8 @@ def enter_room(character: dict) -> None:
         :raises ValueError: if character keys do not include the right keys as strings
         :raises TypeError: if certain of the character's key values are not integers
         """
-        needed_keys = ["Intelligence", "Luck", "Motivation", "Self-Control", "Level"]
+        needed_keys = ["Intelligence", "Luck", "Motivation", "Self-Control", "Level", "Speed", "Frustration",
+                                                                                               "Max Frustration"]
         for key in needed_keys:
             if key not in character.keys():
                 raise ValueError("Your character is missing one or more essential attributes!")
