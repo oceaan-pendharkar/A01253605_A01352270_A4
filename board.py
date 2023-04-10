@@ -112,6 +112,7 @@ def enter_room(character: dict) -> None:
         """
         Raise errors if a character does not contain certain keys, or if the corresponding values are not integers.
 
+        :postcondition: determines whether errors need to be raised based on the keys and valyes in a character
         :raises ValueError: if character keys do not include the right keys as strings
         :raises TypeError: if certain of the character's key values are not integers
         """
