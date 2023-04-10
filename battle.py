@@ -133,6 +133,19 @@ def check_first(character, enemy):
 
 def deal_damage(character_is_faster, character, enemy):
     def calculate_critical(luck):
+        """
+        Calculate if the attacker will land a critical.
+
+        :param luck: an integer
+        :precondition: luck must be an integer
+        :postcondition: calculate if the attacker will land a critical attack based on a base critical chance and a
+                        luck roll
+        :postcondition: returns True if the attacker lands a critical hit and False if the attacker does not
+        :return: True if the attacker lands a critical hit and False if they do not
+        :raises TypeError: if luck is not an integer
+        """
+        if type(luck) is not int:
+            raise TypeError("Luck needs to be an integer!")
         base_crit_chance = 5
         random_number = random.randint(1, 100)
         critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
