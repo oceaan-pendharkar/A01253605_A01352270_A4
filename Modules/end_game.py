@@ -101,6 +101,13 @@ def boss_fight(character):
     :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                       'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
     """
+    if type(character) is not dict:
+        raise TypeError("Character needs to be a dictionary!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control',
+                                            'Max Frustration', 'Luck', 'Motivation', 'Fitness', 'Level']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
+                       "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
+
     boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
             "Self-Control": 15, "Luck": 0, 'Exp': 0}
     character_is_faster = Modules.battle.check_first(character, boss)
