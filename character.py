@@ -122,6 +122,14 @@ def check_goal(character: dict) -> None:
     :raises ValueError: if character does not contain the keys "column", "row", "Fitness", or "Name"
     :raises TypeError: if character's values at "column", "row", "Fitness" are not integers
     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
+    >>> check_goal(my_player)
+
+    >>> my_player = {"row": 9, "column": 9, "Motivation": 2, "Fitness": 30, "Name": "Player"}
+    >>> check_goal(my_player)
+    Nice job, Player. You've reached the final square and you're ready to defeat the final boss!!!
+    >>> my_player = {"row": 9, "column": 9, "Motivation": 2, "Fitness": 20, "Name": "Buzz"}
+    >>> check_goal(my_player)
+    Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_goal!")
