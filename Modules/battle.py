@@ -345,15 +345,15 @@ def battle_loss(character, enemy):
     :precondition: character must have a key named 'Motivation'
     :precondition: enemy must be a dictionary
     :precondition: enemy must have a key named 'Name'
-    :postcondition: decrease player motivation by 20
-    :postcondition: prints message to player informing them they lost 20 motivation
+    :postcondition: decrease player motivation by 2
+    :postcondition: prints message to player informing them they lost 2 motivation
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if enemy is not a dictionary
     :raises KeyError: if character does not have key 'Motivation'
     :raises KeyError: if enemy does not have key 'Name'
     """
     print(f"You gave in to the temptation of {enemy['Name']}! You lost 20 motivation.")
-    character["Motivation"] -= 20
+    character["Motivation"] -= 2
 
 
 def battle_win(character, enemy):
