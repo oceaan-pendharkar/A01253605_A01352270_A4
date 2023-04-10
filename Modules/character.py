@@ -22,7 +22,7 @@ def populate_custom_points(character: dict, points: int) -> None:
         raise TypeError("Character must be a dict! Points must be an int!")
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
-                                                                                    "goal achieved"]])
+                                                                                    "goal achieved", "Frustration"]])
     while points > 0:
         key = next(key_generator)
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
@@ -82,7 +82,7 @@ def create_character() -> dict:
     """
     character = {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
                  "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
-                 "alive": True, "goal achieved": False}
+                 "alive": True, "goal achieved": False, "Frustration": 0}
     choice = None
     while choice != 'y' and choice != 'n':
         choice = input(f"Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
