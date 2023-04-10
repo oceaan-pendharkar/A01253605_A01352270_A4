@@ -47,6 +47,8 @@ def enter_room(character: dict) -> None:
     :postcondition: the player interacts with the room in a game
     :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
+    :raises ValueError: if character keys do not include Intelligence, Luck, Motivation, and Self-Control as strings
+    :raises ValueError: if the character's Intelligence, Luck, Motivation, and Self-Control values are not integers
     """
 
     def generate_room() -> str:
@@ -106,6 +108,23 @@ def enter_room(character: dict) -> None:
                 character["Self-Control"] -= 2
         else:
             print(f"The number was {number}.\nYou did not {event}. As you were...")
+
+    def raise_value_errors() -> None:
+        """
+        Raise ValueError if a character does not contain certain keys, or if the corresponding values are not integers.
+
+        :raises ValueError: if character keys do not include the right keys as strings
+        :raises ValueError: if certain of the character's key values are not integers
+        """
+        needed_keys = ["Intelligence", "Luck", "Motivation", "Self-Control", "Level"]
+        for key in needed_keys:
+            if key not in character.keys():
+                raise ValueError("Your character is missing one or more essential attributes!")
+        for key in needed_keys:
+            if type(character[key]) != int:
+                raise ValueError("Your attribute values in your character must be integers!")
+
+    raise_value_errors()
 
     room = generate_room()
 
