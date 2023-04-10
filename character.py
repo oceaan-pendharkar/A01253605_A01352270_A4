@@ -13,6 +13,8 @@ def populate_custom_points(character: dict, points: int) -> None:
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if points is not an integer
     """
+    if type(character) != dict or type(points) != int:
+        raise TypeError("Character must be a dict! Points must be an int!")
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
                                                                                     "goal achieved"]])
