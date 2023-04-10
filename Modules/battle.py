@@ -91,12 +91,17 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
     :param luck_multiplier: a number, default is 0
     :precondition: luck must be an integer
     :precondition: lower must be an integer
-    :precondition: upper must be an integer
+    :precondition: upper must be an integer greater than lower
     :precondition: luck_multiplier must a number, either a float or an int
     :precondition: if no argument is passed for luck_multiplier, default value is 0
     :postcondition: generates and returns a number that is randomly between lower and upper inclusive and
                     adds a luck multiplier to the number
     :return: the random number as an int
+    :raises TypeError: if luck is not an integer
+    :raises TypeError: if lower is not an integer
+    :raises TypeError: if upper is not an integer
+    :raises TypeError: if luck_multiplier is not an integer or a float
+    :raises ValueError: if upper is not greater than lower
     """
     if type(luck) is not int:
         raise TypeError("Luck stat needs to be an integer!")
