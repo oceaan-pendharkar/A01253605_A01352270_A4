@@ -107,6 +107,10 @@ def check_alive(character: dict) -> None:
     >>> check_alive(my_guy)
     >>> my_guy
     {'Motivation': 0, 'alive': False}
+    >>> my_guy = {"Motivation": 50, "alive": True}
+    >>> check_alive(my_guy)
+    >>> my_guy
+    {'Motivation': 50, 'alive': True}
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
