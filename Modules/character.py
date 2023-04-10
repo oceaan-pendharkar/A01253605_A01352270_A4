@@ -70,7 +70,7 @@ def make_preset_character(character: dict) -> None:
         elif selection == 'j':
             character["Speed"] += 10
         else:
-            print("You must enter 'n', 'l', 'g', or 'j'. Try again...")
+            print(f"You must enter 'n', 'l', 'g', or 'j'. Try again...")
 
 
 def create_character() -> dict:
@@ -85,7 +85,7 @@ def create_character() -> dict:
                  "alive": True, "goal achieved": False}
     choice = None
     while choice != 'y' and choice != 'n':
-        choice = input("Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
+        choice = input(f"Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
         if choice == 'y':
             print(f"Alright! Here are your base stats:\n{character}\nYou have ***10 points*** to distribute between "
                   "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you "
@@ -98,7 +98,7 @@ def create_character() -> dict:
         elif choice == 'n':
             make_preset_character(character)
         else:
-            print("You entered something other than 'y' or 'n'. Try again...")
+            print(f"You entered something other than 'y' or 'n'. Try again...")
     return character
 
 
@@ -225,7 +225,7 @@ def check_vitals(character: dict, board: tuple) -> None:
         check_goal(character, board)
     else:
         character["alive"] = False
-        print("Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
+        print(f"Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
 
 
 def main():
