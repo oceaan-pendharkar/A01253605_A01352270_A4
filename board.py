@@ -80,7 +80,7 @@ def enter_room(character: dict) -> None:
 
     def event_happens(description: str, chance: int, event: str) -> None:
         """
-        Generate a room for a player to interact with in a game.
+        Generate the event in a room for a player to interact with in a game.
 
         :param description: the description of the room, as a string
         :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
