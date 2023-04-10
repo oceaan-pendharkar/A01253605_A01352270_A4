@@ -154,6 +154,13 @@ def deal_damage(character_is_faster, character, enemy):
     :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
     :postcondition: deal damage to the enemy if character is faster, otherwise deal damage to the character
     :postcondition: print the amount of damage character took, or the amount of damage character dealt
+    :raises TypeError: if character_is_faster is not a boolean
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises KeyError: if character does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  and 'Luck'
+    :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  and 'Luck'
     """
 
     def check_errors(character_is_faster, character, enemy):
