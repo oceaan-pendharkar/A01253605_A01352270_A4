@@ -414,12 +414,25 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
     :param character_is_faster: a boolean telling if the character is faster than the enemy or not
     :param character: a dictionary showing the character's stats
     :param enemy: a dictionary showing the enemy's stats
+    :param enemy_frustration: a number
     :precondition: character_is_faster must be a boolean
     :precondition: character must be a dictionary
-    :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
+    :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                   'Max Frustration' and 'Luck'
     :precondition: enemy must be a dictionary
     :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
-    :return:
+    :precondition: enemy_frustration must be either an int or a float that is positive
+    :postcondition: deal damage to slower person and then deals damage to faster person if slower is still alive.
+    :postcondition: repeats until either character or enemy have max frustration
+    :raises TypeError: if character_is_faster is not a boolean
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises TypeError: if enemy_frustration is not an int or a float
+    :raises ValueError: if enemy_frustration is not positive
+    :raises KeyError: if character does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration' and 'Luck'
+    :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  and 'Luck'
     """
     while character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
