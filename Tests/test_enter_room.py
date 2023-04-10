@@ -38,7 +38,7 @@ class Test(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', side_effect=[3, 2])
     @patch('builtins.input', side_effect=[1])
-    def test_assignment_incorrect(self, _, __,mock_output):
+    def test_assignment_incorrect(self, _, __, mock_output):
         character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
                      "Frustration": 10, "Max Frustration": 80}
         enter_room(character)
@@ -116,3 +116,17 @@ class Test(TestCase):
                          "'Speed': 10, 'Frustration': 10, 'Max Frustration': 80}\n")
         self.assertEqual(character["Motivation"], 20)
 
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[5, 2])
+    @patch('builtins.input', side_effect=[2])
+    def test_raise_value(self, _, __, ___):
+        with self.assertRaises(ValueError):
+            enter_room({"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10})
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[5, 2])
+    @patch('builtins.input', side_effect=[2])
+    def test_raise_type(self, _, __, ___):
+        with self.assertRaises(TypeError):
+            enter_room({"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1,
+                        "Speed": 10, "Frustration": '10', "Max Frustration": 80})
