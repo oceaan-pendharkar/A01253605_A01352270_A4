@@ -157,7 +157,7 @@ def check_goal(character: dict, board: tuple) -> None:
             raise ValueError("Character does not contain all necessary keys to check_goal!")
     for key in ["column", "row", "Fitness"]:
         if type(character[key]) != int:
-            raise TypeError("Character's column, name, Fitness, and row must all have integer values!")
+            raise TypeError("Character's column, Fitness, and row must all have integer values!")
 
     if character["Fitness"] >= 30 and (character["row"] + 1, character["column"] + 1) == (board[0][1], board[1][1]):
         print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
