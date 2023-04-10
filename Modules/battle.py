@@ -307,7 +307,7 @@ def level_up(character):
     if type(character) is not dict:
         raise TypeError("Character must be a dictionary!")
     if not all(key in character for key in ['Frustration', 'Intelligence', 'Self-Control', 'Luck', 'Motivation',
-                                        'Max Frustration']):
+                                            'Max Frustration']):
         raise KeyError("Character must have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', "
                        "'Motivation', and 'Max Frustration'")
     points = 10
