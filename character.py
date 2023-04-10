@@ -103,8 +103,10 @@ def check_alive(character: dict) -> None:
     :raises TypeError: if character is not a dictionary
     :raises ValueError: if character does not contain the keys "Motivation" or "alive"
     :raises TypeError: if character["Motivation"] is not an integer
-    >>> my_guy = {"Motivation": 0}
-    my_
+    >>> my_guy = {"Motivation": 0, "alive": True}
+    >>> check_alive(my_guy)
+    >>> my_guy
+    {'Motivation': 0, 'alive': False}
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
@@ -113,7 +115,7 @@ def check_alive(character: dict) -> None:
     if type(character["Motivation"]) != int:
         raise TypeError("character['Motivation'] must be an integer!")
 
-    if character["Motivation"] < 0:
+    if character["Motivation"] <= 0:
         character["alive"] = False
 
 
