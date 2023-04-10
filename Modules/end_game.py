@@ -38,13 +38,14 @@ def mid_boss_event(character, boss):
 
 
 def boss_lose(character, enemy):
-    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You decided that life is too short to "
-          f"be working all the time, and you need to enjoy life.")
+    print(f"{enemy['Name']} has frustrated you so much, that you just gave up. Sorry you didn't win "
+          f"{character['Name']}. You decided that life is too short to be working all the time, and you need "
+          f"to enjoy life.")
 
 
 def boss_win(character, enemy):
-    print(f"Congratulations! You've beaten {enemy['Name']} and have completed the game! Hopefully your instructor will"
-          f" give you a good mark for it? Please?")
+    print(f"Congratulations {character['Name']}! You've beaten {enemy['Name']} and have completed the game! Hopefully "
+          f"your instructor will give you a good mark for it? Please?")
 
 
 def boss_fight(character):
