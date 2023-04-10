@@ -35,5 +35,18 @@ class Test(TestCase):
         self.assertEqual(mock_output.getvalue(), "Nice job, person. You've reached the final square and you're ready to"
                                                  " defeat the final boss!!!\n")
 
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_last_square_response(self, mock_output):
+        character = {"column": 4, "row": 4, "Fitness": 20, "Name": "person"}
+        check_goal(character, ((0, 5), (0, 5)))
+        self.assertEqual(mock_output.getvalue(),
+                         "Hey there, person, you've found the final square, but you aren't ready"
+                         " to defeat the boss yet! Keep trucking...\n")
 
-
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_fitness_good_response(self, mock_output):
+        character = {"column": 4, "row": 2, "Fitness": 30, "Name": "person"}
+        check_goal(character, ((0, 5), (0, 5)))
+        self.assertEqual(mock_output.getvalue(), "Alright, person. You've got enough fitness points to defeat the "
+                                                 "final boss! Make your way to the final square for the final battle..."
+                                                 "\n")
