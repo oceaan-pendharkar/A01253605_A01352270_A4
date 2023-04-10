@@ -209,7 +209,7 @@ def get_column_coordinate(character: dict, move: str) -> int:
 
 def keep_checking_move(board: tuple, character: dict) -> str:
     """
-    Make sure the user enters an appropriate direction, and that the direction is a valid move.
+    Ensure the user enters an appropriate direction, and that the direction is a valid move.
 
     :precondition: the user must be on the board
     :postcondition: validates the move in the chosen direction
