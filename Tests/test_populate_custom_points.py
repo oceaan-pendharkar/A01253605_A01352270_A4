@@ -23,18 +23,18 @@ class Test(TestCase):
                          "You have 0 points left to distribute between your attributes.\n")
 
         self.assertEqual(character, {'Fitness': 5,
-                                      'Intelligence': 7,
-                                      'Level': 1,
-                                      'Luck': 7,
-                                      'Max Frustration': 62,
-                                      'Motivation': 12,
-                                      'Name': 'Name',
-                                      'Self-Control': 7,
-                                      'Speed': 5,
-                                      'alive': True,
-                                      'column': 0,
-                                      'goal achieved': False,
-                                      'row': 0})
+                                     'Intelligence': 7,
+                                     'Level': 1,
+                                     'Luck': 7,
+                                     'Max Frustration': 62,
+                                     'Motivation': 12,
+                                     'Name': 'Name',
+                                     'Self-Control': 7,
+                                     'Speed': 5,
+                                     'alive': True,
+                                     'column': 0,
+                                     'goal achieved': False,
+                                     'row': 0})
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=[1, 1, 1, 2, 2, 2, 1])
