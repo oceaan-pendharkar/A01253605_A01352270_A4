@@ -55,6 +55,7 @@ def enter_room(character: dict) -> None:
         """
         Pseudo-randomly select a room for a player to enter, in a game.
 
+        :precondition: LOCATIONS must exist as a non-empty tuple of strings
         :precondition: the character must be in the game
         :postcondition: the room is selected for the player
         :return: the name of the room, as a string
