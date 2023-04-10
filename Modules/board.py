@@ -105,7 +105,7 @@ def enter_room(character: dict) -> None:
             elif event == 'have to fight':
                 Modules.battle.battle_sequence(character)
             elif event == 'gain motivation':
-                character["Motivation"] += 10
+                character["Motivation"] += 2
             elif event == 'lose self-control':
                 character["Self-Control"] -= 2
         else:
