@@ -31,4 +31,3 @@ class Test(TestCase):
     def test_raises_type_val_motivation(self):
         with self.assertRaises(TypeError):
             check_alive({"Motivation": '0', "alive": True})
-
