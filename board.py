@@ -12,7 +12,7 @@ def guessing_game(upper_bound: int) -> tuple:
 
     :param upper_bound: an integer greater than 1
     :precondition: upper_bound must be an integer greater than 1
-    :postcondition: a random number is generated
+    :postcondition: a pseudo-random number is generated
     :postcondition: the user inputs a number within the specified range
     :postcondition: determines whether the user's number was the same as the random number generated
     :return: True if the user guessed the generated number, else False as, and the random number, as a tuple of size 2
