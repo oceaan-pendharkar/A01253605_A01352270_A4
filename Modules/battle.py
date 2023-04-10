@@ -211,7 +211,7 @@ def deal_damage(character_is_faster, character, enemy):
             raise TypeError("Luck needs to be an integer!")
         base_crit_chance = 5
         random_number = random.randint(1, 100)
-        critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
+        critical = base_crit_chance + luck_roll(luck, 0, 0, 0.5)
         if random_number <= critical:
             return True
         else:
@@ -383,7 +383,7 @@ def battle_sequence(character):
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max Frustration"])
-    check_result(character, enemy, battle_loss, battle_win)
+    check_result(character, enemy, battle_loss, calculate_fitness)
 
 
 def main():
@@ -391,7 +391,7 @@ def main():
     Drive the program.
     """
     character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
-                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 10}
+                 "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 100}
     battle_sequence(character)
 
 
