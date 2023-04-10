@@ -20,6 +20,7 @@ def populate_custom_points(character: dict, points: int) -> None:
                                                                                     "goal achieved"]])
     while points > 0:
         key = next(key_generator)
+        print(f"You have {points} points left to distribute between your attributes.")
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
         if type(character[key]) == int:
             character[key] += point_increase
@@ -34,7 +35,6 @@ def populate_custom_points(character: dict, points: int) -> None:
                   "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...")
             character[key] -= point_increase
 
-        print(f"You have {points} points left to distribute between your attributes.")
 
 
 def make_preset_character(character: dict) -> None:
