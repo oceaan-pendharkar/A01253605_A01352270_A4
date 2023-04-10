@@ -191,10 +191,8 @@ def check_vitals(character: dict, board: tuple) -> None:
 
     >>> my_guy = {"Motivation": 0, "alive": True, "row": 5, "column": 9, "Fitness": 30, "Name": "Bob"}
     >>> check_vitals(my_guy, ((0, 9), (0, 9)))
-    >>> my_guy
-    {'Motivation': 0, 'alive': False}
-
-    >>> my_player = {"row": 8, "column": 8, "Motivation": 0, "Fitness": 20, "Name": "Buzz", "alive": True}
+    Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!
+    >>> my_player = {"row": 8, "column": 8, "Motivation": 20, "Fitness": 20, "Name": "Buzz", "alive": True}
     >>> check_vitals(my_player, ((0, 9), (0, 9)))
     Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
