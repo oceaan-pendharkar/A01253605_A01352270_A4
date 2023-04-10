@@ -21,6 +21,13 @@ class Test(TestCase):
         self.assertEqual(guessing_game(2), (False, 2))
         self.assertEqual(mock_output.getvalue(), "")
 
+    @patch('random.randint', return_value=1)
+    @patch('builtins.input', side_effect=[1])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_true_lower_bound(self, mock_output, _, __):
+        self.assertEqual(guessing_game(2), (True, 1))
+        self.assertEqual(mock_output.getvalue(), "")
+
     @patch('random.randint', return_value=3)
     @patch('builtins.input', side_effect=['nice', 2])
     @patch('sys.stdout', new_callable=io.StringIO)
