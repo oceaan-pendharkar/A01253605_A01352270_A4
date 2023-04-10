@@ -179,8 +179,6 @@ def deal_damage(character_is_faster, character, enemy):
             not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
         raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'"
                        "! Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
-    if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
-        raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
 
     def calculate_critical(luck):
         """
