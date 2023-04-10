@@ -7,8 +7,8 @@ def determine_enemy(character):
     """
     Select enemy from list of enemies.
 
-    :postcondition: randomly selects and returns an enemy from a dictionary of preset enemy dictionaries
-    :return: the randomly selected enemy dictionary
+    :postcondition: randomly selects and returns a copy of enemy from a dictionary of preset enemy dictionaries
+    :return: a copy of the randomly selected enemy dictionary
     """
     enemies = {1: {'Name': 'Chicken Sandwich', 'Description': 'On the table lies a delicious chicken sandwich. The '
                                                               'crisp, juicy, and tender chicken strips lie between 2 '
