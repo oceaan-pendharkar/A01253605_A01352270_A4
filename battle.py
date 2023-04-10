@@ -131,17 +131,16 @@ def check_first(character, enemy):
         return False
 
 
-def calculate_critical(luck):
-    base_crit_chance = 5
-    random_number = random.randint(1, 100)
-    critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
-    if random_number <= critical:
-        return True
-    else:
-        return False
-
-
 def deal_damage(character_is_faster, character, enemy):
+    def calculate_critical(luck):
+        base_crit_chance = 5
+        random_number = random.randint(1, 100)
+        critical = base_crit_chance + luck_roll(luck, 0, 0, 0.3)
+        if random_number <= critical:
+            return True
+        else:
+            return False
+
     def calculate_damage(attacker, defender):
         attacker_critical = calculate_critical(attacker["Luck"])
         if attacker_critical:
