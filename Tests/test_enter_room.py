@@ -47,6 +47,44 @@ class Test(TestCase):
         self.assertEqual(character["Fitness"], 0)
         self.assertEqual(character["Frustration"], 10)
 
+    # test second condition: 'have to fight' - room 8
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[8, 2])  # all the calls to random.randint()
+    @patch('builtins.input', side_effect=[1])  # input for guessing game
+    def test_fight_incorrect_room8(self, _, __, mock_output):
+        character = {"Luck": 10, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80, "Name": "Oceaan", "Fitness": 0}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Nemesis Coffee. There is a 1/2 chance you will have to fight "
+                         "if you enter one of the listed numbers.\nThe number was 2.\nYou did "
+                         "not have to fight. As you were...\nYou are now leaving "
+                         "Nemesis Coffee.\nHere's what your points and stats look like:\n{"
+                         "'Luck': 10, 'Intelligence': 10, 'Motivation': 10, 'Self-Control': 10,"
+                         " 'Level': 1, 'Speed': 10, 'Frustration': 10, 'Max Frustration': 80, "
+                         "'Name': 'Oceaan', 'Fitness': 0}\n")
+        self.assertEqual(character["Fitness"], 0)
+        self.assertEqual(character["Frustration"], 10)
+
+    # test second condition: 'have to fight' - room 8
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[9, 2])  # all the calls to random.randint()
+    @patch('builtins.input', side_effect=[1])  # input for guessing game
+    def test_fight_incorrect_room9(self, _, __, mock_output):
+        character = {"Luck": 10, "Intelligence": 5, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80, "Name": "Oceaan", "Fitness": 0}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(),
+                         "You're in Kita No Donburi. There is a 1/2 chance you will have to fight "
+                         "if you enter one of the listed numbers.\nThe number was 2.\nYou did "
+                         "not have to fight. As you were...\nYou are now leaving "
+                         "Kita No Donburi.\nHere's what your points and stats look like:\n{"
+                         "'Luck': 10, 'Intelligence': 5, 'Motivation': 10, 'Self-Control': 10,"
+                         " 'Level': 1, 'Speed': 10, 'Frustration': 10, 'Max Frustration': 80, "
+                         "'Name': 'Oceaan', 'Fitness': 0}\n")
+        self.assertEqual(character["Fitness"], 0)
+        self.assertEqual(character["Frustration"], 10)
+
     # test first condition: 'get assigned ANOTHER assignment', guessing correct value
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', side_effect=[0, 2])
