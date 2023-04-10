@@ -390,6 +390,15 @@ def check_result(character, enemy, lose_function, win_function):
     :raises KeyError: if character does not have keys 'Motivation', 'Fitness', 'Name', and 'Level'
     :raises KeyError: if enemy does not have keys 'Name' and 'Exp'
     """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and enemy must be dictionaries!")
+    if not callable(win_function) and not callable(lose_function):
+        raise TypeError("win_function and lose_function need to be functions!")
+    if not all(key in character for key in ['Motivation', 'Fitness', 'Name', 'Level']):
+        raise KeyError("Character must have keys 'Motivation', 'Fitness', 'Name', and 'Level'!")
+    if not all(key in enemy for key in ['Name', 'Exp']):
+        raise KeyError("Enemy must have keys 'Name' and 'Exp'!")
+
     if character['Frustration'] >= character["Max Frustration"]:
         lose_function(character, enemy)
     else:
