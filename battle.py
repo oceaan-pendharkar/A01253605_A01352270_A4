@@ -98,6 +98,23 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
 
 
 def check_first(character, enemy):
+    """
+    Check if the character is faster or enemy is faster.
+
+    :param character: a dictionary describing the character's stats
+    :param enemy: a dictionary describing the enemy's stats
+    :precondition: character must be a dictionary
+    :precondition: character must have at least 2 keys named 'Speed' and 'Luck'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have at least 2 keys named 'Speed' and 'Name'
+    :postcondition: compare speed of character and enemy and return True if character is faster and False if enemy is
+    :postcondition: print a statement informing user who goes first depending on if character is faster or not
+    :return: True if character is faster and False if enemy is faster
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises KeyError: if 'Speed' key or 'Luck' key is not in character
+    :raises KeyError: if 'Speed' key or 'Name' key is not in enemy
+    """
     character_speed = character['Speed'] + luck_roll(character['Luck'], -2, 2, 0.3)
     enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
     if character_speed >= enemy_speed:
