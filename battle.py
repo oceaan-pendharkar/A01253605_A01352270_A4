@@ -286,6 +286,12 @@ def level_up(character):
     :raises KeyError: if character does not have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck',
                       'Motivation', and 'Max Frustration'
     """
+    if type(character) is not dict:
+        raise TypeError("Character must be a dictionary!")
+    if not all(key in enemy for key in ['Frustration', 'Intelligence', 'Self-Control', 'Luck', 'Motivation',
+                                        'Max Frustration']):
+        raise KeyError("Character must have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', "
+                       "'Motivation', and 'Max Frustration'")
     points = 10
     print(f"You have {points} to allocate to your stats. Possible stats to increase are Motivation, Max Frustration,"
           "Self-Control, Intelligence, Luck, and Speed. Please allocate your points. ")
