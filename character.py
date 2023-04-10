@@ -200,6 +200,10 @@ def check_vitals(character: dict, board: tuple) -> None:
     if type(character) != dict or type(board) != tuple:
         raise TypeError("Character must be a dictionary! Board must be a tuple!")
 
+    for key in keys:
+        if key not in character.keys():
+            raise ValueError('Character must contain keys "Name", "row", "column", "Fitness", "Motivation", "alive"!')
+
     keys_with_int_values = keys[2:]
     for key in keys_with_int_values:
         if type(character[key]) != int:
