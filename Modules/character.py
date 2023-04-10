@@ -228,8 +228,6 @@ def main():
     """
     Drive the program.
     """
-    me = create_character()
-    print(me)
 
 
 if __name__ == "__main__":
