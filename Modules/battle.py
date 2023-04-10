@@ -374,7 +374,8 @@ def check_result(character, enemy, lose_function, win_function):
     :param lose_function: a function to execute when the character wins the battle
     :param win_function: a function to execute when the character loses the battle
     :precondition: character must be a dictionary
-    :precondition: character must have keys named 'Motivation', 'Fitness', 'Name', and 'Level'
+    :precondition: character must have keys named 'Frustration', 'Max Frustration', 'Motivation', 'Fitness',
+                   'Name', and 'Level'
     :precondition: enemy must be a dictionary
     :precondition: enemy must have a keys named 'Name' and 'Exp'
     :postcondition: execute lose_function if the character lost the battle and win_function if they won
@@ -389,8 +390,10 @@ def check_result(character, enemy, lose_function, win_function):
         raise TypeError("Character and enemy must be dictionaries!")
     if not callable(win_function) or not callable(lose_function):
         raise TypeError("win_function and lose_function need to be functions!")
-    if not all(key in character for key in ['Motivation', 'Fitness', 'Name', 'Level']):
-        raise KeyError("Character must have keys 'Motivation', 'Fitness', 'Name', and 'Level'!")
+    if not all(key in character for key in ['Frustration', 'Max Frustration', 'Motivation', 'Fitness', 'Name',
+                                            'Level']):
+        raise KeyError("Character must have keys 'Frustration', 'Max Frustration', 'Motivation', 'Fitness', "
+                       "'Name', and 'Level'!")
     if not all(key in enemy for key in ['Name', 'Exp']):
         raise KeyError("Enemy must have keys 'Name' and 'Exp'!")
 
