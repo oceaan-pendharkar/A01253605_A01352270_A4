@@ -277,7 +277,7 @@ def level_up(character):
     Give the user points to allocate to stats.
 
     :param character: must be a dictionary
-    :precondition: character must be a dictonary
+    :precondition: character must be a dictionary
     :precondition: character must have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', 'Motivation',
                    and 'Max Frustration'
     :postcondition: Assigns 10 points between 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', 'Motivation',
@@ -288,7 +288,7 @@ def level_up(character):
     """
     if type(character) is not dict:
         raise TypeError("Character must be a dictionary!")
-    if not all(key in enemy for key in ['Frustration', 'Intelligence', 'Self-Control', 'Luck', 'Motivation',
+    if not all(key in character for key in ['Frustration', 'Intelligence', 'Self-Control', 'Luck', 'Motivation',
                                         'Max Frustration']):
         raise KeyError("Character must have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', "
                        "'Motivation', and 'Max Frustration'")
@@ -299,6 +299,21 @@ def level_up(character):
 
 
 def calculate_fitness(character, enemy):
+    """
+    Assign fitness points to character and determine if character leveled up.
+
+    :param character: must be a dictionary
+    :param enemy: must be another dictionary
+    :precondition: character must be a dictionary
+    :precondition: enemy must be a dictionary
+    :precondition: character must have keys named 'Fitness' and 'Level'
+    :precondition: enemy must have key named 'Exp'
+    :postcondition: Assign fitness points to character and determine if character leveled up
+    :raises TypeError: if character is not a dictionary
+    :raises TyperError: if enemy is not a dictionary
+    :raises KeyError: if character does not have keys named 'Fitness' and 'Level'
+    :raises KeyError: if enemy does not have key named 'Exp'
+    """
     character["Fitness"] += enemy["Exp"]
     print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
     if character["Fitness"] >= 15 and character["Level"] < 2:
