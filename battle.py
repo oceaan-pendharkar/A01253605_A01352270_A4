@@ -14,6 +14,11 @@ def determine_enemy(level):
     :raises TypeError: if level is not an integer
     :raises ValueError: if level is not positive
     """
+    if type(level) is not int:
+        raise TypeError("Level must be an integer!")
+    if level <= 0:
+        raise ValueError("Level must be a positive integer!")
+
     enemies = {1: {'Name': 'Chicken Sandwich', 'Description': 'On the table lies a delicious chicken sandwich. The '
                                                               'crisp, juicy, and tender chicken strips lie between 2 '
                                                               'slices of freshly baked bread. You can feel the '
