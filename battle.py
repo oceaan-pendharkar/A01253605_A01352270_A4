@@ -132,6 +132,27 @@ def check_first(character, enemy):
 
 
 def deal_damage(character_is_faster, character, enemy):
+    """
+    Deal damage to the character or the enemy.
+
+    :param character_is_faster: a boolean telling if the character is faster than the enemy or not
+    :param character: a dictionary showing the character's stats
+    :param enemy: a dictionary showing the enemy's stats
+    :precondition: character_is_faster must be a boolean
+    :precondition: character must be a dictionary
+    :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
+    :postcondition: deal damage to the enemy if character is faster, otherwise deal damage to the character
+    :postcondition: print the amount of damage character took, or the amount of damage character dealt
+    :raises TypeError: if character_is_faster is not a boolean
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if enemy is not a dictionary
+    :raises KeyError: if character does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      and 'Luck'
+    :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      and 'Luck'
+    """
     def calculate_critical(luck):
         """
         Calculate if the attacker will land a critical.
