@@ -41,9 +41,9 @@ def enter_room(character: dict) -> None:
     Create a scenario for a player to engage with when they've entered a room in a game.
 
     :param character: the character, as a dictionary
-    :precondition: description must be a string
     :precondition: character must be a dictionary
-    :precondition: character's keys must include Intelligence, Luck, Motivation, and Self-Control as strings
+    :precondition: character's keys must include "Intelligence", "Luck", "Motivation", "Self-Control", "Level", "Speed",
+                    "Frustration", "Max Frustration", "Fitness", "Fitness", "Name" as strings
     :postcondition: the player interacts with the room in a game
     :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
