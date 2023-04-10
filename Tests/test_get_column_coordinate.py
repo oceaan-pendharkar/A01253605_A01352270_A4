@@ -29,3 +29,12 @@ class Test(TestCase):
         with self.assertRaises(ValueError):
             get_column_coordinate(character, 'E')
 
+    def test_type_character(self):
+        character = []
+        with self.assertRaises(TypeError):
+            get_column_coordinate(character, 'e')
+
+    def test_type_move(self):
+        character = {}
+        with self.assertRaises(TypeError):
+            get_column_coordinate(character, 2)
