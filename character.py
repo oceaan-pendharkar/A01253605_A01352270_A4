@@ -26,13 +26,11 @@ def populate_custom_points(character: dict, points: int) -> None:
         points -= point_increase
         if points == 0:
             print("You've used all your points!")
-            break
         elif points < 0:
             print(f"Woah there, that was more than {points} points!! \nSince you cheated, that's all the points you "
                   "get for now. \nAnd you can forget about getting points for the category you just over-filled. "
                   "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...")
             character[key] -= point_increase
-            break
         print(f"You have {points} points left to distribute between your attributes.")
 
 
