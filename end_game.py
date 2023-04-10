@@ -11,11 +11,6 @@ def mid_boss_event(character, boss):
     character["Frustration"] += 10
 
 
-def go_for_a_walk(character):
-    character["row"] += battle.luck_roll(0, -2, 2)
-    character["column"] += battle.luck_roll(0, -2, 2)
-
-
 def boss_lose(character, enemy):
     print(f"{enemy['Name']} has frustrated you so much, that you just gave up. You decided that life is too short to "
           f"be working all the time, and you need to enjoy life.")
