@@ -1,6 +1,5 @@
 import random
-from battle import battle_sequence
-
+import Modules.battle
 LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Granville Station', 'Waterfront Station', 'Pacific Centre',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
@@ -100,7 +99,7 @@ def enter_room(character: dict) -> None:
             if event == 'get assigned ANOTHER assignment':
                 complete_assignment()
             elif event == 'have to fight':
-                battle_sequence(character)
+                Modules.battle.battle_sequence(character)
             elif event == 'gain motivation':
                 character["Motivation"] += 10
             elif event == 'lose self-control':
