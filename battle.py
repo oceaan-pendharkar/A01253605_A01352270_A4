@@ -158,7 +158,7 @@ def deal_damage(character_is_faster, character, enemy):
         :precondition: character must be a dictionary
         :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
         :precondition: enemy must be a dictionary
-        :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
+        :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
         :postcondition: raise errors if any of the preconditions are not met
         :raises TypeError: if character_is_faster is not a boolean
         :raises TypeError: if character is not a dictionary
@@ -168,7 +168,14 @@ def deal_damage(character_is_faster, character, enemy):
         :raises KeyError: if enemy does not have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                       and 'Luck'
         """
-
+        if type(character_is_faster) is not bool:
+            raise TypeError("character_is_faster needs to be a boolean!")
+        if type(character) is not dict or type(enemy) is not dict:
+            raise TypeError("Character and enemy need to be dictionaries!")
+        if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+            raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'")
+        if not all(key in enemy for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control', 'Luck']):
+            raise KeyError("Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
 
     check_errors(character_is_faster, character, enemy)
 
@@ -314,7 +321,7 @@ def main():
     """
     Drive the program.
     """
-    character = {'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
+    character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, 'Intelligence': 10, 'Speed': 3, 'Luck': 5,
                  "Self-Control": 4, "Level": 1, "Fitness": 14, "Max Frustration": 10}
     battle_sequence(character)
 
