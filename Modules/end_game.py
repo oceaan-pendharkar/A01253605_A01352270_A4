@@ -5,7 +5,7 @@ Martin Siu A01352270
 import Modules.battle
 
 
-def mid_boss_event(character, boss):
+def mid_boss_event(character: dict, boss: dict) -> None:
     """
     Generate an event for when the boss HP is less than half.
 
@@ -37,7 +37,7 @@ def mid_boss_event(character, boss):
     character["Frustration"] += 10
 
 
-def boss_lose(character, enemy):
+def boss_lose(character: dict, enemy: dict) -> None:
     """
     Print a message for character upon losing to boss.
 
@@ -63,7 +63,7 @@ def boss_lose(character, enemy):
           f"to enjoy life.")
 
 
-def boss_win(character, enemy):
+def boss_win(character: dict, enemy: dict) -> None:
     """
     Print a congratulatory message to the user after beating the boss.
 
@@ -88,7 +88,7 @@ def boss_win(character, enemy):
           f"your instructor will give you a good mark for it? Please?")
 
 
-def boss_fight(character):
+def boss_fight(character: dict) -> None:
     """
     Drive the boss fight sequence
 
@@ -118,7 +118,7 @@ def boss_fight(character):
     Modules.battle.check_result(character, boss, boss_lose, boss_win)
 
 
-def endgame(character, alive):
+def endgame(character: dict, alive: bool) -> None:
     """
     Determine if player is dead or can fight the boss.
 
