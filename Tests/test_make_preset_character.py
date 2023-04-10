@@ -72,3 +72,7 @@ class Test(TestCase):
                           "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
                           "alive": True, "goal achieved": False})
         self.assertEqual(mock_output.getvalue(), "You must enter 'n', 'l', 'g', or 'j'. Try again...\n")
+
+    def test_type_error(self):
+        with self.assertRaises(TypeError):
+            make_preset_character([])
