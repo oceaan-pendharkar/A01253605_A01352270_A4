@@ -33,7 +33,7 @@ def mid_boss_event(character: dict, boss: dict) -> None:
           " makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
           "increased and your frustration increases by 50.")
     boss["Intelligence"] = round(boss["Intelligence"] * 1.1)
-    boss["Speed"] *= round(boss["Speed"] * 1.1)
+    boss["Speed"] = round(boss["Speed"] * 1.1)
     character["Frustration"] += 10
 
 
