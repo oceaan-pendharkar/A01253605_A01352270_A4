@@ -58,3 +58,11 @@ class Test(TestCase):
         self.assertEqual(keep_checking_move(((0, 5), (0, 5)), {"row": 2, "column": 1}), 's')
         self.assertEqual(mock_output.getvalue(), "Direction must be 'n', 's', 'e', or 'w'!\nDirection must be 'n', "
                                                  "'s', 'e', or 'w'!\nDirection must be 'n', 's', 'e', or 'w'!\n")
+
+    def test_type_character(self):
+        with self.assertRaises(TypeError):
+            keep_checking_move(((0, 2), (0, 2)), ['Character'])
+
+    def test_type_board(self):
+        with self.assertRaises(TypeError):
+            keep_checking_move([(0, 2), (0, 2)], {'Character': "Me"})
