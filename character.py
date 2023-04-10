@@ -159,16 +159,14 @@ def check_goal(character: dict, board: tuple) -> None:
         if type(character[key]) != int:
             raise TypeError("Character's column, name, Fitness, and row must all have integer values!")
 
-    character_coordinates = (character["row"], character["column"])
-
-    if character["Fitness"] >= 30 and character_coordinates == (board[0][1], board[1][1]):
+    if character["Fitness"] >= 30 and (character["row"], character["column"]) == (board[0][1], board[1][1]):
         print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
               f"boss!!!")
         character["goal achieved"] = True
-    elif character["Fitness"] >= 30 and character_coordinates != (board[0][1], board[1][1]):
+    elif character["Fitness"] >= 30 and (character["row"], character["column"]) != (board[0][1], board[1][1]):
         print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
               f"way to the final square for the final battle...")
-    elif character["Fitness"] < 30 and character_coordinates == (board[0][1], board[1][1]):
+    elif character["Fitness"] < 30 and (character["row"], character["column"]) == (board[0][1], board[1][1]):
         print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
               f"boss yet! Keep trucking...")
 
