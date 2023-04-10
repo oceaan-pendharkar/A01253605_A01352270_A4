@@ -120,14 +120,15 @@ def check_goal(character: dict) -> None:
     :postcondition: updates "goal achieved" attribute of character if Fitness >= 30 and coordinates = (9, 9)
     :raises TypeError: if character is not a dictionary
     :raises ValueError: if character does not contain the keys "column", "row", "Fitness", or "Name"
-    :raises TypeError: if character's values at "column", "row", "Fitness", and "Name" are not integers
+    :raises TypeError: if character's values at "column", "row", "Fitness" are not integers
+    >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_goal!")
     for key in ["column", "row", "Fitness", "Name"]:
         if key not in character.keys():
             raise ValueError("Character does not contain all necessary keys to check_goal!")
-    for key in ["column", "row", "Fitness", "Name"]:
+    for key in ["column", "row", "Fitness"]:
         if type(character[key]) != int:
             raise TypeError("Character's column, name, Fitness, and row must all have integer values!")
 
