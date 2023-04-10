@@ -89,6 +89,18 @@ def boss_win(character, enemy):
 
 
 def boss_fight(character):
+    """
+    Drive the boss fight sequence
+
+    :param character: a dictionary
+    :precondition: character must be a dictionary
+    :precondition: character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    :postcondition: Drive the battle sequence between character and the boss
+    :raises TypeError: if character is not a dictionary
+    :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    """
     boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
             "Self-Control": 15, "Luck": 0, 'Exp': 0}
     character_is_faster = Modules.battle.check_first(character, boss)
