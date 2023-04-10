@@ -155,6 +155,21 @@ def deal_damage(character_is_faster, character, enemy):
             return False
 
     def calculate_damage(attacker, defender):
+        """
+        Calculate damage from the attacker to the defender.
+
+        :param attacker: a dictionary
+        :param defender: a dictionary
+        :precondition: character must be a dictionary with at least 3 keys called 'Name', 'Luck', and 'Intelligence'
+        :precondition: defender must be a dictionary with at least 1 key called 'Self-Control'
+        :postcondition: calculate the damage done by attacker to the defender
+        :postcondition: ensure the damage is not negative or zero by calling the validate_damage function
+        :return: the value of the validated damage as an int or a float
+        :raises TypeError: if attacker is not a dictionary
+        :raises TypeError: if defender is not a dictionary
+        :raises KeyError: if attacker does not have at least 3 keys called 'Name', 'Luck', and 'Intelligence'
+        :raises KeyError: if defender does not have at least 1 key called 'Self-Control'
+        """
         attacker_critical = calculate_critical(attacker["Luck"])
         if attacker_critical:
             attacker_damage = attacker["Intelligence"] * 1.5
