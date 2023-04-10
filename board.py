@@ -26,8 +26,9 @@ def guessing_game(upper_bound: int) -> bool:
             guess = int(input(f"Type an integer [1, {upper_bound}]: "))
         except ValueError:
             print(f"Looks like you entered something other than an integer [1, {upper_bound}]. Try again...")
-        if guess not in acceptable_numbers:
-            print(f"Looks like you input a number outside the range [1, {upper_bound}]. Try again...")
+        else:
+            if guess not in acceptable_numbers:
+                print(f"Looks like you input a number outside the range [1, {upper_bound}]. Try again...")
 
     if number == guess:
         return True
