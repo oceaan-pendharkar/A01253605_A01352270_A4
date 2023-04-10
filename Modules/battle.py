@@ -7,7 +7,7 @@ import copy
 import Modules.character
 
 
-def determine_enemy(level):
+def determine_enemy(level: int) -> dict:
     """
     Select enemy from list of enemies.
 
@@ -79,7 +79,7 @@ def determine_enemy(level):
     return enemy
 
 
-def luck_roll(luck, lower, upper, luck_multiplier=0):
+def luck_roll(luck: int, lower: int, upper: int, luck_multiplier=0) -> int:
     """
     Determine the number of a roll with luck modifiers.
 
@@ -117,7 +117,7 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
     return roll
 
 
-def check_first(character, enemy):
+def check_first(character: dict, enemy: dict) -> bool:
     """
     Check if the character is faster or enemy is faster.
 
@@ -151,7 +151,7 @@ def check_first(character, enemy):
         return False
 
 
-def deal_damage(character_is_faster, character, enemy):
+def deal_damage(character_is_faster: bool, character: dict, enemy: dict) -> None:
     """
     Deal damage to the character or the enemy.
 
@@ -180,7 +180,7 @@ def deal_damage(character_is_faster, character, enemy):
         raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'"
                        "! Enemy must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'!")
 
-    def calculate_critical(luck):
+    def calculate_critical(luck: int) -> bool:
         """
         Calculate if the attacker will land a critical.
 
@@ -202,7 +202,7 @@ def deal_damage(character_is_faster, character, enemy):
         else:
             return False
 
-    def validate_damage(damage):
+    def validate_damage(damage) -> int:
         """
         Validate the damage dealt.
 
@@ -223,7 +223,7 @@ def deal_damage(character_is_faster, character, enemy):
         else:
             return round(damage)
 
-    def calculate_damage(attacker, defender):
+    def calculate_damage(attacker: dict, defender: dict) -> int:
         """
         Calculate damage from the attacker to the defender.
 
@@ -233,7 +233,7 @@ def deal_damage(character_is_faster, character, enemy):
         :precondition: defender must be a dictionary with at least 1 key called 'Self-Control'
         :postcondition: calculate the damage done by attacker to the defender
         :postcondition: ensure the damage is not negative or zero by calling the validate_damage function
-        :return: the value of the validated damage as an int or a float
+        :return: the value of the validated damage as an int
         :raises TypeError: if attacker is not a dictionary
         :raises TypeError: if defender is not a dictionary
         :raises KeyError: if attacker does not have at least 3 keys called 'Name', 'Luck', and 'Intelligence'
@@ -264,7 +264,7 @@ def deal_damage(character_is_faster, character, enemy):
         print(f"{enemy['Name']} frustrated you by {enemy_damage} points")
 
 
-def level_up(character):
+def level_up(character: dict) -> None:
     """
     Give the user points to allocate to stats.
 
@@ -290,7 +290,7 @@ def level_up(character):
     Modules.character.populate_custom_points(character, points)
 
 
-def calculate_fitness(character, enemy):
+def calculate_fitness(character: dict, enemy: dict) -> None:
     """
     Assign fitness points to character and determine if character leveled up.
 
@@ -311,7 +311,7 @@ def calculate_fitness(character, enemy):
     if not all(key in character for key in ['Fitness', 'Level']) or 'Exp' not in enemy:
         raise KeyError("Character must have keys 'Fitness' and 'Level'! Enemy must have key 'Exp'!")
 
-    def add_fitness():
+    def add_fitness() -> None:
         """
         Add fitness points to character dictionary.
 
@@ -336,7 +336,7 @@ def calculate_fitness(character, enemy):
         pass
 
 
-def battle_loss(character, enemy):
+def battle_loss(character: dict, enemy: dict) -> None:
     """
     Decrease character motivation after battle loss.
 
@@ -363,7 +363,7 @@ def battle_loss(character, enemy):
     character["Motivation"] -= 2
 
 
-def check_result(character, enemy, lose_function, win_function):
+def check_result(character: dict, enemy: dict, lose_function, win_function) -> None:
     """
     Check if the character won the battle or not.
 
@@ -401,7 +401,7 @@ def check_result(character, enemy, lose_function, win_function):
         win_function(character, enemy)
 
 
-def battle(character_is_faster, character, enemy, enemy_frustration):
+def battle(character_is_faster: bool, character: dict, enemy: dict, enemy_frustration) -> None:
     """
     Deal damage to character and enemy.
 
@@ -450,7 +450,7 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
             deal_damage(not character_is_faster, character, enemy)
 
 
-def battle_sequence(character):
+def battle_sequence(character: dict) -> None:
     """
     Drive the battle sequence.
 
