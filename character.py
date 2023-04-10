@@ -37,7 +37,6 @@ def populate_custom_points(character: dict, points: int) -> None:
         print(f"You have {points} points left to distribute between your attributes.")
 
 
-
 def make_preset_character(character: dict) -> None:
     """
     Give 10 extra points to a character in one attribute, depending on the selection.
