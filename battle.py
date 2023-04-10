@@ -91,7 +91,7 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
         raise TypeError("Lower bound needs to be an integer!")
     if type(upper) is not int:
         raise TypeError("Upper bound needs to be an integer!")
-    if luck_multiplier is not float or luck_multiplier is not int:
+    if type(luck_multiplier) is not float and type(luck_multiplier) is not int:
         raise TypeError("Luck multiplier must be a number!")
     roll = round(random.randint(lower, upper) + luck * luck_multiplier)
     return roll
