@@ -75,16 +75,24 @@ def luck_roll(luck, lower, upper, luck_multiplier=0):
     :param luck: an integer
     :param lower: another integer
     :param upper: another integer
-    :param luck_multiplier: a float number, default is 0
+    :param luck_multiplier: a number, default is 0
     :precondition: luck must be an integer
     :precondition: lower must be an integer
     :precondition: upper must be an integer
-    :precondition: luck_multiplier must a float
+    :precondition: luck_multiplier must a number, either a float or an int
     :precondition: if no argument is passed for luck_multiplier, default value is 0
     :postcondition: generates and returns a number that is randomly between lower and upper inclusive and
                     adds a luck multiplier to the number
     :return: the random number as an int
     """
+    if type(luck) is not int:
+        raise TypeError("Luck stat needs to be an integer!")
+    if type(lower) is not int:
+        raise TypeError("Lower bound needs to be an integer!")
+    if type(upper) is not int:
+        raise TypeError("Upper bound needs to be an integer!")
+    if luck_multiplier is not float or luck_multiplier is not int:
+        raise TypeError("Luck multiplier must be a number!")
     roll = round(random.randint(lower, upper) + luck * luck_multiplier)
     return roll
 
