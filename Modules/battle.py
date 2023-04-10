@@ -456,6 +456,18 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 
 
 def battle_sequence(character):
+    """
+    Drive the battle sequence.
+
+    :param character: a dictionary describing the character's stats
+    :precondition: character must be a dictionary
+    :precondition: character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    :postcondition: drive the battle sequence between a character and the enemy
+    :raises TypeError: if character is not a dictionary
+    :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    """
     enemy = determine_enemy(character['Level'])
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
