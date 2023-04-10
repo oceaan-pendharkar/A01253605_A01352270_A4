@@ -97,11 +97,19 @@ def check_alive(character: dict) -> None:
 
     :param character: the character, as a dictionary
     :precondition: character must be a dictionary
+    :precondition: character must contain the key "Motivation" as a string
+    :precondition: the value of character["Motivation"] must be an integer
     :postcondition: updates character's "alive" attribute to False if their motivation has dropped to zero or below
     :raises TypeError: if character is not a dictionary
+    :raises ValueError: if character does not contain the key "Motivation"
+    :raises TypeError: if character["Motivation"] is not an integer
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
+    if "Motivation" not in character.keys():
+        raise ValueError("Character must have Motivation to check if they're alive!")
+    if type(character["Motivation"]) != int:
+        raise TypeError("character['Motivation'] must be an integer!")
 
     if character["Motivation"] < 0:
         character["alive"] = False
