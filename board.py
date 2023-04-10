@@ -88,8 +88,6 @@ def enter_room(character: dict) -> None:
         :precondition: description must be one of the strings in the global tuple LOCATIONS
         :precondition: chance must be an integer
         :precondition: event must be a string
-        :precondition: attribute must be a string that exists in the character's dictionary keys
-        :precondition: character must be a dictionary
         :postcondition: the player interacts with the room
         """
         print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
