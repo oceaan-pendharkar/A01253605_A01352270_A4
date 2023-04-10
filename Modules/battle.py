@@ -1,6 +1,6 @@
 import random
 import copy
-from character import populate_custom_points
+import Modules.character
 
 
 def determine_enemy(level):
@@ -295,7 +295,7 @@ def level_up(character):
     points = 10
     print(f"You have {points} to allocate to your stats. Possible stats to increase are Motivation, Max Frustration,"
           "Self-Control, Intelligence, Luck, and Speed. Please allocate your points. ")
-    populate_custom_points(character, points)
+    Modules.character.populate_custom_points(character, points)
 
 
 def calculate_fitness(character, enemy):
