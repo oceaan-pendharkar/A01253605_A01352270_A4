@@ -73,7 +73,7 @@ def create_character() -> dict:
     """
     Create a character.
 
-    :postcondition: creates a character, as a dictionary of attributes as keys and integer values
+    :postcondition: creates a character, as a dictionary of attributes as keys and values
     :return: the character, as a dictionary
     """
     character = {"Motivation": 10, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
