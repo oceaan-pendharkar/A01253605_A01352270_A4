@@ -20,7 +20,7 @@ class Test(TestCase):
                                                  "counter. The glaze on top of the donut glistens in the light, "
                                                  "tempting you towards its sweetness.\nYou have higher speed and "
                                                  "attack first\nOceaan landed a critical hit!\nYou frustrated Donut by "
-                                                 "15.0 points\nYou won the battle!\nYou've gained 2 fitness points from"
+                                                 "15 points\nYou won the battle!\nYou've gained 2 fitness points from"
                                                  " defeating Donut\nYou are now leaving McDonald's.\nHere's what your "
                                                  "points and stats look like:\n{'Luck': 20, 'Intelligence': 10, "
                                                  "'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
