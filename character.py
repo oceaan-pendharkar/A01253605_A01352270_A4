@@ -145,7 +145,7 @@ def check_goal(character: dict, board: tuple) -> None:
 
     >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 30, "Name": "Player"}
     >>> check_goal(my_player, ((0, 9), (0, 9)))
-    Nice job, Player. You've reached the final square and you're ready to defeat the final boss!!!
+    Nice job, Player. You've reached the final square, and you're ready to defeat the final boss!!!
     >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 20, "Name": "Buzz"}
     >>> check_goal(my_player, ((0, 9), (0, 9)))
     Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
