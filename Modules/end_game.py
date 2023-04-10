@@ -119,6 +119,22 @@ def boss_fight(character):
 
 
 def endgame(character, alive):
+    """
+    Determine if player is dead or can fight the boss.
+
+    :param character: a dictionary describing the players stats
+    :param alive: a boolean describing if the character is alive or not
+    :precondition: character must be a dictionary
+    :precondition: character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                  'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    :precondition: alive must be a boolean
+    :postcondition: determine if player is alive based on alive boolean and launches boss fight if they are
+    :postcondition: print a consolation message to the user if they are not alive
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if alive is not a boolean
+    :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
+                      'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
+    """
     print(alive)
     if alive:
         boss_fight(character)
