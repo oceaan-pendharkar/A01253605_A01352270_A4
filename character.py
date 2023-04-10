@@ -108,8 +108,8 @@ def check_alive(character: dict) -> None:
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
-    if "Motivation" not in character.keys():
-        raise ValueError("Character must have Motivation to check if they're alive!")
+    if "Motivation" not in character.keys() or "alive" not in character.keys():
+        raise ValueError("Character must have 'Motivation' and 'alive' keys to check if they're alive!")
     if type(character["Motivation"]) != int:
         raise TypeError("character['Motivation'] must be an integer!")
 
