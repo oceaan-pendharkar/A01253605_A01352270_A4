@@ -1,5 +1,5 @@
 from unittest import TestCase
-from character import check_alive
+from Modules.character import check_alive
 
 
 class Test(TestCase):

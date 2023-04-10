@@ -1,5 +1,5 @@
 from unittest import TestCase
-from board import get_column_coordinate
+from Modules.board import get_column_coordinate
 
 
 class Test(TestCase):

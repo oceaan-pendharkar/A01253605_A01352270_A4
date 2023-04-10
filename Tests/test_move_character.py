@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from board import move_character
+from Modules.board import move_character
 
 
 class Test(TestCase):

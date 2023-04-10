@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from character import populate_custom_points
+from Modules.character import populate_custom_points
 
 
 class Test(TestCase):

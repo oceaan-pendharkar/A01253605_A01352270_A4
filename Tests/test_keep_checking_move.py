@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from board import keep_checking_move
+from Modules.board import keep_checking_move
 
 
 class Test(TestCase):

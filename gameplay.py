@@ -1,6 +1,4 @@
-import board
-import character
-import end_game
+from Modules import end_game, board, character
 
 
 def game():

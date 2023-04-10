@@ -1,5 +1,5 @@
 from unittest import TestCase
-from board import get_row_coordinate
+from Modules.board import get_row_coordinate
 
 
 class Test(TestCase):

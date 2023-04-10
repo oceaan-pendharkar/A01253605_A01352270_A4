@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from board import guessing_game
+from Modules.board import guessing_game
 
 
 class Test(TestCase):

@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from character import create_character
+from Modules.character import create_character
 
 
 class Test(TestCase):

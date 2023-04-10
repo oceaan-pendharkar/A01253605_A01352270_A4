@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from board import enter_room
+from Modules.board import enter_room
 
 
 class Test(TestCase):
