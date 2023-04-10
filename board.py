@@ -155,6 +155,8 @@ def get_row_coordinate(character: dict, move: str) -> int:
     :precondition: move must be a string of size 1, either 'n' or 's'
     :postcondition: assigns a new column value to the character based on the move
     :return: the new coordinate, as an integer
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if move is not a string
     :raises ValueError: if move is not 'n' or 's'
     :raises KeyError: if character does not contain key "row"
     >>> get_row_coordinate({"row": 0, "column": 0}, 's')
@@ -164,6 +166,8 @@ def get_row_coordinate(character: dict, move: str) -> int:
     >>> get_row_coordinate({"row": 0, "column": 5}, 'n')
     -1
     """
+    if type(move) != str or type(character) != dict:
+        raise TypeError("Character must be a dict! Move must be a string!")
     if move != 'n' and move != 's':
         raise ValueError("You can only use 'n' or 's' to validate or change the row coordinate")
     if move == 'n':
@@ -182,6 +186,8 @@ def get_column_coordinate(character: dict, move: str) -> int:
     :precondition: move must be a string of size 1, either 'e' or 'w'
     :postcondition: assigns a new row value to the character based on the move
     :return: the new coordinate, as an integer
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if move is not a string
     :raises ValueError: if move is not 'e' or 'w'
     :raises KeyError: if character keys do not contain "column"
     >>> get_column_coordinate({"row": 0, "column": 0}, 'e')
@@ -191,6 +197,8 @@ def get_column_coordinate(character: dict, move: str) -> int:
     >>> get_column_coordinate({"row": 6, "column": 0}, 'w')
     -1
     """
+    if type(move) != str or type(character) != dict:
+        raise TypeError("Character must be a dict! Move must be a string!")
     if move != 'e' and move != 'w':
         raise ValueError("You can only use 'e' or 'w' to validate or change the column coordinate")
     if move == 'e':
