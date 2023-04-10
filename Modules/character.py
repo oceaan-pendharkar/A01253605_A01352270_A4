@@ -23,9 +23,15 @@ def populate_custom_points(character: dict, points: int) -> None:
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
                                                                                     "goal achieved", "Frustration"]])
+
     while points > 0:
         key = next(key_generator)
-        point_increase = int(input(f"How many points do you want to add to your {key}?"))
+        point_increase = 0
+        try:
+            point_increase = int(input(f"How many points do you want to add to your {key}?"))
+        except ValueError as e:
+            print(e)
+
         if type(character[key]) == int:
             character[key] += point_increase
             points -= point_increase
