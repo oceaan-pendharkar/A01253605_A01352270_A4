@@ -30,7 +30,7 @@ def mid_boss_event(character: dict, boss: dict) -> None:
 
     print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
           "realization dawns upon you.\nYou still have to unit test everything... The thought of the endless unit tests"
-          "makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
+          " makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
           "increased and your frustration increases by 50.")
     boss["Intelligence"] = round(boss["Intelligence"] * 1.1)
     boss["Speed"] *= round(boss["Speed"] * 1.1)
