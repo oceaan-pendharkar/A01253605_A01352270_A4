@@ -85,7 +85,7 @@ def enter_room(character: dict) -> None:
         :param description: the description of the room, as a string
         :param chance: the denominator of the fraction of chance an event will happen in the room, as an integer
         :param event: the event that might happen in that room
-        :precondition: description must be one of the strings in LOCATIONS
+        :precondition: description must be one of the strings in the global tuple LOCATIONS
         :precondition: percent must be an integer
         :precondition: event must be a string
         :precondition: attribute must be a string that exists in the character's dictionary keys
