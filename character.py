@@ -141,13 +141,13 @@ def check_goal(character: dict, board: tuple) -> None:
     :raises TypeError: if character's values at "column", "row", "Fitness" are not integers
     :raises IndexError: if board is a tuple less than size 2
     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
-    >>> check_goal(my_player)
+    >>> check_goal(my_player, ((0, 9), (0, 9)))
 
-    >>> my_player = {"row": 9, "column": 9, "Motivation": 2, "Fitness": 30, "Name": "Player"}
-    >>> check_goal(my_player)
+    >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 30, "Name": "Player"}
+    >>> check_goal(my_player, ((0, 9), (0, 9)))
     Nice job, Player. You've reached the final square and you're ready to defeat the final boss!!!
-    >>> my_player = {"row": 9, "column": 9, "Motivation": 2, "Fitness": 20, "Name": "Buzz"}
-    >>> check_goal(my_player)
+    >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 20, "Name": "Buzz"}
+    >>> check_goal(my_player, ((0, 9), (0, 9)))
     Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
     if type(character) != dict or type(board) != tuple:
@@ -159,14 +159,14 @@ def check_goal(character: dict, board: tuple) -> None:
         if type(character[key]) != int:
             raise TypeError("Character's column, name, Fitness, and row must all have integer values!")
 
-    if character["Fitness"] >= 30 and (character["row"], character["column"]) == (board[0][1], board[1][1]):
+    if character["Fitness"] >= 30 and (character["row"] + 1, character["column"] + 1) == (board[0][1], board[1][1]):
         print(f"Nice job, {character['Name']}. You've reached the final square and you're ready to defeat the final "
               f"boss!!!")
         character["goal achieved"] = True
-    elif character["Fitness"] >= 30 and (character["row"], character["column"]) != (board[0][1], board[1][1]):
+    elif character["Fitness"] >= 30 and (character["row"] + 1, character["column"] + 1) != (board[0][1], board[1][1]):
         print(f"Alright, {character['Name']}. You've got enough fitness points to defeat the final boss! Make your "
               f"way to the final square for the final battle...")
-    elif character["Fitness"] < 30 and (character["row"], character["column"]) == (board[0][1], board[1][1]):
+    elif character["Fitness"] < 30 and (character["row"] + 1, character["column"] + 1) == (board[0][1], board[1][1]):
         print(f"Hey there, {character['Name']}, you've found the final square, but you aren't ready to defeat the "
               f"boss yet! Keep trucking...")
 
