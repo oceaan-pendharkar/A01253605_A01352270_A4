@@ -28,8 +28,7 @@ Here is a table of the requirements implemented from the rubric:
 | Unit tests | see Tests subdirectory |
 | Code compiles and executes without errors/warnings | Play the game :)  |
 | board is 10 x 10 | Function call: line 9 in gameplay.py, function definition: line 328 in board.py |
-| Gameplay ends | see while loop conditions in line 11 of gameplay.py and endgame, called in line 15 of gameplay.py 
-and defined in line 39 of end_game.py |
+| Gameplay ends | see conditions starting line 11 of gameplay.py, see endgame (defined in line 39 of end_game.py) |
 | Character movements are correct | see move_character, defined in line 290 of board.py |
 | Character movements are restricted | see keep_checking_move, defined in line 213 of board.py |
 | Challenges | see conditions in enter_room, lines 101-110 of board.py  |
