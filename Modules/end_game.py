@@ -26,7 +26,7 @@ def boss_win(character, enemy):
 
 
 def boss_fight(character):
-    boss = {"Name": "Assignment 1", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
+    boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
             "Self-Control": 15, "Luck": 0}
     character_is_faster = Modules.battle.check_first(character, boss)
     Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
