@@ -23,7 +23,7 @@ def populate_custom_points(character: dict, points: int) -> None:
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
         if type(character[key]) == int:
             character[key] += point_increase
-        points -= point_increase
+            points -= point_increase
 
         if points == 0:
             print("You've used all your points!")
