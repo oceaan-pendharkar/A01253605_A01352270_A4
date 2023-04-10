@@ -47,8 +47,8 @@ def enter_room(character: dict) -> None:
     :postcondition: the player interacts with the room in a game
     :postcondition: a message saying the player is leaving the room is displayed
     :postcondition: the player's stats and points are displayed
-    :raises ValueError: if character keys do not include Intelligence, Luck, Motivation, and Self-Control as strings
-    :raises TypeError: if the character's Intelligence, Luck, Motivation, and Self-Control values are not integers
+    :raises ValueError: if character keys do not include the specified strings
+    :raises TypeError: if the character's values of the specified strings, apart from Name, are not integers
     """
 
     def generate_room() -> str:
