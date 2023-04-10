@@ -139,9 +139,22 @@ def check_vitals(character: dict) -> None:
     """
     Check if a character is alive and whether they have achieved their goal
 
-    :param character: a dictionary
+    :param character: a dictionary containing the keys "Name", "row", "column", "Fitness", and "Motivation", as strings
+    :precondition: character must be a dictionary
+    :precondition: character must contain the keys "Name", "row", "column", "Fitness", and "Motivation", as strings
+    :precondition: character's values at keys "row", "column", "Fitness", and "Motivation" must be integers
     :return: True if character is still in the game, else False
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if character values at specified keys are not integers
     """
+    if type(character) != dict:
+        raise TypeError("Character must be a dictionary!")
+
+    keys_with_int_values = ["row", "column", "Fitness", "Motivation"]
+    for key in keys_with_int_values:
+        if type(character[key]) != int:
+            raise TypeError("One or more of the specified keys do not have integer values!")
+
     check_alive(character)
     check_goal(character)
 
