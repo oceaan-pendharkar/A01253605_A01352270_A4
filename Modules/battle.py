@@ -314,6 +314,13 @@ def calculate_fitness(character, enemy):
         raise KeyError("Character must have keys 'Fitness' and 'Level'! Enemy must have key 'Exp'!")
 
     def add_fitness():
+        """
+        Add fitness points to character dictionary.
+
+        :postcondition: add fitness points to character dictionary
+        :postcondition: print message to user informing them that they won the battle at the beginning
+        :postcondition: print message to user informing them how many fitness points they gained
+        """
         print("You won the battle!")
         character["Fitness"] += enemy["Exp"]
         print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
