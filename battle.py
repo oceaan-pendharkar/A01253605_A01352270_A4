@@ -3,12 +3,16 @@ import copy
 from character import populate_custom_points
 
 
-def determine_enemy(character):
+def determine_enemy(level):
     """
     Select enemy from list of enemies.
 
+    :parameter level: an integer
+    :precondition: level must be a positive integer
     :postcondition: randomly selects and returns a copy of enemy from a dictionary of preset enemy dictionaries
     :return: a copy of the randomly selected enemy dictionary
+    :raises TypeError: if level is not an integer
+    :raises ValueError: if level is not positive
     """
     enemies = {1: {'Name': 'Chicken Sandwich', 'Description': 'On the table lies a delicious chicken sandwich. The '
                                                               'crisp, juicy, and tender chicken strips lie between 2 '
@@ -60,7 +64,7 @@ def determine_enemy(character):
     enemy = copy.deepcopy(enemies[selector])
     for key, value in enemy.items():
         if key not in ["Name", "Description", "Frustration", "Exp"]:
-            increased_stat = value * (1 + character["Level"] * 0.1)
+            increased_stat = value * (1 + level * 0.1)
             enemy[key] = round(increased_stat)
     print(enemies[selector]['Description'])
     return enemy
@@ -310,7 +314,7 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
 
 
 def battle_sequence(character):
-    enemy = determine_enemy(character)
+    enemy = determine_enemy(character['Level'])
     character["Frustration"] = 0
     character_is_faster = check_first(character, enemy)
     battle(character_is_faster, character, enemy, enemy["Max Frustration"])
