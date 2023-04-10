@@ -47,3 +47,7 @@ class Test(TestCase):
                                               "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
                                               "alive": True, "goal achieved": False})
         self.assertEqual(mock_output.getvalue(), "You entered something other than 'y' or 'n'. Try again...\n")
+
+    @patch('builtins.input', side_effect=["Name", 2, 'n', 'j'])
+    def test_return_type(self, _):
+        self.assertEqual(dict, type(create_character()))
