@@ -1,0 +1,34 @@
+import io
+from unittest import TestCase
+from unittest.mock import patch
+
+from board import enter_room
+
+
+class Test(TestCase):
+    # test second condition: 'have to fight'
+
+    # @patch('random.randint', return_value=2)
+    # @patch('random.randint', return_value=2)
+    # @patch('builtins.input', side_effect=[2])
+    # def test_enter_room(self, _, __, ___):
+    #     character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+    #                  "Frustration": 10, "Max Frustration": 80}
+    #     enter_room(character)
+
+    # test first condition: 'get assigned ANOTHER assignment'
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', return_value=0)
+    @patch('random.randint', return_value=2)
+    @patch('builtins.input', side_effect=[2])
+    def test_enter_room(self, _, __, ___, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(), "You're in Some BCIT Classroom. There is a 1/3 chance you will get "
+                                                 "assigned ANOTHER assignment if you enter one of the listed numbers."
+                                                 "\nThe number was 0.\nYou did not get assigned ANOTHER assignment. "
+                                                 "As you were...\nYou are now leaving Some BCIT Classroom.\nHere's "
+                                                 "what your points and stats look like:\n{'Luck': 20, 'Intelligence': "
+                                                 "10, 'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
+                                                 "'Frustration': 10, 'Max Frustration': 80}\n")
