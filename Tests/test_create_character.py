@@ -9,12 +9,12 @@ class Test(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=["Name", 'y', '10'])
     def test_create_custom(self, _, mock_output):
-        self.assertEqual(create_character(), {"Motivation": 20, "Max Frustration": 60, "Self-Control": 5,
+        self.assertEqual(create_character(), {"Motivation": 90, "Max Frustration": 60, "Self-Control": 5,
                                               "Intelligence": 5, "Luck": 5, "Speed": 5,
                                               "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
                                               "alive": True, "goal achieved": False})
         self.assertEqual(mock_output.getvalue(), "Alright! Here are your base stats:"
-                                                 "\n{'Motivation': 10, 'Max Frustration': 60, 'Self-Control': 5, "
+                                                 "\n{'Motivation': 80, 'Max Frustration': 60, 'Self-Control': 5, "
                                                  "'Intelligence': 5, 'Luck': 5, 'Speed': 5, 'Fitness': 5, "
                                                  "'Name': 'Name', 'row': 0, 'column': 0, 'Level': 1, 'alive': True, "
                                                  "'goal achieved': False}"
@@ -33,16 +33,17 @@ class Test(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=["Name", 'n', 'l'])
     def test_create_preset(self, _, mock_output):
-        self.assertEqual(create_character(), {"Motivation": 10, "Max Frustration": 60, "Self-Control": 5,
-                                              "Intelligence": 5, "Luck": 15, "Speed": 5,
-                                              "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
-                                              "alive": True, "goal achieved": False})
+        character = create_character()
+        self.assertEqual(character, {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5,
+                                     "Intelligence": 5, "Luck": 15, "Speed": 5,
+                                     "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
+                                     "alive": True, "goal achieved": False})
         self.assertEqual(mock_output.getvalue(), "")
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=["Name", 2, 'n', 'l'])
     def test_wrong_input(self, _, mock_output):
-        self.assertEqual(create_character(), {"Motivation": 10, "Max Frustration": 60, "Self-Control": 5,
+        self.assertEqual(create_character(), {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5,
                                               "Intelligence": 5, "Luck": 15, "Speed": 5,
                                               "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
                                               "alive": True, "goal achieved": False})
