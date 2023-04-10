@@ -34,7 +34,7 @@ Here is a table of the requirements implemented from the rubric:
 | Challenges | see conditions in enter_room, lines 101-110 of board.py  |
 | Mutability is minimized | |
 | Scope of mutables is minimized |  |
-| List/Dictionary Comprehension | see line 23-25 in character.py |
+| List/Dictionary Comprehension | see lines 23-25 in character.py |
 | if-statement | see lines 275-279 of calculate_damage in battle.py |
 | for/while loop | see line 280 in board.py  |
 | membership operator | see line 377 battle.py |
