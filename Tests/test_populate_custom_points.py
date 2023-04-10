@@ -7,19 +7,34 @@ from character import populate_custom_points
 
 class Test(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
-    @patch('builtins.input', side_effect=[0, 2, 2, 2, 2, 2])
+    @patch('builtins.input', side_effect=[2, 2, 2, 2, 2])
     def test_normal_case(self, _, mock_output):
         character = {"Motivation": 10, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5,
                      "Speed": 5,
-                     "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
+                     "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
                      "alive": True, "goal achieved": False}
         populate_custom_points(character, 10)
-        self.assertEqual(mock_output.getvalue(), "You have 10 points left to distribute between your attributes.\n"
-                                                 "You have 8 points left to distribute between your attributes.\n"
-                                                 "You have 6 points left to distribute between your attributes.\n"
-                                                 "You have 4 points left to distribute between your attributes.\n"
-                                                 "You have 2 points left to distribute between your attributes.\n"
-                                                 "You've used all your points!\n")
+        self.assertEqual(mock_output.getvalue(),
+                         "You have 8 points left to distribute between your attributes.\n"
+                         "You have 6 points left to distribute between your attributes.\n"
+                         "You have 4 points left to distribute between your attributes.\n"
+                         "You have 2 points left to distribute between your attributes.\n"
+                         "You've used all your points!\n"
+                         "You have 0 points left to distribute between your attributes.\n")
+
+        self.assertEqual(character, {'Fitness': 5,
+                                      'Intelligence': 7,
+                                      'Level': 1,
+                                      'Luck': 7,
+                                      'Max Frustration': 62,
+                                      'Motivation': 12,
+                                      'Name': 'Name',
+                                      'Self-Control': 7,
+                                      'Speed': 5,
+                                      'alive': True,
+                                      'column': 0,
+                                      'goal achieved': False,
+                                      'row': 0})
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=[1, 1, 1, 2, 2, 2, 1])
@@ -61,7 +76,21 @@ class Test(TestCase):
                      "alive": True, "goal achieved": False}
         populate_custom_points(character, 10)
         self.assertEqual(mock_output.getvalue(), "You have 10 points left to distribute between your attributes.\n"
-                                                 "You've used all your points!\n")
+                                                 "You've used all your points!\n"
+                                                 "You have 0 points left to distribute between your attributes.\n")
+        self.assertEqual(character, {'Fitness': 5,
+                                     'Intelligence': 5,
+                                     'Level': 1,
+                                     'Luck': 5,
+                                     'Max Frustration': 70,
+                                     'Motivation': 34,
+                                     'Name': 'name',
+                                     'Self-Control': 5,
+                                     'Speed': 5,
+                                     'alive': True,
+                                     'column': 0,
+                                     'goal achieved': False,
+                                     'row': 0})
 
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('builtins.input', side_effect=[11])
