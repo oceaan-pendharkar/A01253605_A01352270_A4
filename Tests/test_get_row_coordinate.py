@@ -33,3 +33,13 @@ class Test(TestCase):
         character = {"column": 0}
         with self.assertRaises(KeyError):
             get_row_coordinate(character, 's')
+
+    def test_type_character(self):
+        character = []
+        with self.assertRaises(TypeError):
+            get_row_coordinate(character, 's')
+
+    def test_type_move(self):
+        character = {}
+        with self.assertRaises(TypeError):
+            get_row_coordinate(character, 2)
