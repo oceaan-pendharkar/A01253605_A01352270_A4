@@ -14,6 +14,13 @@ class Test(TestCase):
         self.assertEqual(mock_output.getvalue(), "Looks like you input a number outside the range [1, 3]. "
                                                  "Try again...\n")
 
+    @patch('random.randint', return_value=2)
+    @patch('builtins.input', side_effect=[1])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_false_lower_bound(self, mock_output, _, __):
+        self.assertEqual(guessing_game(2), (False, 2))
+        self.assertEqual(mock_output.getvalue(), "")
+
     @patch('random.randint', return_value=3)
     @patch('builtins.input', side_effect=['nice', 2])
     @patch('sys.stdout', new_callable=io.StringIO)
@@ -22,10 +29,12 @@ class Test(TestCase):
         self.assertEqual(mock_output.getvalue(), "Looks like you entered something other than an integer "
                                                  "[1, 3]. Try again...\n")
 
+    @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', return_value=2)
     @patch('builtins.input', side_effect=[2])
-    def test_true(self, _, __):
+    def test_true(self, _, __, mock_output):
         self.assertEqual(guessing_game(3), (True, 2))
+        self.assertEqual(mock_output.getvalue(), "")
 
     @patch('random.randint', return_value=2)
     @patch('builtins.input', side_effect=[3])
