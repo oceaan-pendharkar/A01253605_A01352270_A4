@@ -406,6 +406,21 @@ def check_result(character, enemy, lose_function, win_function):
 
 
 def battle(character_is_faster, character, enemy, enemy_frustration):
+    """
+    Deal damage to character and enemy.
+
+    Deals damage to the slower person and then deals damage to the faster person if slower is still alive.
+
+    :param character_is_faster: a boolean telling if the character is faster than the enemy or not
+    :param character: a dictionary showing the character's stats
+    :param enemy: a dictionary showing the enemy's stats
+    :precondition: character_is_faster must be a boolean
+    :precondition: character must be a dictionary
+    :precondition: character must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck'
+    :precondition: enemy must be a dictionary
+    :precondition: enemy must have keys named 'Frustration', 'Name', 'Intelligence', 'Self-Control', and 'Luck
+    :return:
+    """
     while character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
         deal_damage(character_is_faster, character, enemy)
         if character['Frustration'] < character["Max Frustration"] and enemy['Frustration'] < enemy_frustration:
