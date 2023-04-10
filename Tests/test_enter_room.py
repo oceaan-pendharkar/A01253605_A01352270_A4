@@ -26,6 +26,26 @@ class Test(TestCase):
                                                  "'Motivation': 10, 'Self-Control': 10, 'Level': 1, 'Speed': 10, "
                                                  "'Frustration': 0, 'Max Frustration': 80, 'Name': 'Oceaan', "
                                                  "'Fitness': 2}\n")
+        self.assertEqual(character["Fitness"], 2)
+        self.assertEqual(character["Frustration"], 0)
+
+    # test second condition: 'have to fight'
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('random.randint', side_effect=[2, 2, 2, -2, 2, 2, 0, 2, 0, 2, 2])  # all the calls to random.randint()
+    @patch('builtins.input', side_effect=[1])  # input for guessing game
+    def test_fight_incorrect(self, _, __, mock_output):
+        character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
+                     "Frustration": 10, "Max Frustration": 80, "Name": "Oceaan", "Fitness": 0}
+        enter_room(character)
+        self.assertEqual(mock_output.getvalue(), "You're in McDonald's. There is a 1/2 chance you will have to fight "
+                                                 "if you enter one of the listed numbers.\nThe number was 2.\nYou did "
+                                                 "not have to fight. As you were...\nYou are now leaving "
+                                                 "McDonald's.\nHere's what your points and stats look like:\n{'Luck': "
+                                                 "20, 'Intelligence': 10, 'Motivation': 10, 'Self-Control': 10, "
+                                                 "'Level': 1, 'Speed': 10, 'Frustration': 10, 'Max Frustration': 80, "
+                                                 "'Name': 'Oceaan', 'Fitness': 0}\n")
+        self.assertEqual(character["Fitness"], 0)
+        self.assertEqual(character["Frustration"], 10)
 
     # test first condition: 'get assigned ANOTHER assignment', guessing correct value
     @patch('sys.stdout', new_callable=io.StringIO)
@@ -117,7 +137,7 @@ class Test(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     @patch('random.randint', side_effect=[5, 2])
     @patch('builtins.input', side_effect=[2])
-    def test_motivation_incorrect(self, _, __, mock_output):
+    def test_motivation_correct(self, _, __, mock_output):
         character = {"Luck": 20, "Intelligence": 10, "Motivation": 10, "Self-Control": 10, "Level": 1, "Speed": 10,
                      "Frustration": 10, "Max Frustration": 80, "Name": "Oceaan", "Fitness": 0}
         enter_room(character)
