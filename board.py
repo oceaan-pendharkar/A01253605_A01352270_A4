@@ -53,7 +53,7 @@ def enter_room(character: dict) -> None:
 
     def generate_room() -> str:
         """
-        Randomly select a room for a player to enter, in a game.
+        Pseudo-randomly select a room for a player to enter, in a game.
 
         :precondition: the character must be in the game
         :postcondition: the room is selected for the player
