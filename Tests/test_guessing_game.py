@@ -13,3 +13,16 @@ class Test(TestCase):
         guessing_game(3)
         self.assertEqual(mock_output.getvalue(), "Looks like you entered something other than an integer "
                                                  "[1, 3]. Try again...\n")
+
+    @patch('random.randint', return_value=2)
+    @patch('builtins.input', side_effect=[5, 2])
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_value_error(self, mock_output, _, __):
+        guessing_game(3)
+        self.assertEqual(mock_output.getvalue(), "Looks like you input a number outside the range [1, 3]. "
+                                                 "Try again...\n")
+
+    @patch('random.randint', return_value=2)
+    @patch('builtins.input', side_effect=[2])
+    def test_true(self, _, __):
+        self.assertEqual(guessing_game(3), True)
