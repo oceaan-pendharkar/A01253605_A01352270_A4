@@ -9,6 +9,7 @@ def populate_custom_points(character: dict, points: int) -> None:
     :param points: a positive integer
     :precondition: character must be a dictionary
     :precondition: character's attributes must have integer values
+    :precondition: to exit the function, the user MUST enter values other than zero
     :postcondition: adds points to the character's attributes
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if points is not an integer
