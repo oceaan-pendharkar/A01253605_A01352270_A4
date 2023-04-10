@@ -91,7 +91,7 @@ def create_character() -> dict:
     return character
 
 
-def check_alive(character: dict) -> None:
+def check_alive(character: dict) -> bool:
     """
     Check to see if a character's motivation has dropped to or below zero in a game.
 
@@ -100,6 +100,7 @@ def check_alive(character: dict) -> None:
     :precondition: character must contain the keys "Motivation" and "alive" as strings
     :precondition: the value of character["Motivation"] must be an integer
     :postcondition: updates character's "alive" attribute to False if their motivation has dropped to zero or below
+    :return: True if alive, else False
     :raises TypeError: if character is not a dictionary
     :raises ValueError: if character does not contain the keys "Motivation" or "alive"
     :raises TypeError: if character["Motivation"] is not an integer
@@ -120,7 +121,9 @@ def check_alive(character: dict) -> None:
         raise TypeError("character['Motivation'] must be an integer!")
 
     if character["Motivation"] <= 0:
-        character["alive"] = False
+        return False
+    else:
+        return True
 
 
 def check_goal(character: dict, board: tuple) -> None:
@@ -187,12 +190,16 @@ def check_vitals(character: dict, board: tuple) -> None:
     :raises TypeError: if character values at specified keys are not integers
     :raises ValueError: if character does not contain specified keys
     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player", "alive": True}
-    >>> check_vitals(my_player)
+    >>> check_vitals(my_player, ((0, 2), (0, 2)))
 
-    >>> my_guy = {"Motivation": 0, "alive": True, "row": 9, "column": 9}
-    >>> check_alive(my_guy)
+    >>> my_guy = {"Motivation": 0, "alive": True, "row": 5, "column": 9, "Fitness": 30, "Name": "Bob"}
+    >>> check_vitals(my_guy, ((0, 9), (0, 9)))
     >>> my_guy
     {'Motivation': 0, 'alive': False}
+
+    >>> my_player = {"row": 8, "column": 8, "Motivation": 0, "Fitness": 20, "Name": "Buzz", "alive": True}
+    >>> check_vitals(my_player, ((0, 9), (0, 9)))
+    Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
     keys = ["Name", "alive", "row", "column", "Fitness", "Motivation"]
     if type(character) != dict or type(board) != tuple:
@@ -203,8 +210,12 @@ def check_vitals(character: dict, board: tuple) -> None:
         if type(character[key]) != int:
             raise TypeError("One or more of the specified keys do not have integer values!")
 
-    check_alive(character)
-    check_goal(character, board)
+    alive = check_alive(character)
+    if alive:
+        check_goal(character, board)
+    else:
+        character["alive"] = False
+        print("Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
 
 
 def main():
