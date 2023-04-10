@@ -26,7 +26,7 @@ def mid_boss_event(character, boss):
     if type(character) is not dict or type(boss) is not dict:
         raise TypeError("Character and Enemy must be dictionaries!")
     if 'Frustration' not in character or not all(key in character for key in ['Intelligence', 'Speed']):
-        raise KeyError("Character must have 'Frustration' key! Enemy must have 'Intelligence' and 'Speed' keys!")
+        raise KeyError("Character must have 'Frustration' key! Boss must have 'Intelligence' and 'Speed' keys!")
 
     print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
           "realization dawns upon you.\nYou still have to unit test everything... The thought of the endless unit tests"
@@ -53,6 +53,11 @@ def boss_lose(character, enemy):
     :raises KeyError: if character does not have key 'Name'
     :raises KeyErrr: if boss does not have keys 'Name'
     """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and Enemy must be dictionaries!")
+    if 'Name' not in character or 'Name' not in enemy:
+        raise KeyError("Character must have 'Name' key! Enemy must have 'Name' key!")
+
     print(f"{enemy['Name']} has frustrated you so much, that you just gave up. Sorry you didn't win "
           f"{character['Name']}. You decided that life is too short to be working all the time, and you need "
           f"to enjoy life.")
