@@ -115,6 +115,12 @@ def check_first(character, enemy):
     :raises KeyError: if 'Speed' key or 'Luck' key is not in character
     :raises KeyError: if 'Speed' key or 'Name' key is not in enemy
     """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and Enemy must be dictionaries!")
+    if 'Speed' not in character or 'Luck' not in character:
+        raise KeyError("Character must have speed and luck stats!")
+    if 'Speed' not in enemy or 'Name' not in enemy:
+        raise KeyError("Enemy must have speed stat and a name")
     character_speed = character['Speed'] + luck_roll(character['Luck'], -2, 2, 0.3)
     enemy_speed = enemy['Speed'] + luck_roll(0, -2, 2)
     if character_speed >= enemy_speed:
