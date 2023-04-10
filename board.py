@@ -6,7 +6,7 @@ LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
 
 
-def guessing_game(upper_bound: int) -> bool:
+def guessing_game(upper_bound: int) -> tuple:
     """
     Complete a guessing game.
 
@@ -15,7 +15,7 @@ def guessing_game(upper_bound: int) -> bool:
     :postcondition: a random number is generated
     :postcondition: the user inputs a number within the specified range
     :postcondition: determines whether the user's number was the same as the random number generated
-    :return: True if the user guessed the generated number, else False
+    :return: True if the user guessed the generated number, else False as, and the random number, as a tuple of size 2
     """
     number = random.randint(1, upper_bound)
     guess = None
@@ -31,9 +31,9 @@ def guessing_game(upper_bound: int) -> bool:
                 print(f"Looks like you input a number outside the range [1, {upper_bound}]. Try again...")
 
     if number == guess:
-        return True
+        return True, number
     else:
-        return False
+        return False, number
 
 
 def enter_room(character: dict) -> None:
