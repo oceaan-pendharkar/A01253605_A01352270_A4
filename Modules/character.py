@@ -22,7 +22,7 @@ def populate_custom_points(character: dict, points: int) -> None:
         raise TypeError("Character must be a dict! Points must be an int!")
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
-                                                                                    "goal achieved"]])
+                                                                                    "goal achieved", "Frustration"]])
     while points > 0:
         key = next(key_generator)
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
@@ -31,7 +31,7 @@ def populate_custom_points(character: dict, points: int) -> None:
             points -= point_increase
 
         if points == 0:
-            print("You've used all your points!")
+            print(f"You've used all your points!")
 
         elif points < 0:
             print(f"Woah there, that was more points than we said!! \nSince you cheated, that's all the points you "
@@ -70,7 +70,7 @@ def make_preset_character(character: dict) -> None:
         elif selection == 'j':
             character["Speed"] += 10
         else:
-            print("You must enter 'n', 'l', 'g', or 'j'. Try again...")
+            print(f"You must enter 'n', 'l', 'g', or 'j'. Try again...")
 
 
 def create_character() -> dict:
@@ -82,10 +82,10 @@ def create_character() -> dict:
     """
     character = {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5, "Speed": 5,
                  "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
-                 "alive": True, "goal achieved": False}
+                 "alive": True, "goal achieved": False, "Frustration": 0}
     choice = None
     while choice != 'y' and choice != 'n':
-        choice = input("Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
+        choice = input(f"Would you like to choose the categories to which you want to distribute your 10 points? y/n ")
         if choice == 'y':
             print(f"Alright! Here are your base stats:\n{character}\nYou have ***10 points*** to distribute between "
                   "Motivation, Max Frustration, Self-Control, Intelligence, Luck, and Speed.\nMotivation: helps you "
@@ -98,7 +98,7 @@ def create_character() -> dict:
         elif choice == 'n':
             make_preset_character(character)
         else:
-            print("You entered something other than 'y' or 'n'. Try again...")
+            print(f"You entered something other than 'y' or 'n'. Try again...")
     return character
 
 
@@ -225,7 +225,7 @@ def check_vitals(character: dict, board: tuple) -> None:
         check_goal(character, board)
     else:
         character["alive"] = False
-        print("Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
+        print(f"Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
 
 
 def main():

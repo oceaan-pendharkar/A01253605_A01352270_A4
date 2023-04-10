@@ -16,12 +16,12 @@ class Test(TestCase):
         self.assertEqual(create_character(), {"Motivation": 90, "Max Frustration": 60, "Self-Control": 5,
                                               "Intelligence": 5, "Luck": 5, "Speed": 5,
                                               "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
-                                              "alive": True, "goal achieved": False})
+                                              "alive": True, "goal achieved": False, 'Frustration': 0})
         self.assertEqual(mock_output.getvalue(), "Alright! Here are your base stats:"
                                                  "\n{'Motivation': 80, 'Max Frustration': 60, 'Self-Control': 5, "
                                                  "'Intelligence': 5, 'Luck': 5, 'Speed': 5, 'Fitness': 5, "
                                                  "'Name': 'Name', 'row': 0, 'column': 0, 'Level': 1, 'alive': True, "
-                                                 "'goal achieved': False}"
+                                                 "'goal achieved': False, 'Frustration': 0}"
                                                  "\nYou have ***10 points*** to distribute between Motivation, "
                                                  "Max Frustration, Self-Control, Intelligence, Luck, and Speed."
                                                  "\nMotivation: helps you stay alive"
@@ -41,7 +41,7 @@ class Test(TestCase):
         self.assertEqual(character, {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5,
                                      "Intelligence": 5, "Luck": 15, "Speed": 5,
                                      "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
-                                     "alive": True, "goal achieved": False})
+                                     "alive": True, "goal achieved": False, 'Frustration': 0})
         self.assertEqual(mock_output.getvalue(), "")
 
     @patch('sys.stdout', new_callable=io.StringIO)
@@ -50,7 +50,7 @@ class Test(TestCase):
         self.assertEqual(create_character(), {"Motivation": 80, "Max Frustration": 60, "Self-Control": 5,
                                               "Intelligence": 5, "Luck": 15, "Speed": 5,
                                               "Fitness": 5, 'Name': "Name", "row": 0, "column": 0, "Level": 1,
-                                              "alive": True, "goal achieved": False})
+                                              "alive": True, "goal achieved": False, 'Frustration': 0})
         self.assertEqual(mock_output.getvalue(), "You entered something other than 'y' or 'n'. Try again...\n")
 
     @patch('builtins.input', side_effect=["Name", 2, 'n', 'j'])

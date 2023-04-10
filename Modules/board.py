@@ -235,7 +235,7 @@ def keep_checking_move(board: tuple, character: dict) -> str:
         :return: the direction the user wishes to travel, as a string ('n', 's', 'e', or 'w')
         :raises ValueError: if direction is not 'n', 's', 'e', or 'w'
         """
-        user_choice = input("Enter the direction you wish to go (n, s, e, or w): ")
+        user_choice = input(f"Enter the direction you wish to go (n, s, e, or w): ")
         if user_choice != 'n' and user_choice != 's' and user_choice != 'w' and user_choice != 'e':
             raise ValueError
         return user_choice
@@ -281,7 +281,7 @@ def keep_checking_move(board: tuple, character: dict) -> str:
         try:
             direction = get_user_choice()
         except ValueError:
-            print("Direction must be 'n', 's', 'e', or 'w'!")
+            print(f"Direction must be 'n', 's', 'e', or 'w'!")
         else:
             choice_is_valid = validate_move(board, direction)
     return direction
