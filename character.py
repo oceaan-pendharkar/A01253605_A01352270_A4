@@ -1,33 +1,40 @@
 import itertools
 
 
-def populate_custom_points(character: dict, points) -> None:
+def populate_custom_points(character: dict, points: int) -> None:
     """
     Add points to a selection of attributes of a character based on user input.
 
-    :character: a dictionary of attributes as strings for keys and integers for values
+    :param character: a dictionary of attributes as strings for keys and integers for values
+    :param points: a positive integer
     :precondition: character must be a dictionary
-    :precondition: character's attributes must have values of zero to start
-    :postcondition: adds 120 points total to the character's attributes
+    :precondition: character's attributes must have integer values
+    :precondition: to exit the function, the user MUST enter values other than zero
+    :postcondition: adds points to the character's attributes
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if points is not an integer
     """
+    if type(character) != dict or type(points) != int:
+        raise TypeError("Character must be a dict! Points must be an int!")
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
                                                                                     "goal achieved"]])
     while points > 0:
         key = next(key_generator)
+        print(f"You have {points} points left to distribute between your attributes.")
         point_increase = int(input(f"How many points do you want to add to your {key}?"))
-        character[key] += point_increase
-        points -= point_increase
+        if type(character[key]) == int:
+            character[key] += point_increase
+            points -= point_increase
+
         if points == 0:
             print("You've used all your points!")
-            break
+
         elif points < 0:
-            print(f"Woah there, that was more than {points} points!! \nSince you cheated, that's all the points you "
+            print(f"Woah there, that was more points than we said!! \nSince you cheated, that's all the points you "
                   "get for now. \nAnd you can forget about getting points for the category you just over-filled. "
                   "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...")
             character[key] -= point_increase
-            break
-        print(f"You have {points} points left to distribute between your attributes.")
 
 
 def make_preset_character(character: dict) -> None:
@@ -91,7 +98,7 @@ def create_character() -> dict:
     return character
 
 
-def check_alive(character: dict) -> None:
+def check_alive(character: dict) -> bool:
     """
     Check to see if a character's motivation has dropped to or below zero in a game.
 
@@ -99,18 +106,16 @@ def check_alive(character: dict) -> None:
     :precondition: character must be a dictionary
     :precondition: character must contain the keys "Motivation" and "alive" as strings
     :precondition: the value of character["Motivation"] must be an integer
-    :postcondition: updates character's "alive" attribute to False if their motivation has dropped to zero or below
+    :return: True if alive, else False
     :raises TypeError: if character is not a dictionary
     :raises ValueError: if character does not contain the keys "Motivation" or "alive"
     :raises TypeError: if character["Motivation"] is not an integer
     >>> my_guy = {"Motivation": 0, "alive": True}
     >>> check_alive(my_guy)
-    >>> my_guy
-    {'Motivation': 0, 'alive': False}
+    False
     >>> my_guy = {"Motivation": 50, "alive": True}
     >>> check_alive(my_guy)
-    >>> my_guy
-    {'Motivation': 50, 'alive': True}
+    True
     """
     if type(character) != dict:
         raise TypeError("Character must be a dictionary to call check_alive!")
@@ -120,7 +125,9 @@ def check_alive(character: dict) -> None:
         raise TypeError("character['Motivation'] must be an integer!")
 
     if character["Motivation"] <= 0:
-        character["alive"] = False
+        return False
+    else:
+        return True
 
 
 def check_goal(character: dict, board: tuple) -> None:
@@ -145,7 +152,7 @@ def check_goal(character: dict, board: tuple) -> None:
 
     >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 30, "Name": "Player"}
     >>> check_goal(my_player, ((0, 9), (0, 9)))
-    Nice job, Player. You've reached the final square and you're ready to defeat the final boss!!!
+    Nice job, Player. You've reached the final square, and you're ready to defeat the final boss!!!
     >>> my_player = {"row": 8, "column": 8, "Motivation": 2, "Fitness": 20, "Name": "Buzz"}
     >>> check_goal(my_player, ((0, 9), (0, 9)))
     Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
@@ -187,24 +194,34 @@ def check_vitals(character: dict, board: tuple) -> None:
     :raises TypeError: if character values at specified keys are not integers
     :raises ValueError: if character does not contain specified keys
     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player", "alive": True}
-    >>> check_vitals(my_player)
+    >>> check_vitals(my_player, ((0, 2), (0, 2)))
 
-    >>> my_guy = {"Motivation": 0, "alive": True, "row": 9, "column": 9}
-    >>> check_alive(my_guy)
-    >>> my_guy
-    {'Motivation': 0, 'alive': False}
+    >>> my_guy = {"Motivation": 0, "alive": True, "row": 5, "column": 9, "Fitness": 30, "Name": "Bob"}
+    >>> check_vitals(my_guy, ((0, 9), (0, 9)))
+    Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!
+    >>> my_player = {"row": 8, "column": 8, "Motivation": 20, "Fitness": 20, "Name": "Buzz", "alive": True}
+    >>> check_vitals(my_player, ((0, 9), (0, 9)))
+    Hey there, Buzz, you've found the final square, but you aren't ready to defeat the boss yet! Keep trucking...
     """
     keys = ["Name", "alive", "row", "column", "Fitness", "Motivation"]
     if type(character) != dict or type(board) != tuple:
         raise TypeError("Character must be a dictionary! Board must be a tuple!")
+
+    for key in keys:
+        if key not in character.keys():
+            raise ValueError('Character must contain keys "Name", "row", "column", "Fitness", "Motivation", "alive"!')
 
     keys_with_int_values = keys[2:]
     for key in keys_with_int_values:
         if type(character[key]) != int:
             raise TypeError("One or more of the specified keys do not have integer values!")
 
-    check_alive(character)
-    check_goal(character, board)
+    alive = check_alive(character)
+    if alive:
+        check_goal(character, board)
+    else:
+        character["alive"] = False
+        print("Sorry, you lost all your motivation... you're basically dead. Have fun in the afterlife!")
 
 
 def main():
