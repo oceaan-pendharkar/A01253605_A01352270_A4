@@ -176,18 +176,21 @@ def check_vitals(character: dict) -> None:
 
     :param character: a dictionary containing the keys "Name", "row", "column", "Fitness", and "Motivation", as strings
     :precondition: character must be a dictionary
-    :precondition: character must contain the keys "Name", "row", "column", "Fitness", and "Motivation", as strings
+    :precondition: character must contain the keys "Name", "row", "column", "Fitness", "Motivation", "alive" as strings
     :precondition: character's values at keys "row", "column", "Fitness", and "Motivation" must be integers
     :return: True if character is still in the game, else False
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if character values at specified keys are not integers
     :raises ValueError: if character does not contain specified keys
+     >>> my_player = {"row": 0, "column": 0, "Motivation": 2, "Fitness": 2, "Name": "Player"}
+    >>> check_goal(my_player)
+    >>> check_vitals()
     """
-    keys = ["Name", "row", "column", "Fitness", "Motivation"]
+    keys = ["Name", "alive", "row", "column", "Fitness", "Motivation"]
     if type(character) != dict:
         raise TypeError("Character must be a dictionary!")
 
-    keys_with_int_values = keys[1:]
+    keys_with_int_values = keys[2:]
     for key in keys_with_int_values:
         if type(character[key]) != int:
             raise TypeError("One or more of the specified keys do not have integer values!")
