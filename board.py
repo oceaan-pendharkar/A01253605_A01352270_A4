@@ -151,12 +151,12 @@ def get_row_coordinate(character: dict, move: str) -> int:
     :param character: a dictionary
     :param move: the direction of the move, as a string 'n' or 's'
     :precondition: character must be a dictionary
-    :precondition: character must contain keys "row" and "column"
+    :precondition: character must contain keys "row"
     :precondition: move must be a string of size 1, either 'n' or 's'
     :postcondition: assigns a new column value to the character based on the move
     :return: the new coordinate, as an integer
     :raises ValueError: if move is not 'n' or 's'
-    :raises KeyError: if character does not contain key "row" or key "column"
+    :raises KeyError: if character does not contain key "row"
     >>> get_row_coordinate({"row": 0, "column": 0}, 's')
     1
     >>> get_row_coordinate({"row": 5, "column": 3}, 'n')
