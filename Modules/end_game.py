@@ -79,6 +79,11 @@ def boss_win(character, enemy):
     :raises KeyError: if character does not have key 'Name'
     :raises KeyError: if boss does not have keys 'Name'
     """
+    if type(character) is not dict or type(enemy) is not dict:
+        raise TypeError("Character and Enemy must be dictionaries!")
+    if 'Name' not in character or 'Name' not in enemy:
+        raise KeyError("Character must have 'Name' key! Enemy must have 'Name' key!")
+
     print(f"Congratulations {character['Name']}! You've beaten {enemy['Name']} and have completed the game! Hopefully "
           f"your instructor will give you a good mark for it? Please?")
 
