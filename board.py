@@ -178,10 +178,12 @@ def get_column_coordinate(character: dict, move: str) -> int:
 
     :param character: a dictionary
     :param move: the direction of the move, as a string 'e' or 'w'
+    :precondition: character must be a dictionary
     :precondition: move must be a string of size 1, either 'e' or 'w'
     :postcondition: assigns a new row value to the character based on the move
     :return: the new coordinate, as an integer
     :raises ValueError: if move is not 'e' or 'w'
+    :raises KeyError: if character keys do not contain "column"
     >>> get_column_coordinate({"row": 0, "column": 0}, 'e')
     1
     >>> get_column_coordinate({"row": 5, "column": 3}, 'w')
