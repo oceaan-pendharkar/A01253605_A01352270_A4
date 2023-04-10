@@ -6,6 +6,35 @@ LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
              'Levels Nightclub', 'Nemesis Coffee', 'Kita No Donburi')
 
 
+def guessing_game(upper_bound: int) -> bool:
+    """
+    Complete a guessing game.
+
+    :param upper_bound: an integer greater than 1
+    :precondition: upper_bound must be an integer greater than 1
+    :postcondition: a random number is generated
+    :postcondition: the user inputs a number within the specified range
+    :postcondition: determines whether the user's number was the same as the random number generated
+    :return: True if the user guessed the generated number, else False
+    """
+    number = random.randint(1, upper_bound)
+    guess = None
+    acceptable_numbers = [number for number in range(1, upper_bound + 1)]
+
+    while guess not in acceptable_numbers:
+        try:
+            guess = int(input(f"Type an integer [1, {upper_bound}]: "))
+        except ValueError:
+            print(f"Looks like you entered something other than an integer [1, {upper_bound}]. Try again...")
+        if guess not in acceptable_numbers:
+            print(f"Looks like you input a number outside the range [1, {upper_bound}]. Try again...")
+
+    if number == guess:
+        return True
+    else:
+        return False
+
+
 def enter_room(character: dict) -> None:
     """
     Creates a scenario for a player to engage with when they've entered a room in a game.
@@ -62,9 +91,10 @@ def enter_room(character: dict) -> None:
         """
         print(f"You're in {description}. There is a 1/{chance} chance you will {event} if you enter one of the listed "
               f"numbers.")
-        number = random.randint(1, chance)
-        guess = int(input(f"Type an integer [1, {chance}]: "))
-        if number == guess:
+
+        guess = guessing_game(chance)
+
+        if guess:
             print(f"You KNEW this would happen! You {event}.")
             if event == 'get assigned ANOTHER assignment':
                 complete_assignment()
