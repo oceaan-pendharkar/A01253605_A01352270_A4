@@ -328,6 +328,7 @@ def calculate_fitness(character, enemy):
     if 'Exp' not in enemy:
         raise KeyError("Enemy must have key 'Exp'!")
 
+    print("You won the battle!")
     character["Fitness"] += enemy["Exp"]
     print(f"You've gained {enemy['Exp']} fitness points from defeating {enemy['Name']}")
     if character["Fitness"] >= 15 and character["Level"] < 2:
@@ -361,11 +362,6 @@ def battle_loss(character, enemy):
     """
     print(f"You gave in to the temptation of {enemy['Name']}! You lost 2 motivation.")
     character["Motivation"] -= 2
-
-
-def battle_win(character, enemy):
-    print("You won the battle!")
-    calculate_fitness(character, enemy)
 
 
 def check_result(character, enemy, lose_function, win_function):
