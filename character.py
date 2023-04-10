@@ -9,7 +9,7 @@ def populate_custom_points(character: dict, points: int) -> None:
     :param points: a positive integer
     :precondition: character must be a dictionary
     :precondition: character's attributes must have values of zero to start
-    :postcondition: adds 120 points total to the character's attributes
+    :postcondition: adds points to the character's attributes
     """
     key_generator = itertools.cycle([key for key in character.keys() if key not in ["Name", "row", "column",
                                                                                     "Fitness", "Level", "alive",
