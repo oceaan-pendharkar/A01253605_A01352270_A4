@@ -170,6 +170,12 @@ def deal_damage(character_is_faster, character, enemy):
         :raises KeyError: if attacker does not have at least 3 keys called 'Name', 'Luck', and 'Intelligence'
         :raises KeyError: if defender does not have at least 1 key called 'Self-Control'
         """
+        if type(attacker) is not dict or type(defender) is not dict:
+            raise TypeError("Attacker and defender need to be dictionaries!")
+        if 'Name' not in attacker or 'Luck' not in attacker or 'Intelligence' not in attacker:
+            raise KeyError("Attacker must have at least 3 keys named 'Name', 'Luck, and 'Intelligence'")
+        if 'Self-Control' not in defender:
+            raise KeyError("Defender must have a key call 'Self-Control")
         attacker_critical = calculate_critical(attacker["Luck"])
         if attacker_critical:
             attacker_damage = attacker["Intelligence"] * 1.5
