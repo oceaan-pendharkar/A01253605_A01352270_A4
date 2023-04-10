@@ -6,7 +6,24 @@ import Modules.battle
 
 
 def mid_boss_event(character, boss):
-    print("You've finished making all the code for assignment 1! You bask in your achievement before a sinking "
+    """
+    Generate an event for when the boss HP is less than half.
+
+    Increases boss stats and does 10 frustration damage to player.
+
+    :param character: a dictionary
+    :param boss: another dictionary
+    :precondition: character must be a dictionary
+    :precondition: character must have key named 'Frustration'
+    :precondition: boss must be a dictionary
+    :precondition: boss must have keys named 'Intelligence' and 'Speed'
+    :postcondition: mulitplies the 'Intelligence' and 'Speed' stats of the boos by 110% and increases frustration by 10
+    :raises TypeError: if character is not a dictionary
+    :raises TypeError: if boss is not a dictionary
+    :raises KeyError: if character does not have key 'Frustration'
+    :raises KeyErrr: if boss does not have keys 'Intelligence' and 'Speed'
+    """
+    print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
           "realization dawns upon you.\nYou still have to unit test everything... The thought of the endless unit tests"
           "makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
           "increased and your frustration increases by 50.")
