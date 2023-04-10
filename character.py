@@ -37,7 +37,6 @@ def populate_custom_points(character: dict, points: int) -> None:
             character[key] -= point_increase
 
 
-
 def make_preset_character(character: dict) -> None:
     """
     Give 10 extra points to a character in one attribute, depending on the selection.
