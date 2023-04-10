@@ -438,7 +438,7 @@ def battle(character_is_faster, character, enemy, enemy_frustration):
         raise TypeError("character_is_faster needs to be a boolean!")
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and enemy need to be dictionaries!")
-    if type(enemy_frustration) is not int or type(enemy_frustration) is not float:
+    if type(enemy_frustration) is not int and type(enemy_frustration) is not float:
         raise TypeError("enemy_frustration needs to be a number!")
     if enemy_frustration <= 0:
         raise ValueError("enemy_frustration needs to be positive!")
