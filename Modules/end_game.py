@@ -141,7 +141,6 @@ def endgame(character: dict, alive: bool) -> None:
                                             'Max Frustration', 'Luck', 'Motivation', 'Fitness', 'Level']):
         raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
                        "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
-    print(alive)
     if alive:
         boss_fight(character)
     else:
