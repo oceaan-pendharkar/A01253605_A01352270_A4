@@ -45,8 +45,8 @@ def enter_room(character: dict) -> None:
     :precondition: character's keys must include "Intelligence", "Luck", "Motivation", "Self-Control", "Level", "Speed",
                     "Frustration", "Max Frustration", "Fitness", "Fitness", "Name" as strings
     :postcondition: the player interacts with the room in a game
-    :postcondition: the player's stats and points are displayed
     :postcondition: a message saying the player is leaving the room is displayed
+    :postcondition: the player's stats and points are displayed
     :raises ValueError: if character keys do not include Intelligence, Luck, Motivation, and Self-Control as strings
     :raises TypeError: if the character's Intelligence, Luck, Motivation, and Self-Control values are not integers
     """
