@@ -273,10 +273,23 @@ def deal_damage(character_is_faster, character, enemy):
 
 
 def level_up(character):
+    """
+    Give the user points to allocate to stats.
+
+    :param character: must be a dictionary
+    :precondition: character must be a dictonary
+    :precondition: character must have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', 'Motivation',
+                   and 'Max Frustration'
+    :postcondition: Assigns 10 points between 'Frustration', 'Intelligence', 'Self-Control', and 'Luck', 'Motivation',
+                    and 'Max Frustration'
+    :raises TypeError: if character is not a dictionary
+    :raises KeyError: if character does not have keys 'Frustration', 'Intelligence', 'Self-Control', and 'Luck',
+                      'Motivation', and 'Max Frustration'
+    """
     points = 10
     print(f"You have {points} to allocate to your stats. Possible stats to increase are Motivation, Max Frustration,"
           "Self-Control, Intelligence, Luck, and Speed. Please allocate your points. ")
-    populate_custom_points(character, 10)
+    populate_custom_points(character, points)
 
 
 def calculate_fitness(character, enemy):
