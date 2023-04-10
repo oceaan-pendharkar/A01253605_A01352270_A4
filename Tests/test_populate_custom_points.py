@@ -37,3 +37,29 @@ class Test(TestCase):
                                                  "You have 3 points left to distribute between your attributes.\n"
                                                  "You have 1 points left to distribute between your attributes.\n"
                                                  "You've used all your points!\n")
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('builtins.input', side_effect=[0, 10])
+    def test_early_stop(self, _, mock_output):
+        character = {"Motivation": 34, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5,
+                     "Speed": 5,
+                     "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
+                     "alive": True, "goal achieved": False}
+        populate_custom_points(character, 10)
+        self.assertEqual(mock_output.getvalue(), "You have 10 points left to distribute between your attributes.\n"
+                                                 "You've used all your points!\n")
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    @patch('builtins.input', side_effect=[0, 11])
+    def test_reprimand(self, _, mock_output):
+        character = {"Motivation": 22, "Max Frustration": 60, "Self-Control": 5, "Intelligence": 5, "Luck": 5,
+                     "Speed": 5,
+                     "Fitness": 5, 'Name': input("What's your character's name? "), "row": 0, "column": 0, "Level": 1,
+                     "alive": True, "goal achieved": False}
+        populate_custom_points(character, 10)
+        self.assertEqual(mock_output.getvalue(), "You have 10 points left to distribute between your attributes."
+                                                 "\nWoah there, that was more points than we said!! "
+                                                 "\nSince you cheated, that's all the points you get for now. "
+                                                 "\nAnd you can forget about getting points for the category you just "
+                                                 "over-filled. "
+                                                 "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...\n")
