@@ -8,7 +8,7 @@ LOCATIONS = ('Some BCIT Classroom', 'Tim Hortons', "McDonald's", 'Home',
 
 def guessing_game(upper_bound: int) -> tuple:
     """
-    Complete a guessing game.
+    Complete a guessing game by generating a pseudo-random number and having the user input a guess.
 
     :param upper_bound: an integer greater than 1
     :precondition: upper_bound must be an integer greater than 1
