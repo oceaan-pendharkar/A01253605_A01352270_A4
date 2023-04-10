@@ -146,7 +146,7 @@ def enter_room(character: dict) -> None:
 
 def get_row_coordinate(character: dict, move: str) -> int:
     """
-    Get the row value to for a character based on the move being validated or made.
+    Get the row value for a character based on the move being validated or made.
 
     :param character: a dictionary
     :param move: the direction of the move, as a string 'n' or 's'
