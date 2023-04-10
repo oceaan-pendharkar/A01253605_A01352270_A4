@@ -154,6 +154,13 @@ def deal_damage(character_is_faster, character, enemy):
         else:
             return False
 
+    def validate_damage(damage):
+        if damage <= 0:
+            damage = 1
+            return damage
+        else:
+            return damage
+
     def calculate_damage(attacker, defender):
         """
         Calculate damage from the attacker to the defender.
@@ -184,13 +191,6 @@ def deal_damage(character_is_faster, character, enemy):
             attacker_damage = attacker['Intelligence'] - defender["Self-Control"]
 
         return validate_damage(attacker_damage)
-
-    def validate_damage(damage):
-        if damage <= 0:
-            damage = 1
-            return damage
-        else:
-            return damage
 
     if character_is_faster:
         character_damage = calculate_damage(character, enemy)
