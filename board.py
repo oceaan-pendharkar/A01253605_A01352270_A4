@@ -38,7 +38,7 @@ def guessing_game(upper_bound: int) -> tuple:
 
 def enter_room(character: dict) -> None:
     """
-    Creates a scenario for a player to engage with when they've entered a room in a game.
+    Create a scenario for a player to engage with when they've entered a room in a game.
 
     :param character: the character, as a dictionary
     :precondition: description must be a string
