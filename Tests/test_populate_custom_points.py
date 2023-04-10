@@ -63,3 +63,11 @@ class Test(TestCase):
                                                  "\nAnd you can forget about getting points for the category you just "
                                                  "over-filled. "
                                                  "\nThat's not how operation COMPLETE ASSIGNMENT 4 works...\n")
+
+    def test_type_character(self):
+        with self.assertRaises(TypeError):
+            populate_custom_points([], 20)
+
+    def test_type_points(self):
+        with self.assertRaises(TypeError):
+            populate_custom_points({}, '20')
