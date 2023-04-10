@@ -110,7 +110,7 @@ def enter_room(character: dict) -> None:
 
     def raise_errors() -> None:
         """
-        Raise ValueError if a character does not contain certain keys, or if the corresponding values are not integers.
+        Raise errors if a character does not contain certain keys, or if the corresponding values are not integers.
 
         :raises ValueError: if character keys do not include the right keys as strings
         :raises TypeError: if certain of the character's key values are not integers
