@@ -135,6 +135,12 @@ def endgame(character, alive):
     :raises KeyError: if character does not have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',
                       'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'
     """
+    if type(character) is not dict or type(alive) is not bool:
+        raise TypeError("Character needs to be a dictionary! Alive must be a boolean!")
+    if not all(key in character for key in ['Frustration', 'Name', 'Intelligence', 'Self-Control',
+                                            'Max Frustration', 'Luck', 'Motivation', 'Fitness', 'Level']):
+        raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
+                       "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
     print(alive)
     if alive:
         boss_fight(character)
