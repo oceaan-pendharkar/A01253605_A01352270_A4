@@ -352,6 +352,10 @@ def battle_loss(character: dict, enemy: dict) -> None:
     :raises TypeError: if enemy is not a dictionary
     :raises KeyError: if character does not have key 'Motivation'
     :raises KeyError: if enemy does not have key 'Name'
+    >>> character = {'Motivation': 2}
+    >>> enemy = {'Name': 'Nothing'}
+    >>> battle_loss(character, enemy)
+    You gave in to the temptation of Nothing! You lost 2 motivation.
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and enemy must be dictionaries!")
