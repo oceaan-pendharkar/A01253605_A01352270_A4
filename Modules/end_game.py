@@ -31,10 +31,10 @@ def mid_boss_event(character: dict, boss: dict) -> None:
     print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
           "realization dawns upon you.\nYou still have to unit test everything... The thought of the endless unit tests"
           " makes you more frustrated and makes Assignment 4 so much harder to complete.\nAssignment 4's stats have "
-          "increased and your frustration increases by 50.")
+          "increased and your frustration increases by 5.")
     boss["Intelligence"] = round(boss["Intelligence"] * 1.1)
     boss["Speed"] = round(boss["Speed"] * 1.1)
-    character["Frustration"] += 10
+    character["Frustration"] += 5
 
 
 def boss_lose(character: dict, enemy: dict) -> None:
@@ -118,8 +118,8 @@ def boss_fight(character: dict) -> None:
         raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
                        "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
 
-    boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 110, "Intelligence": 14, "Speed": 30,
-            "Self-Control": 11, "Luck": 0, 'Exp': 0}
+    boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 100, "Intelligence": 13, "Speed": 30,
+            "Self-Control": 10, "Luck": 0, 'Exp': 0}
     character_is_faster = Modules.battle.check_first(character, boss)
     Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
     if character["Frustration"] < character["Max Frustration"]:
