@@ -28,23 +28,23 @@ def determine_enemy(level: int) -> dict:
                                                               'slices of freshly baked bread. You can feel the '
                                                               'growling in our stomach drawing you towards it...',
                    'Frustration': 0, 'Max Frustration': 18, 'Intelligence': 21, 'Speed': 5, "Self-Control": 3,
-                   "Luck": 0, "Exp": 2},
+                   "Luck": 0, "Exp": 3},
                2: {'Name': 'Donut', 'Description': 'You can see a donut on display by the front counter. The glaze '
                                                    'on top of the donut glistens in the light, tempting you towards '
                                                    'its sweetness.',
                    'Frustration': 0, 'Max Frustration': 11, 'Intelligence': 19, 'Speed': 3, "Self-Control": 7,
-                   "Luck": 0, "Exp": 3},
+                   "Luck": 0, "Exp": 4},
                3: {'Name': 'Latte', 'Description': 'Looking at the menu, you dream about holding a warm latte in your '
                                                    'hands. The scent of the tea and milk fills your mind and you can'
                                                    'almost taste the contrast of the smooth milky foam and the '
                                                    'green tea under it. Will you end up ordering it?',
                    'Frustration': 0, 'Max Frustration': 14, 'Intelligence': 24, 'Speed': 11, "Self-Control": 1,
-                   "Luck": 0, "Exp": 2},
+                   "Luck": 0, "Exp": 4},
                4: {'Name': 'Breakfast Sandwich', 'Description': 'You see someone eating a warm breakfast sandwich '
                                                                 'through the window. The perfectly cooked egg, crispy'
                                                                 'bacon and melted cheese beckon you towards the store.',
                    'Frustration': 0, 'Max Frustration': 25, 'Intelligence': 15, 'Speed': 4, "Self-Control": 3,
-                   "Luck": 0, "Exp": 2},
+                   "Luck": 0, "Exp": 3},
                5: {'Name': 'Hashbrowns', 'Description': 'The thought of hashbrowns fill your mind. From the satisfying '
                                                         'crunch of the potatoes to the savory flavors of the potatoes'
                                                         'your body craves for a rest to indulge in this fried '
