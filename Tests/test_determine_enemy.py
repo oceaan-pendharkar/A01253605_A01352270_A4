@@ -27,7 +27,7 @@ class Test(TestCase):
                                          'slices of freshly baked bread. You can feel the '
                                          'growling in our stomach drawing you towards it...',
                           'Frustration': 0, 'Max Frustration': 20, 'Intelligence': 23, 'Speed': 6, "Self-Control": 3,
-                          "Luck": 0, "Exp": 1}
+                          "Luck": 0, "Exp": 3}
         self.assertEqual(expected_enemy, enemy)
 
     @patch('random.randint', return_value=5)
