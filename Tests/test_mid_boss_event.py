@@ -18,7 +18,7 @@ class Test(TestCase):
                           "a sinking realization dawns upon you.\nYou still have to unit test everything... The " \
                           "thought of the endless unit tests makes you more frustrated and makes Assignment 4 so " \
                           "much harder to complete.\nAssignment 4's stats have increased and your frustration " \
-                          "increases by 50.\n"
+                          "increases by 5.\n"
         self.assertEqual(expected_output, the_game_printed_this)
 
     def test_stat_change(self):
@@ -27,7 +27,7 @@ class Test(TestCase):
         boss = {"Name": "Assignment 3", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
                 "Self-Control": 15, "Luck": 0, 'Exp': 0}
         mid_boss_event(character, boss)
-        expected_character = {'Name': 'Bobby', 'Motivation': 100, 'Frustration': 10, "Max Frustration": 500,
+        expected_character = {'Name': 'Bobby', 'Motivation': 100, 'Frustration': 5, "Max Frustration": 500,
                               'Intelligence': 100, 'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30,
                               'Luck': 45, "row": 85, "column": 85}
         expected_boss = {"Name": "Assignment 3", "Frustration": 0, "Max Frustration": 200, "Intelligence": 28,

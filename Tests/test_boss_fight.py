@@ -10,7 +10,7 @@ class Test(TestCase):
         character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, "Max Frustration": 500, 'Intelligence': 100,
                      'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30, 'Luck': 45, "row": 85, "column": 85}
         boss_fight(character)
-        expected_character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 10, "Max Frustration": 500,
+        expected_character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 5, "Max Frustration": 500,
                               'Intelligence': 100, 'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30,
                               'Luck': 45, "row": 85, "column": 85}
         self.assertEqual(expected_character, character)
@@ -20,7 +20,7 @@ class Test(TestCase):
         character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 0, "Max Frustration": 15, 'Intelligence': 25,
                      'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30, 'Luck': 45, "row": 85, "column": 85}
         boss_fight(character)
-        expected_character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 18, "Max Frustration": 15,
+        expected_character = {'Name': 'Bob', 'Motivation': 100, 'Frustration': 16, "Max Frustration": 15,
                               'Intelligence': 25, 'Speed': 85, "Self-Control": 5, 'Level': 3, 'Fitness': 30,
                               'Luck': 45, "row": 85, "column": 85}
         self.assertEqual(expected_character, character)
