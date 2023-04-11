@@ -118,8 +118,8 @@ def boss_fight(character: dict) -> None:
         raise KeyError("Character must have keys 'Frustration', 'Name', 'Intelligence', 'Self-Control',"
                        "'Max Frustration', 'Luck', 'Motivation', 'Fitness', and 'Level'")
 
-    boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 200, "Intelligence": 25, "Speed": 30,
-            "Self-Control": 15, "Luck": 0, 'Exp': 0}
+    boss = {"Name": "Assignment 4", "Frustration": 0, "Max Frustration": 110, "Intelligence": 14, "Speed": 30,
+            "Self-Control": 11, "Luck": 0, 'Exp': 0}
     character_is_faster = Modules.battle.check_first(character, boss)
     Modules.battle.battle(character_is_faster, character, boss, boss["Max Frustration"] / 2)
     if character["Frustration"] < character["Max Frustration"]:
