@@ -17,7 +17,7 @@ def mid_boss_event(character: dict, boss: dict) -> None:
     :precondition: character must have key named 'Frustration'
     :precondition: boss must be a dictionary
     :precondition: boss must have keys named 'Intelligence' and 'Speed'
-    :postcondition: mulitplies the 'Intelligence' and 'Speed' stats of the boss by 110% and increases frustration by 10
+    :postcondition: mulitplies the 'Intelligence' and 'Speed' stats of the boss by 10% and increases frustration by 10
     :raises TypeError: if character is not a dictionary
     :raises TypeError: if boss is not a dictionary
     :raises KeyError: if character does not have key 'Frustration'
@@ -25,7 +25,7 @@ def mid_boss_event(character: dict, boss: dict) -> None:
     """
     if type(character) is not dict or type(boss) is not dict:
         raise TypeError("Character and Enemy must be dictionaries!")
-    if 'Frustration' not in character or not all(key in character for key in ['Intelligence', 'Speed']):
+    if 'Frustration' not in character or not all(key in boss for key in ['Intelligence', 'Speed']):
         raise KeyError("Character must have 'Frustration' key! Boss must have 'Intelligence' and 'Speed' keys!")
 
     print("You've finished making all the code for assignment 4! You bask in your achievement before a sinking "
@@ -52,6 +52,11 @@ def boss_lose(character: dict, enemy: dict) -> None:
     :raises TypeError: if boss is not a dictionary
     :raises KeyError: if character does not have key 'Name'
     :raises KeyError: if boss does not have keys 'Name'
+    >>> character_boss_lose = {'Name': 'Bob'}
+    >>> boss = {"Name": "Assignment 4"}
+    >>> boss_lose(character_boss_lose, boss)
+    Assignment 4 has frustrated you so much, that you just gave up. Sorry you didn't win Bob.
+    You decided that life is too short to be working all the time, and you need to enjoy life.
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and Enemy must be dictionaries!")
@@ -59,7 +64,7 @@ def boss_lose(character: dict, enemy: dict) -> None:
         raise KeyError("Character must have 'Name' key! Enemy must have 'Name' key!")
 
     print(f"{enemy['Name']} has frustrated you so much, that you just gave up. Sorry you didn't win "
-          f"{character['Name']}. You decided that life is too short to be working all the time, and you need "
+          f"{character['Name']}.\nYou decided that life is too short to be working all the time, and you need "
           f"to enjoy life.")
 
 
@@ -78,13 +83,18 @@ def boss_win(character: dict, enemy: dict) -> None:
     :raises TypeError: if boss is not a dictionary
     :raises KeyError: if character does not have key 'Name'
     :raises KeyError: if boss does not have keys 'Name'
+    >>> character_boss_win = {'Name': 'Alfred'}
+    >>> boss = {'Name': 'Assignment'}
+    >>> boss_win(character_boss_win, boss)
+    Congratulations Alfred! You've beaten Assignment and have completed the game!
+    Hopefully your instructor will give you a good mark for it? Please?
     """
     if type(character) is not dict or type(enemy) is not dict:
         raise TypeError("Character and Enemy must be dictionaries!")
     if 'Name' not in character or 'Name' not in enemy:
         raise KeyError("Character must have 'Name' key! Enemy must have 'Name' key!")
 
-    print(f"Congratulations {character['Name']}! You've beaten {enemy['Name']} and have completed the game! Hopefully "
+    print(f"Congratulations {character['Name']}! You've beaten {enemy['Name']} and have completed the game!\nHopefully "
           f"your instructor will give you a good mark for it? Please?")
 
 
