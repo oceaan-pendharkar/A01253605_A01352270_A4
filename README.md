@@ -32,8 +32,8 @@ Here is a table of the requirements implemented from the rubric:
 | Character movements are correct | see move_character, defined in line 290 of board.py |
 | Character movements are restricted | see keep_checking_move, defined in line 213 of board.py |
 | Challenges | see conditions in enter_room, lines 101-110 of board.py  |
-| Mutability is minimized | |
-| Scope of mutables is minimized |  |
+| Mutability is minimized | see line 349 in board.py |
+| Scope of mutables is minimized | Throughout the document |
 | List/Dictionary Comprehension | see lines 23-25 in character.py |
 | if-statement | see lines 275-279 of calculate_damage in battle.py |
 | for/while loop | see line 280 in board.py  |
