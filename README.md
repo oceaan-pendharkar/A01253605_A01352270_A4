@@ -17,6 +17,19 @@ oceaan-pendharkar
 MartinS3030
 
 ## Any important comments you'd like to make about your work:
+Your mission: COMPLETE ASSIGNMENT 4. Yes, it's very meta.
+
+To play this game, you can navigate to the first level of this package (the same level this readme is in), and 
+pass gameplay.py as a command argument. For example, on my Mac, I would type python3 gameplay.py from this directory 
+to start playing the game.
+
+Some hints:
+- If you can, put points into your self-control! There are a lot of ways to lose it in the game and you'll need it 
+  for the final battle.
+- Be careful when typing the points you want to allocate - if you don't keep track correctly you will be penalized.
+- Keep track of your stats and position of the board by reading through the statement that prints at the end of each 
+  turn.
+
 Here is a table of the requirements implemented from the rubric:
 | Requirement      | Line Number |
 | ----------- | ----------- |
