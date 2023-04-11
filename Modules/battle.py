@@ -28,18 +28,18 @@ def determine_enemy(level: int) -> dict:
                                                               'slices of freshly baked bread. You can feel the '
                                                               'growling in our stomach drawing you towards it...',
                    'Frustration': 0, 'Max Frustration': 18, 'Intelligence': 21, 'Speed': 5, "Self-Control": 3,
-                   "Luck": 0, "Exp": 1},
+                   "Luck": 0, "Exp": 2},
                2: {'Name': 'Donut', 'Description': 'You can see a donut on display by the front counter. The glaze '
                                                    'on top of the donut glistens in the light, tempting you towards '
                                                    'its sweetness.',
                    'Frustration': 0, 'Max Frustration': 11, 'Intelligence': 19, 'Speed': 3, "Self-Control": 7,
-                   "Luck": 0, "Exp": 2},
+                   "Luck": 0, "Exp": 3},
                3: {'Name': 'Latte', 'Description': 'Looking at the menu, you dream about holding a warm latte in your '
                                                    'hands. The scent of the tea and milk fills your mind and you can'
                                                    'almost taste the contrast of the smooth milky foam and the '
                                                    'green tea under it. Will you end up ordering it?',
                    'Frustration': 0, 'Max Frustration': 14, 'Intelligence': 24, 'Speed': 11, "Self-Control": 1,
-                   "Luck": 0, "Exp": 1},
+                   "Luck": 0, "Exp": 2},
                4: {'Name': 'Breakfast Sandwich', 'Description': 'You see someone eating a warm breakfast sandwich '
                                                                 'through the window. The perfectly cooked egg, crispy'
                                                                 'bacon and melted cheese beckon you towards the store.',
@@ -61,7 +61,7 @@ def determine_enemy(level: int) -> dict:
                                                     'golden brown exterior of the muffin, and its soft fruity interior.'
                                                     'You wonder if you should sit down and enjoy this breakfast treat.',
                    'Frustration': 0, 'Max Frustration': 16, 'Intelligence': 19, 'Speed': 4, "Self-Control": 5,
-                   "Luck": 0, "Exp": 2},
+                   "Luck": 0, "Exp": 3},
                8: {'Name': 'Ice Cream', 'Description': 'As you watch someone eat their delicious ice cream cone, you '
                                                        'imagine the smooth, creamy texture of it. The sweet milky'
                                                        'flavor of the ice cream mixed with whatever flavor you desire. '
